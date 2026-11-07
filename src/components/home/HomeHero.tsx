@@ -168,6 +168,7 @@ export function HomeHero() {
                       className="object-cover"
                       style={{ objectPosition: img.position || "center" }}
                       sizes="100vw"
+                      quality={90}
                     />
                   </div>
                 </div>

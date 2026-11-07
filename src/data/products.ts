@@ -38,8 +38,12 @@ export const productsData: ProductsData = {
       slug: "fruit-and-vegetables",
       description: "Fresh Indian fruit and vegetables for export.",
       icon: "Apple",
-      image: "/products/fruit-vegetables/freshfruits1.jpg",
+      image: "/products/fruit-vegetables/freshvegetables2.jpg",
       gallery: [
+        {
+          src: "/products/fruit-vegetables/freshvegetables2.jpg",
+          alt: "Selection of farm fresh Indian vegetables for global markets",
+        },
         {
           src: "/products/fruit-vegetables/freshfruits1.jpg",
           alt: "Fresh assortment of Indian export quality fruits and vegetables",
@@ -47,10 +51,6 @@ export const productsData: ProductsData = {
         {
           src: "/products/fruit-vegetables/freshfruits3.jpg",
           alt: "Fresh exotic tropical fruits harvested for international export",
-        },
-        {
-          src: "/products/fruit-vegetables/freshvegetables2.jpg",
-          alt: "Selection of farm fresh Indian vegetables for global markets",
         },
         {
           src: "/products/fruit-vegetables/freshvegetables3.jpg",
@@ -65,15 +65,15 @@ export const productsData: ProductsData = {
       slug: "coconut",
       description: "Coconut products from India.",
       icon: "Leaf",
-      image: "/products/coconut/coconut1.jpg",
+      image: "/products/coconut/coconut2.jpg",
       gallery: [
-        {
-          src: "/products/coconut/coconut1.jpg",
-          alt: "Fresh semi-husked Indian coconuts ready for export",
-        },
         {
           src: "/products/coconut/coconut2.jpg",
           alt: "Premium graded mature coconuts from Maharashtra",
+        },
+        {
+          src: "/products/coconut/coconut1.jpg",
+          alt: "Fresh semi-husked Indian coconuts ready for export",
         },
         {
           src: "/products/coconut/coconut3.jpg",
@@ -88,15 +88,15 @@ export const productsData: ProductsData = {
       slug: "jaggery",
       description: "Natural sugarcane jaggery, a traditional sweetener.",
       icon: "Wheat",
-      image: "/products/jaggery/jaggery1.jpg",
+      image: "/products/jaggery/jaggery2.jpg",
       gallery: [
-        {
-          src: "/products/jaggery/jaggery1.jpg",
-          alt: "Traditional pure golden Indian sugarcane jaggery blocks",
-        },
         {
           src: "/products/jaggery/jaggery2.jpg",
           alt: "Natural organic chemical-free jaggery cubes for export",
+        },
+        {
+          src: "/products/jaggery/jaggery1.jpg",
+          alt: "Traditional pure golden Indian sugarcane jaggery blocks",
         },
         {
           src: "/products/jaggery/jaggery3.jpg",

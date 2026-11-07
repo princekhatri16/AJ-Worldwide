@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { whyChooseUsData } from "@/data/whyChooseUs";
 import { InnerPageHeader } from "@/components/ui/InnerPageHeader";
 import { WhyChooseUsBento } from "@/components/why-choose-us/WhyChooseUsBento";
+import { PhotoBand } from "@/components/why-choose-us/PhotoBand";
 import { StatCounter } from "@/components/ui/StatCounter";
 
 export const metadata: Metadata = {
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default function WhyChooseUsPage() {
-  const { title, reasons, facts } = whyChooseUsData;
+  const { title, reasons, facts, photoBand } = whyChooseUsData;
 
   return (
     <div className="bg-white text-[#1E2A24] min-h-screen">
@@ -27,8 +28,8 @@ export default function WhyChooseUsPage() {
 
       {/* 2. Bento Grid Section on surface-base (#FFFFFF) */}
       <section className="py-16 sm:py-20 lg:py-24 bg-white border-b border-[#E3DDCF]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
-          <div className="max-w-2xl mx-auto text-center mb-10 sm:mb-14 space-y-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 space-y-12 sm:space-y-16">
+          <div className="max-w-2xl mx-auto text-center space-y-3">
             <span className="pill-label">Why Choose Us</span>
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-wide [font-variant-caps:all-small-caps] text-[#1F4A3A]">
               Export Strengths
@@ -38,6 +39,9 @@ export default function WhyChooseUsPage() {
 
           {/* Bento Grid */}
           <WhyChooseUsBento reasons={reasons} />
+
+          {/* Full-width Photo Band */}
+          <PhotoBand photo={photoBand} />
         </div>
       </section>
 

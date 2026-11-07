@@ -13,18 +13,17 @@ import {
   ShieldCheck,
   Ship,
   Clock,
-  PhoneCall,
   FileCheck,
   Truck,
   Package,
 } from "lucide-react";
 import { aboutData } from "@/data/about";
 import { productsData } from "@/data/products";
-import { whyChooseUsData } from "@/data/why-choose-us";
 import { qualityExportProcessData } from "@/data/quality-export-process";
 import { HomeHero } from "@/components/home/HomeHero";
 import { HighlightsStrip } from "@/components/home/HighlightsStrip";
 import { HomeAboutSlider } from "@/components/home/HomeAboutSlider";
+import { HomeWhyChooseUs } from "@/components/home/HomeWhyChooseUs";
 import { PreFooterCta } from "@/components/home/PreFooterCta";
 import { Card } from "@/components/ui/Card";
 import { cardStaggerItemVariant, ruleDrawVariant } from "@/lib/motion";
@@ -32,7 +31,6 @@ import { cardStaggerItemVariant, ruleDrawVariant } from "@/lib/motion";
 export default function HomePage() {
   const { whoWeAre } = aboutData;
   const { categories } = productsData;
-  const { reasons } = whyChooseUsData;
   const { howAnOrderWorks } = qualityExportProcessData;
   const shouldReduceMotion = useReducedMotion();
 
@@ -41,14 +39,6 @@ export default function HomePage() {
     "fruit-and-vegetables": <Apple className="w-8 h-8 text-[#B4763A]" />,
     coconut: <CircleDot className="w-8 h-8 text-[#B4763A]" />,
     jaggery: <Boxes className="w-8 h-8 text-[#B4763A]" />,
-  };
-
-  const reasonIcons: Record<string, React.ReactNode> = {
-    ShieldCheck: <ShieldCheck className="w-5 h-5 text-[#B4763A]" />,
-    Boxes: <Boxes className="w-5 h-5 text-[#B4763A]" />,
-    Ship: <Ship className="w-5 h-5 text-[#B4763A]" />,
-    Clock: <Clock className="w-5 h-5 text-[#B4763A]" />,
-    PhoneCall: <PhoneCall className="w-5 h-5 text-[#B4763A]" />,
   };
 
   const stepIcons = [
@@ -217,64 +207,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 5. Why Choose Us (Warm Surface #F6F3EC) */}
-      <section
-        aria-labelledby="home-why-heading"
-        className="py-16 sm:py-20 lg:py-24 bg-[#F6F3EC] border-b border-[#E3DDCF]"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
-          <div className="max-w-2xl mx-auto text-center mb-10 sm:mb-14 space-y-3">
-            <span className="pill-label">Why Choose Us</span>
-            <h2
-              id="home-why-heading"
-              className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-wide [font-variant-caps:all-small-caps] text-[#1F4A3A]"
-            >
-              Why Work With AJ Worldwide
-            </h2>
-            <div className="section-rule mx-auto" />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {reasons.map((item, idx) => (
-              <Card
-                key={item.id}
-                surface="white"
-                index={idx}
-                className="space-y-3"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="site-card-icon w-10 h-10 rounded-xl bg-[#F6F3EC] border border-[#E3DDCF] flex items-center justify-center transition-all duration-300">
-                    {reasonIcons[item.icon] || (
-                      <ShieldCheck className="w-5 h-5 text-[#B4763A]" />
-                    )}
-                  </div>
-                  <span className="font-mono text-xs text-[#B4763A] font-bold">
-                    0{idx + 1}
-                  </span>
-                </div>
-
-                <h3 className="site-card-title font-serif text-base font-bold tracking-wide [font-variant-caps:all-small-caps] text-[#1F4A3A] transition-colors">
-                  {item.title}
-                </h3>
-
-                <p className="text-xs sm:text-sm text-[#5F6B64] leading-relaxed">
-                  {item.description}
-                </p>
-              </Card>
-            ))}
-          </div>
-
-          <div className="mt-10 sm:mt-12 text-center">
-            <Link
-              href="/why-choose-us"
-              className="inline-flex items-center gap-2 py-3 px-6 rounded-full border border-[#1F4A3A] text-[#1F4A3A] hover:bg-[#1F4A3A] hover:text-white text-xs font-bold uppercase tracking-wider transition-all shadow-2xs"
-            >
-              <span>Explore Why Choose Us</span>
-              <ArrowRight className="w-3.5 h-3.5 rtl-flip" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* 5. Why Choose Us: Two-column Image Collage + Strengths Cards (Warm Surface #F6F3EC) */}
+      <HomeWhyChooseUs />
 
       {/* 6. How an Order Works (White Surface #FFFFFF) */}
       <section
