@@ -60,14 +60,14 @@ export default function RegistrationsPage() {
                 <div className="flex flex-col flex-1 justify-between">
                   <div>
                     {/* Logo/Icon Box on Top */}
-                    <div className="w-full h-24 sm:h-28 bg-[#F6F3EC] border border-[#E3DDCF] rounded-xl flex items-center justify-center p-3 sm:p-4 overflow-hidden relative mb-4">
+                    <div className="w-full h-24 sm:h-28 bg-white border border-[#E3DDCF] rounded-xl flex items-center justify-center p-3 overflow-hidden relative mb-4">
                       {reg.image ? (
                         <Image
                           src={reg.image}
-                          alt={reg.name}
+                          alt={reg.alt || reg.name}
                           fill
-                          className="object-contain p-2 site-card-image transition-transform duration-500 ease-out"
-                          sizes="(max-width: 640px) 50vw, 25vw"
+                          className="object-contain p-3 site-card-image transition-transform duration-500 ease-out"
+                          sizes="300px"
                         />
                       ) : (
                         <div className="site-card-icon w-12 h-12 rounded-2xl bg-white border border-[#E3DDCF] flex items-center justify-center shadow-2xs transition-all duration-300 group-hover:scale-105 group-hover:border-[#1F4A3A]">

@@ -239,34 +239,26 @@ export function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-40 w-full transition-all duration-200 border-b border-[#E3DDCF] ${
-        isScrolled ? "bg-white/95 backdrop-blur-md shadow-sm" : "bg-white"
-      }`}
+      className={`sticky top-0 z-40 w-full transition-all duration-200 border-b border-[#E3DDCF] ${isScrolled ? "bg-white/95 backdrop-blur-md shadow-sm" : "bg-white"
+        }`}
     >
       <div className="w-full px-4 sm:px-6 lg:px-10">
         <div className="flex items-center justify-between h-16 lg:h-22 gap-6">
-          {/* Logo block on far left: logo mark on top, wordmark 'AJ Worldwide' in small-caps serif under it */}
+          {/* Logo block on far left: full-colour brand logo */}
           <Link
             href="/"
-            className="flex items-center lg:flex-col lg:items-center justify-center gap-2 lg:gap-1 shrink-0 py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] rounded-lg group"
+            className="flex items-center shrink-0 py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] rounded-lg group"
             aria-label="AJ Worldwide - Home"
           >
-            <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-lg bg-[#1F4A3A] p-1 flex items-center justify-center shrink-0 shadow-xs border border-[#1F4A3A] transition-transform group-hover:scale-105">
-              <Image
-                src={siteData.logo || "/logo-mark.png"}
-                alt="AJ Worldwide Logo"
-                width={36}
-                height={36}
-                priority
-                className="object-contain"
-              />
-            </div>
-            <span
-              className="font-serif font-bold text-xs lg:text-[13px] text-[#1E2A24] tracking-wider [font-variant-caps:all-small-caps] notranslate leading-tight transition-colors group-hover:text-[#1F4A3A]"
+            <Image
+              src={siteData.logo || "/brand/logo-full.png"}
+              alt="AJ Worldwide"
+              width={121}
+              height={56}
+              priority
+              className="h-10 lg:h-14 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
               translate="no"
-            >
-              AJ WORLDWIDE
-            </span>
+            />
           </Link>
 
           {/* Inline Navigation (Shown ONLY at ≥1280px / xl in a single line, never wrapping) */}
@@ -292,19 +284,17 @@ export function Header() {
                       aria-haspopup="true"
                       aria-expanded={megaMenuOpen}
                       aria-controls="products-mega-menu"
-                      className={`relative px-1 py-1 text-sm font-semibold transition-colors cursor-pointer inline-flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] rounded ${
-                        isProductsActive
+                      className={`relative px-1 py-1 text-sm font-semibold transition-colors cursor-pointer inline-flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] rounded ${isProductsActive
                           ? "text-[#1F4A3A] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-0.5 after:bg-[#1F4A3A] after:rounded-full"
                           : "text-[#1E2A24]/90 hover:text-[#1F4A3A]"
-                      }`}
+                        }`}
                     >
                       <span className="font-serif [font-variant-caps:all-small-caps] tracking-wide text-[15px]">
                         {item.label}
                       </span>
                       <ChevronDown
-                        className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                          megaMenuOpen ? "rotate-180 text-[#1F4A3A]" : "text-[#5F6B64]"
-                        }`}
+                        className={`w-3.5 h-3.5 transition-transform duration-200 ${megaMenuOpen ? "rotate-180 text-[#1F4A3A]" : "text-[#5F6B64]"
+                          }`}
                       />
                     </button>
 
@@ -346,47 +336,42 @@ export function Header() {
                                     onFocus={() => setActiveCategoryIndex(idx)}
                                     onClick={() => setMegaMenuOpen(false)}
                                     onKeyDown={(e) => handleCategoryKeyDown(idx, e)}
-                                    className={`w-full flex items-center justify-between p-2.5 rounded-xl transition-all duration-200 text-start group cursor-pointer relative overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] ${
-                                      isActive
+                                    className={`w-full flex items-center justify-between p-2.5 rounded-xl transition-all duration-200 text-start group cursor-pointer relative overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] ${isActive
                                         ? "bg-white shadow-xs"
                                         : "bg-transparent hover:bg-white/60 text-[#1E2A24]"
-                                    }`}
+                                      }`}
                                   >
                                     {/* 3px copper bar on start edge when active */}
                                     <span
                                       aria-hidden="true"
-                                      className={`absolute top-0 bottom-0 start-0 w-[3px] bg-[#B4763A] transition-opacity duration-200 ${
-                                        isActive ? "opacity-100" : "opacity-0"
-                                      }`}
+                                      className={`absolute top-0 bottom-0 start-0 w-[3px] bg-[#B4763A] transition-opacity duration-200 ${isActive ? "opacity-100" : "opacity-0"
+                                        }`}
                                     />
 
                                     <div className="flex items-center gap-3 min-w-0 ps-1">
                                       <div
-                                        className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 ${
-                                          isActive
+                                        className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 ${isActive
                                             ? "bg-[#1F4A3A] text-white shadow-xs"
                                             : "bg-white border border-[#E3DDCF] text-[#B4763A] group-hover:border-[#1F4A3A]/30"
-                                        }`}
+                                          }`}
                                       >
                                         {renderCategoryIcon(cat.slug, isActive)}
                                       </div>
                                       <span
-                                        className={`font-serif text-sm tracking-wide [font-variant-caps:all-small-caps] truncate transition-colors ${
-                                          isActive
+                                        className={`font-serif text-sm tracking-wide [font-variant-caps:all-small-caps] truncate transition-colors ${isActive
                                             ? "text-[#1F4A3A] font-bold"
                                             : "text-[#1E2A24] font-semibold group-hover:text-[#1F4A3A]"
-                                        }`}
+                                          }`}
                                       >
                                         {cat.name}
                                       </span>
                                     </div>
 
                                     <ChevronRight
-                                      className={`w-4 h-4 shrink-0 transition-transform duration-200 rtl-flip ${
-                                        isActive
+                                      className={`w-4 h-4 shrink-0 transition-transform duration-200 rtl-flip ${isActive
                                           ? "text-[#1F4A3A] translate-x-0.5"
                                           : "text-[#5F6B64]/50 group-hover:text-[#5F6B64]"
-                                      }`}
+                                        }`}
                                     />
                                   </Link>
                                 );
@@ -495,11 +480,10 @@ export function Header() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`relative px-1 py-1 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] rounded ${
-                    isActive
+                  className={`relative px-1 py-1 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] rounded ${isActive
                       ? "text-[#1F4A3A] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-0.5 after:bg-[#1F4A3A] after:rounded-full"
                       : "text-[#1E2A24]/90 hover:text-[#1F4A3A] font-medium"
-                  }`}
+                    }`}
                 >
                   <span className="font-serif [font-variant-caps:all-small-caps] tracking-wide text-[15px]">
                     {item.label}
@@ -545,23 +529,21 @@ export function Header() {
           >
             {/* Drawer Header */}
             <div className="p-4 sm:p-5 flex items-center justify-between border-b border-[#E3DDCF] bg-[#F6F3EC]">
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-[#1F4A3A] p-1 flex items-center justify-center">
-                  <Image
-                    src={siteData.logo || "/logo-mark.png"}
-                    alt="AJ Worldwide"
-                    width={28}
-                    height={28}
-                    className="object-contain"
-                  />
-                </div>
-                <span
-                  className="font-serif font-bold text-xs tracking-wider [font-variant-caps:all-small-caps] text-[#1E2A24] notranslate"
+              <Link
+                href="/"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center"
+                aria-label="AJ Worldwide - Home"
+              >
+                <Image
+                  src={siteData.logo || "/brand/logo-full.png"}
+                  alt="AJ Worldwide"
+                  width={91}
+                  height={42}
+                  className="h-10 w-auto object-contain"
                   translate="no"
-                >
-                  AJ WORLDWIDE
-                </span>
-              </div>
+                />
+              </Link>
               <button
                 ref={closeButtonRef}
                 type="button"
@@ -591,9 +573,8 @@ export function Header() {
                           {item.label}
                         </span>
                         <ChevronDown
-                          className={`w-4 h-4 transition-transform ${
-                            mobileProductsOpen ? "rotate-180 text-[#1F4A3A]" : "text-[#5F6B64]"
-                          }`}
+                          className={`w-4 h-4 transition-transform ${mobileProductsOpen ? "rotate-180 text-[#1F4A3A]" : "text-[#5F6B64]"
+                            }`}
                         />
                       </button>
 
@@ -639,9 +620,8 @@ export function Header() {
                     key={item.href}
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`block py-2.5 text-sm font-semibold border-b border-[#E3DDCF]/40 transition-colors ${
-                      isActive ? "text-[#1F4A3A] font-bold" : "text-[#1E2A24]/90"
-                    }`}
+                    className={`block py-2.5 text-sm font-semibold border-b border-[#E3DDCF]/40 transition-colors ${isActive ? "text-[#1F4A3A] font-bold" : "text-[#1E2A24]/90"
+                      }`}
                   >
                     <span className="font-serif [font-variant-caps:all-small-caps] tracking-wide text-base">
                       {item.label}

@@ -96,12 +96,12 @@ function ChatConversation({
       {/* 2. Typing Indicator or Answer Bubble (Start-aligned, #F6F3EC, squared corner on start) */}
       {status === "typing" && (
         <div className="flex items-end gap-2.5 self-start">
-          <div className="w-8 h-8 rounded-full bg-[#1F4A3A] p-1 flex items-center justify-center shrink-0 shadow-2xs border border-[#1F4A3A]">
+          <div className="w-8 h-8 rounded-full bg-white p-1 flex items-center justify-center shrink-0 shadow-2xs border border-[#E3DDCF]">
             <Image
-              src={siteData.logo || "/logo-mark.png"}
+              src={siteData.logoMark || "/brand/logo-mark.png"}
               alt="AJ Worldwide"
-              width={20}
-              height={20}
+              width={22}
+              height={22}
               className="object-contain"
             />
           </div>
@@ -122,12 +122,12 @@ function ChatConversation({
           transition={{ duration: 0.28, ease: "easeOut" }}
           className="flex items-end gap-2.5 self-start max-w-[92%] sm:max-w-[85%]"
         >
-          <div className="w-8 h-8 rounded-full bg-[#1F4A3A] p-1 flex items-center justify-center shrink-0 shadow-2xs border border-[#1F4A3A]">
+          <div className="w-8 h-8 rounded-full bg-white p-1 flex items-center justify-center shrink-0 shadow-2xs border border-[#E3DDCF]">
             <Image
-              src={siteData.logo || "/logo-mark.png"}
+              src={siteData.logoMark || "/brand/logo-mark.png"}
               alt="AJ Worldwide"
-              width={20}
-              height={20}
+              width={22}
+              height={22}
               className="object-contain"
             />
           </div>
@@ -413,9 +413,9 @@ export function ContactFaq({ items }: ContactFaqProps) {
                       className="overflow-hidden"
                     >
                       <div className="pt-3.5 border-t border-[#E3DDCF] mt-3 flex items-end gap-2.5">
-                        <div className="w-7 h-7 rounded-full bg-[#1F4A3A] p-1 flex items-center justify-center shrink-0 shadow-2xs border border-[#1F4A3A]">
+                        <div className="w-7 h-7 rounded-full bg-white p-1 flex items-center justify-center shrink-0 shadow-2xs border border-[#E3DDCF]">
                           <Image
-                            src={siteData.logo || "/logo-mark.png"}
+                            src={siteData.logoMark || "/brand/logo-mark.png"}
                             alt="AJ Worldwide"
                             width={18}
                             height={18}

@@ -6,6 +6,7 @@ export interface RegistrationItem {
   number?: string;
   document?: string;
   image?: string;
+  alt?: string;
 }
 
 export interface RegistrationsData {
@@ -23,6 +24,8 @@ export const registrationsData: RegistrationsData = {
       id: "gst",
       name: "GST",
       authority: "Goods and Services Tax, Government of India",
+      image: "/registrations/gst.webp",
+      alt: "GST logo",
       description:
         "Registration under India's Goods and Services Tax system. It supports properly documented invoicing and tax-compliant business transactions.",
     },
@@ -31,6 +34,8 @@ export const registrationsData: RegistrationsData = {
       id: "aadhar-udyam",
       name: "Aadhar Udyam",
       authority: "Ministry of Micro, Small & Medium Enterprises",
+      image: "/registrations/aadharudyam.jpg",
+      alt: "Udyam registration (MSME) logo",
       description:
         "Government of India enterprise registration issued by the Ministry of MSME. It recognises the business as a registered micro, small or medium enterprise.",
     },
@@ -39,6 +44,8 @@ export const registrationsData: RegistrationsData = {
       id: "iec",
       name: "IEC (Import Export Code)",
       authority: "Directorate General of Foreign Trade (DGFT)",
+      image: "/registrations/iec.webp",
+      alt: "DGFT logo",
       description:
         "A code issued by DGFT that a business needs in order to import or export goods from India. It allows the company to carry out international trade.",
     },
@@ -48,6 +55,8 @@ export const registrationsData: RegistrationsData = {
       id: "fci",
       name: "FCI",
       authority: "Food Corporation of India",
+      image: "/registrations/fci.png",
+      alt: "State Emblem of India, Government of India",
       description:
         "Registration listed with the Food Corporation of India, the Government of India body for foodgrain procurement, storage and distribution.",
     },

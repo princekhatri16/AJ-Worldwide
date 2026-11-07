@@ -1,24 +1,21 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
   ArrowLeft,
   ArrowRight,
   Send,
-  Layers,
-  Apple,
-  CircleDot,
-  Boxes,
 } from "lucide-react";
 import {
   productSpecsData,
   productOrder,
   ProductSlug,
 } from "@/data/productSpecs";
+import { productsData } from "@/data/products";
 import { siteData } from "@/data/site";
 import { InnerPageHeader } from "@/components/ui/InnerPageHeader";
+import { ProductGallery } from "@/components/products/ProductGallery";
 
 // Inline WhatsApp SVG glyph
 function WhatsAppIcon({ className = "w-4 h-4" }: { className?: string }) {
@@ -65,6 +62,9 @@ export default async function ProductDetailPage({
     notFound();
   }
 
+  const category = productsData.categories.find((c) => c.slug === slug);
+  const gallery = category?.gallery || [];
+
   // Prev / Next Navigation
   const currentIndex = productOrder.indexOf(slug as ProductSlug);
   const prevSlug =
@@ -79,12 +79,7 @@ export default async function ProductDetailPage({
     waProductMessage
   )}`;
 
-  const categoryIcons: Record<string, React.ReactNode> = {
-    textile: <Layers className="w-8 h-8 text-[#B4763A]" />,
-    "fruit-and-vegetables": <Apple className="w-8 h-8 text-[#B4763A]" />,
-    coconut: <CircleDot className="w-8 h-8 text-[#B4763A]" />,
-    jaggery: <Boxes className="w-8 h-8 text-[#B4763A]" />,
-  };
+
 
   return (
     <div className="bg-white text-[#1E2A24] min-h-screen">
@@ -102,30 +97,9 @@ export default async function ProductDetailPage({
       <section className="py-12 sm:py-16 border-b border-[#E3DDCF] bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
-            {/* Visual Panel: Image slot or designed placeholder */}
+            {/* Visual Panel: Interactive Product Gallery */}
             <div className="lg:col-span-5 w-full">
-              <div className="relative w-full aspect-[4/3] rounded-2xl bg-[#F6F3EC] border border-[#E3DDCF] p-4 flex items-center justify-center overflow-hidden shadow-xs">
-                {product.image ? (
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                ) : (
-                  <div className="flex flex-col items-center justify-center text-center space-y-3">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white p-2 flex items-center justify-center shadow-md border border-[#E3DDCF]">
-                      {categoryIcons[product.slug] || (
-                        <Boxes className="w-8 h-8 text-[#B4763A]" />
-                      )}
-                    </div>
-                    <span className="text-[11px] uppercase font-bold tracking-[0.2em] text-[#B4763A]">
-                      Export Category
-                    </span>
-                  </div>
-                )}
-              </div>
+              <ProductGallery gallery={gallery} name={product.name} slug={product.slug} />
             </div>
 
             {/* Content & Action Buttons */}

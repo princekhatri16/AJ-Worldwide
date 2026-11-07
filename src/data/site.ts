@@ -7,6 +7,7 @@ export interface SiteData {
   name: string;
   tagline: string;
   logo: string;
+  logoMark: string;
   established: string;
   businessType: string;
   address: string;
@@ -23,7 +24,8 @@ export interface SiteData {
 export const siteData: SiteData = {
   name: "AJ Worldwide",
   tagline: "Trusted Worldwide",
-  logo: "/logo-mark.png",
+  logo: "/brand/logo-full.png",
+  logoMark: "/brand/logo-mark.png",
   established: "2025",
   businessType: "Import & Export",
   location: "Kumbhari, Buldhana, Maharashtra, India",

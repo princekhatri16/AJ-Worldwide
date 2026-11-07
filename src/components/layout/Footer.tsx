@@ -20,28 +20,22 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 pb-10 border-b border-[#F6F3EC]/15">
           {/* Column 1: Brand & Tagline */}
           <div className="space-y-3.5">
-            <Link href="/" className="inline-flex items-center gap-3 group">
-              <div className="w-10 h-10 rounded-lg overflow-hidden border border-[#F6F3EC]/20 bg-[#1F4A3A] p-1 flex items-center justify-center transition-transform group-hover:scale-105">
+            <Link href="/" className="inline-flex items-center group" aria-label="AJ Worldwide - Home">
+              <div className="rounded-xl p-2 bg-white inline-flex items-center justify-center shadow-xs transition-transform group-hover:scale-105">
                 <Image
-                  src={siteData.logo || "/logo-mark.png"}
-                  alt="AJ Worldwide Logo"
-                  width={36}
-                  height={36}
-                  className="object-contain"
+                  src={siteData.logo || "/brand/logo-full.png"}
+                  alt="AJ Worldwide"
+                  width={112}
+                  height={52}
+                  className="h-10 w-auto object-contain"
+                  translate="no"
                 />
               </div>
-              <div className="flex flex-col">
-                <span
-                  className="font-serif font-black text-lg text-[#F6F3EC] tracking-wider [font-variant-caps:all-small-caps] notranslate"
-                  translate="no"
-                >
-                  AJ WORLDWIDE
-                </span>
-                <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-[#B4763A]">
-                  {siteData.tagline}
-                </span>
-              </div>
             </Link>
+
+            <p className="text-[11px] uppercase font-bold tracking-[0.2em] text-[#B4763A]">
+              {siteData.tagline}
+            </p>
 
             <p className="text-xs text-[#F6F3EC]/75 leading-relaxed pt-1">
               From Maharashtra to the world: AJ Worldwide brings textiles, fresh fruit and vegetables, coconut and jaggery to buyers you can trust.

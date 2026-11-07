@@ -37,7 +37,7 @@ export function HomeAboutSlider() {
                 alt={img.alt}
                 fill
                 className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
+                sizes="(min-width: 1024px) 50vw, 100vw"
               />
             </div>
           ))
@@ -56,7 +56,7 @@ export function HomeAboutSlider() {
             {/* Central Badge Graphic */}
             <div className="relative z-10 w-24 h-24 rounded-2xl bg-white border border-[#E3DDCF] shadow-sm flex items-center justify-center mb-3">
               <Image
-                src="/logo-mark.png"
+                src="/brand/logo-mark.png"
                 alt="AJ Worldwide"
                 width={56}
                 height={56}

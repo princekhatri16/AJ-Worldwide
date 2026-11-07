@@ -81,10 +81,10 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     icons: {
       icon: [
-        { url: "/favicon.ico" },
-        { url: "/logo-mark.png", sizes: "192x192", type: "image/png" },
+        { url: "/icon.png", sizes: "512x512", type: "image/png" },
+        { url: "/brand/logo-mark.png", sizes: "512x512", type: "image/png" },
       ],
-      apple: [{ url: "/logo-mark.png" }],
+      apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
     },
   };
 }
@@ -102,7 +102,7 @@ export default function RootLayout({
     "@type": "Organization",
     name: siteData.name,
     url: siteUrl,
-    logo: `${siteUrl}/logo.png`,
+    logo: `${siteUrl}/brand/logo-full.png`,
     description: siteData.tagline,
     telephone: siteData.phone,
     address: {

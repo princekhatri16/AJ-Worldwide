@@ -166,6 +166,7 @@ export function HomeHero() {
                       fill
                       priority={idx === 0}
                       className="object-cover"
+                      style={{ objectPosition: img.position || "center" }}
                       sizes="100vw"
                     />
                   </div>
@@ -206,7 +207,7 @@ export function HomeHero() {
                       aria-hidden="true"
                     >
                       <Image
-                        src="/logo-mark.png"
+                        src="/brand/logo-mark.png"
                         alt=""
                         width={180}
                         height={180}
@@ -221,11 +222,11 @@ export function HomeHero() {
 
       {/* 2. Overlays for WCAG AA Text Contrast across bright photos */}
       <div
-        className="absolute inset-0 bg-gradient-to-r from-[#163829]/90 via-[#163829]/75 to-transparent pointer-events-none z-10"
+        className="absolute inset-0 bg-gradient-to-r from-[#163829]/95 via-[#163829]/80 to-[#163829]/25 pointer-events-none z-10"
         aria-hidden="true"
       />
       <div
-        className="absolute inset-0 bg-gradient-to-t from-[#163829]/60 via-transparent to-[#163829]/30 pointer-events-none z-10"
+        className="absolute inset-0 bg-gradient-to-t from-[#163829]/75 via-transparent to-[#163829]/40 pointer-events-none z-10"
         aria-hidden="true"
       />
 

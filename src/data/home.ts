@@ -1,6 +1,7 @@
 export interface HeroImage {
   src: string;
   alt: string;
+  position?: string;
 }
 
 export interface HomeData {
@@ -50,8 +51,19 @@ export const homeData: HomeData = {
         href: "/contact",
       },
     },
-    // Array of image paths. Empty by default; 3 neutral designed placeholder slides render when empty.
-    heroImages: [],
+    // Real cargo & logistics photography for hero presentation
+    heroImages: [
+      {
+        src: "/hero/herosectionexport2.webp",
+        alt: "Container cargo ship docked at port terminal with cranes loading freight at sunset",
+        position: "center 50%",
+      },
+      {
+        src: "/hero/herosectionexport3.jpg",
+        alt: "Commercial cargo airplane flying over maritime container ships at sea during golden sunset",
+        position: "center 55%",
+      },
+    ],
   },
   highlights: [
     "Textile",
@@ -60,8 +72,17 @@ export const homeData: HomeData = {
     "Jaggery",
     "Open 7 Days a Week",
   ],
-  // Array of image paths for the About section slider. Empty by default; designed placeholder renders when empty.
-  aboutImages: [],
+  // Array of image paths for the About section slider.
+  aboutImages: [
+    {
+      src: "/about/export1.webp",
+      alt: "Container ship sailing through shipping channel with gantry cranes and cargo plane overhead",
+    },
+    {
+      src: "/about/export3.webp",
+      alt: "Global trade network map over active cargo seaport terminal at sunset",
+    },
+  ],
   categoriesPreview: {
     eyebrow: "Product Lines",
     heading: "Export Categories",

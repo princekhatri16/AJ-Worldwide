@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
@@ -155,16 +156,26 @@ export default function HomePage() {
                   <div>
                     {/* 4:3 Image Area on Top */}
                     <div className="relative w-full aspect-[4/3] bg-[#F6F3EC] border-b border-[#E3DDCF] overflow-hidden flex items-center justify-center">
-                      <div className="site-card-image transition-transform duration-500 ease-out flex flex-col items-center justify-center p-4">
-                        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white border border-[#E3DDCF] flex items-center justify-center shadow-2xs mb-2">
-                          {categoryIcons[cat.slug] || (
-                            <Boxes className="w-7 h-7 text-[#B4763A]" />
-                          )}
+                      {cat.image ? (
+                        <Image
+                          src={cat.image}
+                          alt={cat.name}
+                          fill
+                          className="object-cover site-card-image transition-transform duration-500 ease-out"
+                          sizes="(max-width: 640px) 50vw, (max-width: 1280px) 50vw, 25vw"
+                        />
+                      ) : (
+                        <div className="site-card-image transition-transform duration-500 ease-out flex flex-col items-center justify-center p-4">
+                          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white border border-[#E3DDCF] flex items-center justify-center shadow-2xs mb-2">
+                            {categoryIcons[cat.slug] || (
+                              <Boxes className="w-7 h-7 text-[#B4763A]" />
+                            )}
+                          </div>
+                          <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-[#B4763A]">
+                            Export Quality
+                          </span>
                         </div>
-                        <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-[#B4763A]">
-                          Export Quality
-                        </span>
-                      </div>
+                      )}
                     </div>
 
                     {/* Card Body */}
