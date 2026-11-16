@@ -60,16 +60,16 @@ export function HomeWhyChooseUs() {
       aria-labelledby="home-why-heading"
       className="py-16 sm:py-20 lg:py-24 bg-[#F6F3EC] border-b border-[#E3DDCF]"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-12 items-start">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 w-full max-w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-8 lg:gap-10 xl:gap-12 items-start w-full max-w-full">
           {/* Left Column (about 42% / 5 cols): Image Collage in rounded-3xl frame */}
-          <div className="lg:col-span-5 w-full">
+          <div className="min-w-0 w-full max-w-full">
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
               variants={collageContainerVariant}
-              className="rounded-3xl border border-[#E3DDCF] bg-white p-3 sm:p-4 shadow-md flex flex-col gap-3 overflow-hidden"
+              className="rounded-3xl border border-[#E3DDCF] bg-white p-3 sm:p-4 shadow-md flex flex-col gap-3 overflow-hidden w-full max-w-full isolate"
             >
               {/* Top Large Image (4:3 desktop, 16:10 tablet/mobile) */}
               <motion.div
@@ -164,7 +164,7 @@ export function HomeWhyChooseUs() {
           </div>
 
           {/* Right Column (about 58% / 7 cols): Heading block & 5 compact cards */}
-          <div className="lg:col-span-7 w-full space-y-6">
+          <div className="min-w-0 w-full max-w-full space-y-6">
             {/* Heading Block */}
             <div className="space-y-3">
               <span className="pill-label">Export Strengths</span>
@@ -227,7 +227,7 @@ export function HomeWhyChooseUs() {
             <div className="pt-2">
               <Link
                 href="/why-choose-us"
-                className="inline-flex items-center gap-2 py-3 px-6 rounded-full border border-[#1F4A3A] text-[#1F4A3A] hover:bg-[#1F4A3A] hover:text-white text-xs font-bold uppercase tracking-wider transition-all shadow-2xs group active:scale-95"
+                className="inline-flex items-center justify-center gap-2 min-h-[44px] py-3.5 px-6 rounded-full border border-[#1F4A3A] text-[#1F4A3A] hover:bg-[#1F4A3A] hover:text-white text-xs font-bold uppercase tracking-wider transition-all shadow-2xs group active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A]"
               >
                 <span>Explore Why Choose Us</span>
                 <ArrowRight className="w-3.5 h-3.5 rtl-flip transform group-hover:translate-x-1 transition-transform" />

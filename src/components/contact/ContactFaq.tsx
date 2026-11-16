@@ -322,7 +322,7 @@ export function ContactFaq({ items }: ContactFaqProps) {
                 <button
                   type="button"
                   onClick={handleScrollToForm}
-                  className="rounded-full bg-[#1F4A3A] text-white text-xs font-bold uppercase tracking-wider py-2.5 px-5 hover:bg-[#163829] active:scale-[0.98] transition-all inline-flex items-center gap-1.5 shadow-2xs cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A]"
+                  className="rounded-full bg-[#1F4A3A] text-white text-xs font-bold uppercase tracking-wider min-h-[44px] py-3 px-5 hover:bg-[#163829] active:scale-[0.98] transition-all inline-flex items-center gap-1.5 shadow-2xs cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A]"
                 >
                   <span>Send an Inquiry</span>
                   <ArrowDown className="w-3.5 h-3.5" />
@@ -332,7 +332,7 @@ export function ContactFaq({ items }: ContactFaqProps) {
                   href={waUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full border border-[#1F4A3A] text-[#1F4A3A] hover:bg-[#1F4A3A]/5 active:scale-[0.98] text-xs font-bold uppercase tracking-wider py-2.5 px-5 transition-all inline-flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A]"
+                  className="rounded-full border border-[#1F4A3A] text-[#1F4A3A] hover:bg-[#1F4A3A]/5 active:scale-[0.98] text-xs font-bold uppercase tracking-wider min-h-[44px] py-3 px-5 transition-all inline-flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A]"
                 >
                   <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366]" />
                   <span>WhatsApp</span>
@@ -371,7 +371,7 @@ export function ContactFaq({ items }: ContactFaqProps) {
                   aria-expanded={isOpen}
                   aria-controls={`faq-answer-mobile-${item.id}`}
                   onClick={() => toggleMobileItem(item.id)}
-                  className="w-full flex items-center justify-between text-start gap-3 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] rounded-lg"
+                  className="w-full min-h-[48px] py-2 flex items-center justify-between text-start gap-3 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] rounded-lg"
                 >
                   <div className="flex items-center gap-3 min-w-0">
                     <div
@@ -439,7 +439,7 @@ export function ContactFaq({ items }: ContactFaqProps) {
               <button
                 type="button"
                 onClick={handleScrollToForm}
-                className="w-full sm:w-auto rounded-full bg-[#1F4A3A] text-white text-xs font-bold uppercase tracking-wider py-2.5 px-5 hover:bg-[#163829] active:scale-[0.98] transition-all inline-flex items-center justify-center gap-1.5 shadow-2xs"
+                className="w-full sm:w-auto rounded-full bg-[#1F4A3A] text-white text-xs font-bold uppercase tracking-wider min-h-[44px] py-3 px-5 hover:bg-[#163829] active:scale-[0.98] transition-all inline-flex items-center justify-center gap-1.5 shadow-2xs focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A]"
               >
                 <span>Send an Inquiry</span>
                 <ArrowDown className="w-3.5 h-3.5" />
@@ -449,7 +449,7 @@ export function ContactFaq({ items }: ContactFaqProps) {
                 href={waUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto rounded-full border border-[#1F4A3A] text-[#1F4A3A] hover:bg-[#1F4A3A]/5 active:scale-[0.98] text-xs font-bold uppercase tracking-wider py-2.5 px-5 transition-all inline-flex items-center justify-center gap-1.5"
+                className="w-full sm:w-auto rounded-full border border-[#1F4A3A] text-[#1F4A3A] hover:bg-[#1F4A3A]/5 active:scale-[0.98] text-xs font-bold uppercase tracking-wider min-h-[44px] py-3 px-5 transition-all inline-flex items-center justify-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A]"
               >
                 <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366]" />
                 <span>WhatsApp</span>

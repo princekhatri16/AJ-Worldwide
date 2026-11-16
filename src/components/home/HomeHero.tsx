@@ -137,7 +137,7 @@ export function HomeHero() {
       onTouchEnd={handleTouchEnd}
       onKeyDown={handleKeyDown}
       tabIndex={0}
-      className="relative w-full overflow-hidden min-h-[560px] md:min-h-[calc(100svh-80px)] lg:min-h-[calc(100svh-96px)] max-h-[820px] flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A]"
+      className="relative w-full max-w-full overflow-hidden min-h-[560px] md:min-h-[calc(100svh-80px)] lg:min-h-[calc(100svh-96px)] max-h-[820px] flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] isolate touch-pan-y"
     >
       {/* 1. Full-Bleed Sliding Image Slider Track */}
       <div
@@ -308,24 +308,24 @@ export function HomeHero() {
           type="button"
           onClick={prevSlide}
           aria-label="Previous slide"
-          className="w-9 h-9 rounded-full bg-white/15 hover:bg-white/30 text-white backdrop-blur-xs border border-white/25 flex items-center justify-center transition-colors cursor-pointer"
+          className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-white/15 hover:bg-white/30 text-white backdrop-blur-xs border border-white/25 flex items-center justify-center transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
         >
-          <ChevronLeft className="w-4 h-4 rtl-flip" />
+          <ChevronLeft className="w-5 h-5 rtl-flip" />
         </button>
 
         <button
           type="button"
           onClick={nextSlide}
           aria-label="Next slide"
-          className="w-9 h-9 rounded-full bg-white/15 hover:bg-white/30 text-white backdrop-blur-xs border border-white/25 flex items-center justify-center transition-colors cursor-pointer"
+          className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-white/15 hover:bg-white/30 text-white backdrop-blur-xs border border-white/25 flex items-center justify-center transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
         >
-          <ChevronRight className="w-4 h-4 rtl-flip" />
+          <ChevronRight className="w-5 h-5 rtl-flip" />
         </button>
       </div>
 
       {/* Pagination Dots */}
       <div
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1"
         role="tablist"
         aria-label="Slide selectors"
       >
@@ -337,12 +337,16 @@ export function HomeHero() {
             aria-selected={idx === currentSlide}
             aria-label={`Go to slide ${idx + 1}`}
             onClick={() => setCurrentSlide(idx)}
-            className={`transition-all duration-300 rounded-full cursor-pointer ${
-              idx === currentSlide
-                ? "w-8 h-2 bg-[#B4763A]"
-                : "w-2 h-2 bg-white/40 hover:bg-white/70"
-            }`}
-          />
+            className="p-2 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-full flex items-center justify-center"
+          >
+            <span
+              className={`block transition-all duration-300 rounded-full ${
+                idx === currentSlide
+                  ? "w-8 h-2 bg-[#B4763A]"
+                  : "w-2 h-2 bg-white/40 hover:bg-white/70"
+              }`}
+            />
+          </button>
         ))}
       </div>
 

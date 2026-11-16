@@ -66,11 +66,12 @@ export function ProductsCategoryGrid({ categories }: ProductsCategoryGridProps) 
               key={opt.slug}
               type="button"
               onClick={() => handleFilterChange(opt.slug)}
+              translate={opt.slug === "jaggery" ? "no" : undefined}
               className={`py-2 px-4 sm:px-5 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                 isActive
                   ? "bg-[#1F4A3A] text-white shadow-xs"
                   : "bg-white border border-[#E3DDCF] text-[#1E2A24] hover:border-[#1F4A3A] hover:bg-[#F6F3EC]"
-              }`}
+              } ${opt.slug === "jaggery" ? "notranslate" : ""}`}
             >
               {opt.label}
             </button>
@@ -116,22 +117,24 @@ export function ProductsCategoryGrid({ categories }: ProductsCategoryGridProps) 
                         sizes="(max-width: 640px) 50vw, (max-width: 1280px) 50vw, 25vw"
                       />
                     ) : (
-                      <div className="site-card-image transition-transform duration-500 ease-out flex flex-col items-center justify-center p-4">
-                        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white border border-[#E3DDCF] flex items-center justify-center shadow-2xs mb-2">
+                      <div className="site-card-image transition-transform duration-500 ease-out flex items-center justify-center p-4">
+                        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white border border-[#E3DDCF] flex items-center justify-center shadow-2xs">
                           {iconMap[cat.slug] || (
                             <Boxes className="w-7 h-7 text-[#B4763A]" />
                           )}
                         </div>
-                        <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-[#B4763A]">
-                          Export Quality
-                        </span>
                       </div>
                     )}
                   </div>
 
                   {/* Body Content */}
                   <div className="p-4 sm:p-5 space-y-1.5">
-                    <h2 className="site-card-title font-serif text-base sm:text-lg font-bold tracking-wide [font-variant-caps:all-small-caps] text-[#1F4A3A] transition-colors">
+                    <h2
+                      className={`site-card-title font-serif text-base sm:text-lg font-bold tracking-wide [font-variant-caps:all-small-caps] text-[#1F4A3A] transition-colors ${
+                        cat.slug === "jaggery" ? "notranslate" : ""
+                      }`}
+                      translate={cat.slug === "jaggery" ? "no" : undefined}
+                    >
                       {cat.name}
                     </h2>
                     <p className="text-xs sm:text-sm text-[#5F6B64] leading-relaxed line-clamp-2">

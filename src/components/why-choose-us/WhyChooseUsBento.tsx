@@ -257,7 +257,12 @@ export function WhyChooseUsBento({ reasons }: WhyChooseUsBentoProps) {
                               className="absolute bottom-0 inset-x-0 h-[40%] bg-gradient-to-t from-[#163829]/80 to-transparent pointer-events-none"
                             />
                             <div className="absolute bottom-0 inset-x-0 p-2 text-start transition-transform duration-300 ease-out group-hover/tile:-translate-y-[2px] z-10 pointer-events-none">
-                              <span className="text-[10px] sm:text-[11px] max-[640px]:text-[9px] font-bold uppercase tracking-wider text-white select-none block truncate">
+                              <span
+                                className={`text-[10px] sm:text-[11px] max-[640px]:text-[9px] font-bold uppercase tracking-wider text-white select-none block truncate ${
+                                  tile.slug === "jaggery" ? "notranslate" : ""
+                                }`}
+                                translate={tile.slug === "jaggery" ? "no" : undefined}
+                              >
                                 {tile.name}
                               </span>
                             </div>

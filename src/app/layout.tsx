@@ -1,7 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 import { siteData } from "@/data/site";
 import { LanguageProvider } from "@/context/LanguageContext";
@@ -119,6 +125,41 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              iframe.goog-te-banner-frame,
+              .goog-te-banner-frame,
+              .skiptranslate > iframe,
+              #goog-gt-tt,
+              .goog-tooltip,
+              .goog-tooltip:hover,
+              .goog-te-balloon-frame,
+              .goog-te-gadget,
+              .goog-te-gadget-icon,
+              .VIpgJd-ZVi9od-ORHb-OEVmcd,
+              .VIpgJd-ZVi9od-aZ2wEe-wOHMyf,
+              .VIpgJd-ZVi9od-l4eHX-hSRGPd {
+                display: none !important;
+                visibility: hidden !important;
+                height: 0 !important;
+                width: 0 !important;
+                opacity: 0 !important;
+                pointer-events: none !important;
+              }
+              .goog-text-highlight {
+                background: none !important;
+                background-color: transparent !important;
+                box-shadow: none !important;
+              }
+              html, body {
+                top: 0 !important;
+                margin-top: 0 !important;
+                position: static !important;
+              }
+            `,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

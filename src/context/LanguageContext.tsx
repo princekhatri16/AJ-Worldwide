@@ -49,10 +49,71 @@ if (typeof window !== "undefined") {
   };
 }
 
+function resetGoogleTranslateOffset() {
+  if (typeof document === "undefined") return;
+  if (document.body) {
+    if (document.body.style.top && document.body.style.top !== "0px") {
+      document.body.style.top = "0px";
+    }
+    if (document.body.style.marginTop && document.body.style.marginTop !== "0px") {
+      document.body.style.marginTop = "0px";
+    }
+    if (document.body.style.position !== "static") {
+      document.body.style.position = "static";
+    }
+  }
+  if (document.documentElement) {
+    if (document.documentElement.style.top && document.documentElement.style.top !== "0px") {
+      document.documentElement.style.top = "0px";
+    }
+    if (document.documentElement.style.marginTop && document.documentElement.style.marginTop !== "0px") {
+      document.documentElement.style.marginTop = "0px";
+    }
+  }
+  // Remove any injected skiptranslate banner frame
+  const banners = document.querySelectorAll(
+    "iframe.goog-te-banner-frame, .goog-te-banner-frame, .skiptranslate > iframe"
+  );
+  banners.forEach((b) => {
+    b.remove();
+  });
+}
+
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [currentLanguage, setCurrentLanguage] = useState<string>("en");
   const [isRtl, setIsRtl] = useState<boolean>(false);
   const [isLanguageModalOpen, setIsLanguageModalOpen] = useState<boolean>(false);
+
+  // Observer to permanently eliminate Google Translate top banner & 40px push
+  useEffect(() => {
+    resetGoogleTranslateOffset();
+
+    const observer = new MutationObserver(() => {
+      resetGoogleTranslateOffset();
+    });
+
+    if (document.documentElement) {
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["style", "class"],
+      });
+    }
+
+    if (document.body) {
+      observer.observe(document.body, {
+        attributes: true,
+        attributeFilter: ["style", "class"],
+        childList: true,
+      });
+    }
+
+    window.addEventListener("load", resetGoogleTranslateOffset);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("load", resetGoogleTranslateOffset);
+    };
+  }, []);
 
   // Apply RTL and Google Translate Cookie
   const applyLanguageSettings = useCallback((code: string) => {
@@ -64,15 +125,24 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       document.documentElement.lang = code;
       document.documentElement.dir = isRightToLeft ? "rtl" : "ltr";
 
-      // Set Google Translate cookie
-      const cookieValue = code === "en" ? "/en/en" : `/en/${code}`;
-      const expires = new Date();
-      expires.setFullYear(expires.getFullYear() + 1);
+      if (code === "en") {
+        // Reset cookie cleanly
+        document.cookie = "googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+        if (window.location.hostname) {
+          document.cookie = `googtrans=; path=/; domain=${window.location.hostname}; expires=Thu, 01 Jan 1970 00:00:00 GMT;`;
+        }
+      } else {
+        const cookieValue = `/en/${code}`;
+        const expires = new Date();
+        expires.setFullYear(expires.getFullYear() + 1);
 
-      document.cookie = `googtrans=${cookieValue}; path=/; expires=${expires.toUTCString()};`;
-      if (window.location.hostname) {
-        document.cookie = `googtrans=${cookieValue}; path=/; domain=${window.location.hostname}; expires=${expires.toUTCString()};`;
+        document.cookie = `googtrans=${cookieValue}; path=/; expires=${expires.toUTCString()};`;
+        if (window.location.hostname) {
+          document.cookie = `googtrans=${cookieValue}; path=/; domain=${window.location.hostname}; expires=${expires.toUTCString()};`;
+        }
       }
+
+      resetGoogleTranslateOffset();
     }
   }, []);
 

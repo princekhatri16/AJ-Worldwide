@@ -56,14 +56,20 @@ export function InnerPageHeader({ title, breadcrumbs }: InnerPageHeaderProps) {
                   {crumb.href && !isLast ? (
                     <Link
                       href={crumb.href}
-                      className="hover:text-white transition-colors"
+                      className={`hover:text-white transition-colors ${
+                        crumb.label === "Jaggery" ? "notranslate" : ""
+                      }`}
+                      translate={crumb.label === "Jaggery" ? "no" : undefined}
                     >
                       {crumb.label}
                     </Link>
                   ) : (
                     <span
-                      className={isLast ? "font-medium text-white" : ""}
+                      className={`${isLast ? "font-medium text-white" : ""} ${
+                        crumb.label === "Jaggery" ? "notranslate" : ""
+                      }`}
                       aria-current={isLast ? "page" : undefined}
+                      translate={crumb.label === "Jaggery" ? "no" : undefined}
                     >
                       {crumb.label}
                     </span>
@@ -82,7 +88,10 @@ export function InnerPageHeader({ title, breadcrumbs }: InnerPageHeaderProps) {
           initial={shouldReduceMotion ? { opacity: 0 } : "hidden"}
           animate={shouldReduceMotion ? { opacity: 1 } : "visible"}
           variants={bannerHeadingVariant}
-          className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold tracking-wider [font-variant-caps:all-small-caps] text-white"
+          className={`font-serif text-2xl sm:text-3xl lg:text-4xl font-bold tracking-wider [font-variant-caps:all-small-caps] text-white ${
+            title === "Jaggery" ? "notranslate" : ""
+          }`}
+          translate={title === "Jaggery" ? "no" : undefined}
         >
           {title}
         </motion.h1>

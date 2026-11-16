@@ -15,7 +15,7 @@ export function Footer() {
   const phoneUrl = `tel:+${siteData.phoneRaw}`;
 
   return (
-    <footer className="relative bg-[#163829] text-[#F6F3EC] border-t border-[#B4763A] pt-12 sm:pt-14 pb-20 sm:pb-16 overflow-hidden">
+    <footer className="relative bg-[#163829] text-[#F6F3EC] border-t border-[#B4763A] pt-12 sm:pt-14 pb-28 sm:pb-16 overflow-hidden">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 pb-10 border-b border-[#F6F3EC]/15">
           {/* Column 1: Brand & Tagline */}
@@ -47,12 +47,12 @@ export function Footer() {
             <h3 className="font-serif text-xs font-bold uppercase tracking-widest [font-variant-caps:all-small-caps] text-[#B4763A]">
               Quick Links
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-1">
               {siteData.navigation.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="link-underline text-xs text-[#F6F3EC]/80 hover:text-white transition-colors"
+                    className="link-underline text-xs text-[#F6F3EC]/80 hover:text-white transition-colors py-1.5 inline-block"
                   >
                     <span>{item.label}</span>
                   </Link>
@@ -66,12 +66,15 @@ export function Footer() {
             <h3 className="font-serif text-xs font-bold uppercase tracking-widest [font-variant-caps:all-small-caps] text-[#B4763A]">
               Our Products
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-1">
               {productsData.categories.map((cat) => (
                 <li key={cat.slug}>
                   <Link
                     href={`/products/${cat.slug}`}
-                    className="link-underline text-xs text-[#F6F3EC]/80 hover:text-white transition-colors"
+                    className={`link-underline text-xs text-[#F6F3EC]/80 hover:text-white transition-colors py-1.5 inline-block ${
+                      cat.slug === "jaggery" ? "notranslate" : ""
+                    }`}
+                    translate={cat.slug === "jaggery" ? "no" : undefined}
                   >
                     <span>{cat.name}</span>
                   </Link>
@@ -93,7 +96,7 @@ export function Footer() {
                 <div>
                   <a
                     href={phoneUrl}
-                    className="hover:text-[#B4763A] font-mono transition-colors notranslate"
+                    className="hover:text-[#B4763A] font-mono transition-colors notranslate py-1 inline-block"
                     translate="no"
                   >
                     {siteData.phone}
@@ -130,7 +133,7 @@ export function Footer() {
             type="button"
             onClick={scrollToTop}
             aria-label="Scroll back to top of page"
-            className="inline-flex items-center gap-1.5 text-xs text-[#F6F3EC]/80 hover:text-[#B4763A] transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 text-xs text-[#F6F3EC]/80 hover:text-[#B4763A] transition-colors cursor-pointer min-h-[44px] py-2 px-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] rounded"
           >
             <span>Back to top</span>
             <ArrowUp className="w-3.5 h-3.5" />

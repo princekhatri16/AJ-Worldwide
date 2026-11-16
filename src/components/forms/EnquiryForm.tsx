@@ -177,7 +177,16 @@ export function EnquiryForm() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-5" noValidate>
+      <form onSubmit={handleSubmit(onSubmit, (errs) => {
+        const firstKey = Object.keys(errs)[0];
+        if (firstKey) {
+          const el = document.getElementById(firstKey);
+          if (el) {
+            el.focus();
+            el.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+        }
+      })} className="space-y-4 sm:space-y-5" noValidate>
         {/* Hidden Honeypot Field for anti-spam */}
         <div className="hidden" aria-hidden="true">
           <label htmlFor="website_url">Leave this empty</label>
@@ -191,7 +200,7 @@ export function EnquiryForm() {
         </div>
 
         {/* 1. Full Name */}
-        <div>
+        <div className="scroll-mt-24">
           <label
             htmlFor="fullName"
             className="block text-xs font-bold uppercase tracking-wider text-[#1E2A24] mb-1.5"
@@ -201,25 +210,27 @@ export function EnquiryForm() {
           <input
             id="fullName"
             type="text"
+            autoComplete="name"
+            enterKeyHint="next"
             aria-invalid={errors.fullName ? "true" : "false"}
             aria-describedby={errors.fullName ? "fullName-error" : undefined}
             placeholder="Your Name"
             {...register("fullName")}
-            className={`w-full px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-sm text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors ${
+            className={`w-full min-h-[48px] px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-base text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors ${
               errors.fullName
                 ? "border-red-500 focus:ring-red-500"
                 : "border-[#E3DDCF] focus:border-[#B4763A] focus:ring-[#B4763A]/20"
             }`}
           />
           {errors.fullName && (
-            <p id="fullName-error" className="text-xs text-red-500 mt-1">
+            <p id="fullName-error" aria-live="polite" className="text-xs text-red-500 mt-1">
               {errors.fullName.message}
             </p>
           )}
         </div>
 
         {/* 2. Company Name */}
-        <div>
+        <div className="scroll-mt-24">
           <label
             htmlFor="companyName"
             className="block text-xs font-bold uppercase tracking-wider text-[#1E2A24] mb-1.5"
@@ -229,15 +240,17 @@ export function EnquiryForm() {
           <input
             id="companyName"
             type="text"
+            autoComplete="organization"
+            enterKeyHint="next"
             placeholder="Your Company / Firm"
             {...register("companyName")}
-            className="w-full px-3.5 py-2.5 bg-[#F6F3EC] border border-[#E3DDCF] rounded-xl text-sm text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:border-[#B4763A] focus:ring-2 focus:ring-[#B4763A]/20 focus:outline-none transition-colors"
+            className="w-full min-h-[48px] px-3.5 py-2.5 bg-[#F6F3EC] border border-[#E3DDCF] rounded-xl text-base text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:border-[#B4763A] focus:ring-2 focus:ring-[#B4763A]/20 focus:outline-none transition-colors"
           />
         </div>
 
         {/* 3. Country & 4. Email Address */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
+          <div className="scroll-mt-24">
             <label
               htmlFor="country"
               className="block text-xs font-bold uppercase tracking-wider text-[#1E2A24] mb-1.5"
@@ -247,24 +260,26 @@ export function EnquiryForm() {
             <input
               id="country"
               type="text"
+              autoComplete="country-name"
+              enterKeyHint="next"
               aria-invalid={errors.country ? "true" : "false"}
               aria-describedby={errors.country ? "country-error" : undefined}
               placeholder="e.g. United Arab Emirates"
               {...register("country")}
-              className={`w-full px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-sm text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors ${
+              className={`w-full min-h-[48px] px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-base text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors ${
                 errors.country
                   ? "border-red-500 focus:ring-red-500"
                   : "border-[#E3DDCF] focus:border-[#B4763A] focus:ring-[#B4763A]/20"
               }`}
             />
             {errors.country && (
-              <p id="country-error" className="text-xs text-red-500 mt-1">
+              <p id="country-error" aria-live="polite" className="text-xs text-red-500 mt-1">
                 {errors.country.message}
               </p>
             )}
           </div>
 
-          <div>
+          <div className="scroll-mt-24">
             <label
               htmlFor="email"
               className="block text-xs font-bold uppercase tracking-wider text-[#1E2A24] mb-1.5"
@@ -274,18 +289,21 @@ export function EnquiryForm() {
             <input
               id="email"
               type="email"
+              autoComplete="email"
+              inputMode="email"
+              enterKeyHint="next"
               aria-invalid={errors.email ? "true" : "false"}
               aria-describedby={errors.email ? "email-error" : undefined}
               placeholder="buyer@example.com"
               {...register("email")}
-              className={`w-full px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-sm text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors ${
+              className={`w-full min-h-[48px] px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-base text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors ${
                 errors.email
                   ? "border-red-500 focus:ring-red-500"
                   : "border-[#E3DDCF] focus:border-[#B4763A] focus:ring-[#B4763A]/20"
               }`}
             />
             {errors.email && (
-              <p id="email-error" className="text-xs text-red-500 mt-1">
+              <p id="email-error" aria-live="polite" className="text-xs text-red-500 mt-1">
                 {errors.email.message}
               </p>
             )}
@@ -294,7 +312,7 @@ export function EnquiryForm() {
 
         {/* 5. WhatsApp / Phone & 6. Product Interested In */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
+          <div className="scroll-mt-24">
             <label
               htmlFor="phone"
               className="block text-xs font-bold uppercase tracking-wider text-[#1E2A24] mb-1.5"
@@ -304,24 +322,27 @@ export function EnquiryForm() {
             <input
               id="phone"
               type="tel"
+              autoComplete="tel"
+              inputMode="tel"
+              enterKeyHint="next"
               aria-invalid={errors.phone ? "true" : "false"}
               aria-describedby={errors.phone ? "phone-error" : undefined}
               placeholder="+1 555 123 4567"
               {...register("phone")}
-              className={`w-full px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-sm text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors ${
+              className={`w-full min-h-[48px] px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-base text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors ${
                 errors.phone
                   ? "border-red-500 focus:ring-red-500"
                   : "border-[#E3DDCF] focus:border-[#B4763A] focus:ring-[#B4763A]/20"
               }`}
             />
             {errors.phone && (
-              <p id="phone-error" className="text-xs text-red-500 mt-1">
+              <p id="phone-error" aria-live="polite" className="text-xs text-red-500 mt-1">
                 {errors.phone.message}
               </p>
             )}
           </div>
 
-          <div>
+          <div className="scroll-mt-24">
             <label
               htmlFor="product"
               className="block text-xs font-bold uppercase tracking-wider text-[#1E2A24] mb-1.5"
@@ -333,7 +354,7 @@ export function EnquiryForm() {
               aria-invalid={errors.product ? "true" : "false"}
               aria-describedby={errors.product ? "product-error" : undefined}
               {...register("product")}
-              className={`w-full px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-sm text-[#1E2A24] focus:outline-none focus:ring-2 transition-colors cursor-pointer ${
+              className={`w-full min-h-[48px] px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-base text-[#1E2A24] focus:outline-none focus:ring-2 transition-colors cursor-pointer ${
                 errors.product
                   ? "border-red-500 focus:ring-red-500"
                   : "border-[#E3DDCF] focus:border-[#B4763A] focus:ring-[#B4763A]/20"
@@ -342,10 +363,12 @@ export function EnquiryForm() {
               <option value="Textile">Textile</option>
               <option value="Fruit & Vegetables">Fruit &amp; Vegetables</option>
               <option value="Coconut">Coconut</option>
-              <option value="Jaggery">Jaggery</option>
+              <option value="Jaggery" translate="no" className="notranslate">
+                Jaggery
+              </option>
             </select>
             {errors.product && (
-              <p id="product-error" className="text-xs text-red-500 mt-1">
+              <p id="product-error" aria-live="polite" className="text-xs text-red-500 mt-1">
                 {errors.product.message}
               </p>
             )}
@@ -354,7 +377,7 @@ export function EnquiryForm() {
 
         {/* 7. Quantity Required & 8. Destination Country/Port */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
+          <div className="scroll-mt-24">
             <label
               htmlFor="quantity"
               className="block text-xs font-bold uppercase tracking-wider text-[#1E2A24] mb-1.5"
@@ -364,24 +387,25 @@ export function EnquiryForm() {
             <input
               id="quantity"
               type="text"
+              enterKeyHint="next"
               aria-invalid={errors.quantity ? "true" : "false"}
               aria-describedby={errors.quantity ? "quantity-error" : undefined}
               placeholder="e.g. 1 x 40ft Container or 20 Metric Tons"
               {...register("quantity")}
-              className={`w-full px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-sm text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors ${
+              className={`w-full min-h-[48px] px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-base text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors ${
                 errors.quantity
                   ? "border-red-500 focus:ring-red-500"
                   : "border-[#E3DDCF] focus:border-[#B4763A] focus:ring-[#B4763A]/20"
               }`}
             />
             {errors.quantity && (
-              <p id="quantity-error" className="text-xs text-red-500 mt-1">
+              <p id="quantity-error" aria-live="polite" className="text-xs text-red-500 mt-1">
                 {errors.quantity.message}
               </p>
             )}
           </div>
 
-          <div>
+          <div className="scroll-mt-24">
             <label
               htmlFor="destination"
               className="block text-xs font-bold uppercase tracking-wider text-[#1E2A24] mb-1.5"
@@ -391,18 +415,19 @@ export function EnquiryForm() {
             <input
               id="destination"
               type="text"
+              enterKeyHint="next"
               aria-invalid={errors.destination ? "true" : "false"}
               aria-describedby={errors.destination ? "destination-error" : undefined}
               placeholder="e.g. Jebel Ali, Dubai or Rotterdam"
               {...register("destination")}
-              className={`w-full px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-sm text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors ${
+              className={`w-full min-h-[48px] px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-base text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors ${
                 errors.destination
                   ? "border-red-500 focus:ring-red-500"
                   : "border-[#E3DDCF] focus:border-[#B4763A] focus:ring-[#B4763A]/20"
               }`}
             />
             {errors.destination && (
-              <p id="destination-error" className="text-xs text-red-500 mt-1">
+              <p id="destination-error" aria-live="polite" className="text-xs text-red-500 mt-1">
                 {errors.destination.message}
               </p>
             )}
@@ -410,7 +435,7 @@ export function EnquiryForm() {
         </div>
 
         {/* 9. Message / Requirements */}
-        <div>
+        <div className="scroll-mt-24">
           <label
             htmlFor="message"
             className="block text-xs font-bold uppercase tracking-wider text-[#1E2A24] mb-1.5"
@@ -420,26 +445,27 @@ export function EnquiryForm() {
           <textarea
             id="message"
             rows={4}
+            enterKeyHint="done"
             aria-invalid={errors.message ? "true" : "false"}
             aria-describedby={errors.message ? "message-error" : undefined}
             placeholder="Please detail your grade requirements, packaging preferences, and delivery timeline..."
             {...register("message")}
-            className={`w-full px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-sm text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors resize-y ${
+            className={`w-full min-h-[120px] px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-base text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors resize-y ${
               errors.message
                 ? "border-red-500 focus:ring-red-500"
                 : "border-[#E3DDCF] focus:border-[#B4763A] focus:ring-[#B4763A]/20"
             }`}
           />
           {errors.message && (
-            <p id="message-error" className="text-xs text-red-500 mt-1">
+            <p id="message-error" aria-live="polite" className="text-xs text-red-500 mt-1">
               {errors.message.message}
             </p>
           )}
         </div>
 
         {/* react-simple-captcha Canvas & Input */}
-        <div className="p-3.5 bg-[#F6F3EC] border border-[#E3DDCF] rounded-xl space-y-2.5">
-          <div className="flex items-center justify-between">
+        <div className="p-3.5 bg-[#F6F3EC] border border-[#E3DDCF] rounded-xl space-y-2.5 scroll-mt-24">
+          <div className="flex items-center justify-between gap-3">
             <span className="text-xs font-bold uppercase tracking-wider text-[#1E2A24]">
               Security Verification <span className="text-red-500">*</span>
             </span>
@@ -447,10 +473,10 @@ export function EnquiryForm() {
               type="button"
               onClick={reloadCaptcha}
               aria-label="Reload captcha challenge"
-              className="text-xs text-[#B4763A] hover:underline inline-flex items-center gap-1 cursor-pointer font-medium"
+              className="min-h-[44px] min-w-[44px] px-3 py-2 rounded-lg bg-white border border-[#E3DDCF] hover:bg-white/80 active:scale-95 text-xs text-[#B4763A] inline-flex items-center justify-center gap-1.5 cursor-pointer font-semibold transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A]"
             >
               <RefreshCw className="w-3.5 h-3.5" />
-              <span>Refresh Captcha</span>
+              <span>Refresh</span>
             </button>
           </div>
 
@@ -463,12 +489,17 @@ export function EnquiryForm() {
               type="text"
               value={captchaInput}
               onChange={(e) => setCaptchaInput(e.target.value)}
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck="false"
+              enterKeyHint="done"
               placeholder="Enter the 6 characters from image above"
               aria-label="Enter captcha text"
-              className="w-full px-3.5 py-2 bg-white border border-[#E3DDCF] rounded-xl text-sm text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:border-[#B4763A] focus:ring-2 focus:ring-[#B4763A]/20 focus:outline-none"
+              className="w-full min-h-[48px] px-3.5 py-2.5 bg-white border border-[#E3DDCF] rounded-xl text-base text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:border-[#B4763A] focus:ring-2 focus:ring-[#B4763A]/20 focus:outline-none"
             />
             {captchaError && (
-              <p className="text-xs text-red-500 mt-1">{captchaError}</p>
+              <p aria-live="polite" className="text-xs text-red-500 mt-1">{captchaError}</p>
             )}
           </div>
         </div>
@@ -478,7 +509,7 @@ export function EnquiryForm() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full py-3.5 px-6 rounded-full bg-[#1F4A3A] hover:bg-[#163829] text-white text-xs font-bold uppercase tracking-widest transition-all duration-200 shadow-xs flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed [@media(hover:hover)]:hover:-translate-y-0.5 active:scale-95"
+            className="w-full min-h-[48px] py-3.5 px-6 rounded-full bg-[#1F4A3A] hover:bg-[#163829] text-white text-xs font-bold uppercase tracking-widest transition-all duration-200 shadow-xs flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed [@media(hover:hover)]:hover:-translate-y-0.5 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A]"
           >
             {isSubmitting ? (
               <>

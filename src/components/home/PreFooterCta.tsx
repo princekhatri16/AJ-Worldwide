@@ -59,7 +59,7 @@ export function PreFooterCta() {
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
                 <Link
                   href="/contact"
-                  className="px-6 py-3 rounded-full bg-[#1F4A3A] hover:bg-[#163829] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-xs text-center inline-flex items-center justify-center gap-2 group [@media(hover:hover)]:hover:-translate-y-0.5 active:scale-[0.98]"
+                  className="px-6 py-3.5 min-h-[44px] rounded-full bg-[#1F4A3A] hover:bg-[#163829] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-xs text-center inline-flex items-center justify-center gap-2 group [@media(hover:hover)]:hover:-translate-y-0.5 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A]"
                 >
                   <span>Send an Inquiry</span>
                   <ArrowRight className="w-4 h-4 rtl-flip transform group-hover:translate-x-1 transition-transform" />
@@ -67,7 +67,7 @@ export function PreFooterCta() {
 
                 <a
                   href={`tel:+${siteData.phoneRaw}`}
-                  className="px-6 py-3 rounded-full border border-[#E3DDCF] bg-white hover:bg-[#F6F3EC] hover:border-[#1F4A3A] text-[#1E2A24] hover:text-[#1F4A3A] font-bold text-xs uppercase tracking-wider transition-all text-center inline-flex items-center justify-center gap-2 notranslate shadow-2xs [@media(hover:hover)]:hover:-translate-y-0.5 active:scale-[0.98]"
+                  className="px-6 py-3.5 min-h-[44px] rounded-full border border-[#E3DDCF] bg-white hover:bg-[#F6F3EC] hover:border-[#1F4A3A] text-[#1E2A24] hover:text-[#1F4A3A] font-bold text-xs uppercase tracking-wider transition-all text-center inline-flex items-center justify-center gap-2 notranslate shadow-2xs [@media(hover:hover)]:hover:-translate-y-0.5 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A]"
                   translate="no"
                 >
                   <Phone className="w-4 h-4 text-[#B4763A]" />

@@ -38,7 +38,20 @@ export function GoogleTranslateScript() {
 
   return (
     <>
-      <div id="google_translate_element" className="hidden" aria-hidden="true" />
+      <div
+        id="google_translate_element"
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          top: "-9999px",
+          left: "-9999px",
+          width: "1px",
+          height: "1px",
+          overflow: "hidden",
+          opacity: 0,
+          pointerEvents: "none",
+        }}
+      />
       <Script
         id="google-translate-script"
         src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"

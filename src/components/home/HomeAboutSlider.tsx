@@ -1,49 +1,133 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import { CheckCircle2 } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
 import { homeData } from "@/data/home";
+import { useLanguage } from "@/context/LanguageContext";
 
 export function HomeAboutSlider() {
   const { aboutImages } = homeData;
+  const { isRtl } = useLanguage();
+  const shouldReduceMotion = useReducedMotion();
+
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   const hasImages = aboutImages && aboutImages.length > 0;
   const totalSlides = hasImages ? aboutImages.length : 3;
 
-  useEffect(() => {
+  const touchStartX = useRef<number | null>(null);
+  const touchDeltaX = useRef<number>(0);
+
+  const nextSlide = useCallback(() => {
     if (totalSlides <= 1) return;
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % totalSlides);
-    }, 4500);
-    return () => clearInterval(interval);
+    setCurrentSlide((prev) => (prev + 1) % totalSlides);
   }, [totalSlides]);
 
+  const prevSlide = useCallback(() => {
+    if (totalSlides <= 1) return;
+    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+  }, [totalSlides]);
+
+  // Autoplay 4.5s, pause on hover/touch, respect prefers-reduced-motion
+  useEffect(() => {
+    if (totalSlides <= 1 || isPaused || shouldReduceMotion) return;
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 4500);
+    return () => clearInterval(interval);
+  }, [totalSlides, isPaused, shouldReduceMotion, nextSlide]);
+
+  // Touch handlers with touch-pan-y
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsPaused(true);
+    touchStartX.current = e.touches[0].clientX;
+    touchDeltaX.current = 0;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    touchDeltaX.current = e.touches[0].clientX - touchStartX.current;
+  };
+
+  const handleTouchEnd = () => {
+    setIsPaused(false);
+    if (Math.abs(touchDeltaX.current) > 40) {
+      if (isRtl) {
+        if (touchDeltaX.current < 0) {
+          prevSlide();
+        } else {
+          nextSlide();
+        }
+      } else {
+        if (touchDeltaX.current < 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    }
+    touchStartX.current = null;
+    touchDeltaX.current = 0;
+  };
+
   return (
-    <div className="relative rounded-3xl overflow-hidden border border-[#E3DDCF] bg-white shadow-md aspect-[4/3] min-h-[360px] sm:min-h-[420px] flex items-center justify-center">
-      {/* Slider Images or Designed Placeholder */}
-      <div className="absolute inset-0 w-full h-full">
+    <div
+      className="relative w-full max-w-full overflow-hidden rounded-3xl border border-[#E3DDCF] bg-white shadow-md aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3] isolate touch-pan-y select-none"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
+      {/* Slider Track with horizontal slide transform */}
+      <div
+        className="flex w-full h-full will-change-transform transition-transform duration-700 ease-in-out"
+        style={{
+          transform: `translateX(${isRtl ? currentSlide * 100 : -currentSlide * 100}%)`,
+        }}
+      >
         {hasImages ? (
           aboutImages.map((img, idx) => (
             <div
-              key={idx}
-              className={`absolute inset-0 transition-opacity duration-700 ${
-                idx === currentSlide ? "opacity-100" : "opacity-0"
-              }`}
+              key={img.src || idx}
+              className="relative flex-[0_0_100%] w-full h-full min-w-0 shrink-0 overflow-hidden"
             >
-              <Image
-                src={img.src}
-                alt={img.alt}
-                fill
-                className="object-cover"
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                quality={90}
-              />
+              {/* Ken-Burns gentle zoom on active slide */}
+              <motion.div
+                animate={
+                  shouldReduceMotion
+                    ? undefined
+                    : idx === currentSlide
+                    ? { scale: [1, 1.05, 1] }
+                    : { scale: 1 }
+                }
+                transition={{
+                  duration: 7,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="relative w-full h-full"
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  priority={idx === 0}
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  quality={90}
+                  style={{
+                    objectPosition: img.position || "center 40%",
+                  }}
+                />
+              </motion.div>
             </div>
           ))
         ) : (
-          <div className="relative w-full h-full bg-gradient-to-br from-[#F6F3EC] via-[#EFE9DF] to-[#E5DDD0] flex flex-col items-center justify-center p-8 overflow-hidden">
+          <div className="relative flex-[0_0_100%] w-full h-full min-w-0 shrink-0 bg-gradient-to-br from-[#F6F3EC] via-[#EFE9DF] to-[#E5DDD0] flex flex-col items-center justify-center p-8 overflow-hidden">
             {/* Soft decorative circular rings */}
             <div
               className="absolute -right-16 -top-16 w-80 h-80 rounded-full border border-[#B4763A]/20 pointer-events-none"
@@ -55,7 +139,7 @@ export function HomeAboutSlider() {
             />
 
             {/* Central Badge Graphic */}
-            <div className="relative z-10 w-24 h-24 rounded-2xl bg-white border border-[#E3DDCF] shadow-sm flex items-center justify-center mb-3">
+            <div className="relative z-10 w-24 h-24 rounded-2xl bg-white border border-[#E3DDCF] shadow-sm flex items-center justify-center">
               <Image
                 src="/brand/logo-mark.png"
                 alt="AJ Worldwide"
@@ -64,18 +148,14 @@ export function HomeAboutSlider() {
                 className="object-contain"
               />
             </div>
-
-            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#B4763A] relative z-10">
-              Direct Export Trading
-            </span>
           </div>
         )}
       </div>
 
-      {/* Small pagination dots at the top right */}
+      {/* Small pagination dots inside frame at top end corner */}
       {totalSlides > 1 && (
         <div
-          className="absolute top-4 right-4 z-20 flex items-center gap-1.5 bg-black/30 backdrop-blur-xs px-2.5 py-1 rounded-full"
+          className="absolute top-3 inset-inline-end-3 sm:top-4 sm:inset-inline-end-4 z-20 flex items-center gap-1 bg-black/40 backdrop-blur-xs px-2 py-0.5 rounded-full border border-white/15"
           role="tablist"
           aria-label="About slide pagination"
         >
@@ -87,27 +167,31 @@ export function HomeAboutSlider() {
               aria-selected={idx === currentSlide}
               aria-label={`Slide ${idx + 1}`}
               onClick={() => setCurrentSlide(idx)}
-              className={`w-2 h-2 rounded-full transition-all cursor-pointer ${
-                idx === currentSlide
-                  ? "w-4 bg-[#B4763A]"
-                  : "bg-white/50 hover:bg-white/80"
-              }`}
-            />
+              className="w-6 h-6 flex items-center justify-center cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-full"
+            >
+              <span
+                className={`block h-2 rounded-full transition-all duration-300 ${
+                  idx === currentSlide
+                    ? "w-4 bg-[#B4763A]"
+                    : "w-2 bg-white/50 hover:bg-white/80"
+                }`}
+              />
+            </button>
           ))}
         </div>
       )}
 
       {/* Deep-Green Caption Card Overlaid at the Bottom */}
-      <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 z-20">
-        <div className="rounded-2xl p-4 sm:p-5 bg-[#1F4A3A] border border-white/20 shadow-xl text-white flex items-center gap-3.5 backdrop-blur-xs">
-          <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
-            <CheckCircle2 className="w-5 h-5 text-[#B4763A]" />
+      <div className="absolute bottom-3 inset-x-3 sm:bottom-4 sm:inset-x-4 z-20 pointer-events-none">
+        <div className="rounded-2xl p-3 sm:p-4 bg-[#1F4A3A]/95 sm:bg-[#1F4A3A] border border-white/20 shadow-xl text-white flex items-center gap-3 backdrop-blur-xs w-full box-border">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center shrink-0">
+            <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#B4763A]" />
           </div>
           <div className="min-w-0 flex-1">
-            <span className="font-serif font-bold text-sm sm:text-base tracking-wide [font-variant-caps:all-small-caps] block leading-tight text-white">
+            <span className="font-serif font-bold text-xs sm:text-sm lg:text-base tracking-wide [font-variant-caps:all-small-caps] block leading-tight text-white">
               Trusted Worldwide
             </span>
-            <span className="text-xs text-white/80 block mt-0.5 font-normal truncate">
+            <span className="text-[11px] sm:text-xs text-white/85 block mt-0.5 font-normal leading-snug break-words">
               Established 2025 &bull; Kumbhari, Maharashtra
             </span>
           </div>

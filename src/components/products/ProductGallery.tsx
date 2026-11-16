@@ -105,16 +105,10 @@ export function ProductGallery({ gallery = [], name, slug }: ProductGalleryProps
   // Case 0: Empty gallery (e.g. Textile) - Designed placeholder
   if (total === 0) {
     return (
-      <div className="relative w-full aspect-[4/3] rounded-2xl bg-[#F6F3EC] border border-[#E3DDCF] p-6 flex flex-col items-center justify-center overflow-hidden shadow-xs">
-        <div className="w-20 h-20 rounded-2xl bg-white p-4 flex items-center justify-center shadow-md border border-[#E3DDCF] mb-3">
+      <div className="relative w-full aspect-[4/3] rounded-2xl bg-[#F6F3EC] border border-[#E3DDCF] p-6 flex items-center justify-center overflow-hidden shadow-xs">
+        <div className="w-20 h-20 rounded-2xl bg-white p-4 flex items-center justify-center shadow-md border border-[#E3DDCF]">
           {renderFallbackIcon()}
         </div>
-        <span className="font-serif text-sm font-bold [font-variant-caps:all-small-caps] tracking-wider text-[#1F4A3A]">
-          {name}
-        </span>
-        <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-[#B4763A] mt-1">
-          Export Category
-        </span>
       </div>
     );
   }
@@ -130,10 +124,10 @@ export function ProductGallery({ gallery = [], name, slug }: ProductGalleryProps
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      className="space-y-3.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] rounded-2xl"
+      className="w-full max-w-full space-y-3.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] rounded-2xl"
     >
       {/* 4:3 Main Image Display */}
-      <div className="relative w-full aspect-[4/3] rounded-2xl bg-[#F6F3EC] border border-[#E3DDCF] overflow-hidden shadow-xs group">
+      <div className="relative w-full max-w-full aspect-[4/3] rounded-2xl bg-[#F6F3EC] border border-[#E3DDCF] overflow-hidden shadow-xs group isolate touch-pan-y">
         {gallery.map((item, idx) => {
           const isActive = idx === activeIndex;
           return (
@@ -163,7 +157,7 @@ export function ProductGallery({ gallery = [], name, slug }: ProductGalleryProps
               type="button"
               onClick={prevImage}
               aria-label="Previous image"
-              className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-[#1E2A24] shadow-md border border-[#E3DDCF] flex items-center justify-center transition-all opacity-80 hover:opacity-100 focus:opacity-100 active:scale-95 cursor-pointer"
+              className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-white/90 hover:bg-white text-[#1E2A24] shadow-md border border-[#E3DDCF] flex items-center justify-center transition-all opacity-85 hover:opacity-100 focus:opacity-100 active:scale-95 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A]"
             >
               <ChevronLeft className="w-5 h-5 rtl-flip" />
             </button>
@@ -171,7 +165,7 @@ export function ProductGallery({ gallery = [], name, slug }: ProductGalleryProps
               type="button"
               onClick={nextImage}
               aria-label="Next image"
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-[#1E2A24] shadow-md border border-[#E3DDCF] flex items-center justify-center transition-all opacity-80 hover:opacity-100 focus:opacity-100 active:scale-95 cursor-pointer"
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-white/90 hover:bg-white text-[#1E2A24] shadow-md border border-[#E3DDCF] flex items-center justify-center transition-all opacity-85 hover:opacity-100 focus:opacity-100 active:scale-95 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A]"
             >
               <ChevronRight className="w-5 h-5 rtl-flip" />
             </button>

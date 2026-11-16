@@ -61,17 +61,17 @@ export default function HomePage() {
       {/* 3. About Block (Warm Surface #F6F3EC) */}
       <section
         aria-labelledby="home-about-heading"
-        className="py-16 sm:py-20 lg:py-24 bg-[#F6F3EC] border-b border-[#E3DDCF] mt-10"
+        className="py-16 sm:py-20 lg:py-24 bg-[#F6F3EC] border-b border-[#E3DDCF] mt-10 overflow-hidden"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 w-full max-w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-10 lg:gap-14 items-center w-full max-w-full">
             {/* Left: Rounded-3xl Image Slot with Slider & Caption Card */}
-            <div className="lg:col-span-6 order-1">
+            <div className="min-w-0 w-full max-w-full order-1">
               <HomeAboutSlider />
             </div>
 
             {/* Right: Pill label, small-caps serif heading, client text, Know More button */}
-            <div className="lg:col-span-6 order-2 space-y-4">
+            <div className="min-w-0 w-full max-w-full order-2 space-y-4">
               <span className="pill-label">About AJ Worldwide</span>
 
               <h2
@@ -90,14 +90,14 @@ export default function HomePage() {
                 className="section-rule"
               />
 
-              <p className="text-base sm:text-lg text-[#1E2A24] leading-relaxed pt-2">
+              <p className="text-base sm:text-lg text-[#1E2A24] leading-relaxed pt-2 pe-14 lg:pe-0">
                 {whoWeAre.paragraphs[0]}
               </p>
 
               <div className="pt-4">
                 <Link
                   href="/about"
-                  className="inline-flex items-center gap-2 py-3.5 px-7 rounded-full bg-[#1F4A3A] hover:bg-[#163829] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm group [@media(hover:hover)]:hover:-translate-y-0.5 active:scale-95"
+                  className="inline-flex items-center gap-2 py-3.5 px-7 rounded-full bg-[#1F4A3A] hover:bg-[#163829] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm group [@media(hover:hover)]:hover:-translate-y-0.5 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A]"
                 >
                   <span>Know More</span>
                   <ArrowRight className="w-4 h-4 rtl-flip transform group-hover:translate-x-1 transition-transform" />
@@ -155,22 +155,24 @@ export default function HomePage() {
                           sizes="(max-width: 640px) 50vw, (max-width: 1280px) 50vw, 25vw"
                         />
                       ) : (
-                        <div className="site-card-image transition-transform duration-500 ease-out flex flex-col items-center justify-center p-4">
-                          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white border border-[#E3DDCF] flex items-center justify-center shadow-2xs mb-2">
+                        <div className="site-card-image transition-transform duration-500 ease-out flex items-center justify-center p-4">
+                          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white border border-[#E3DDCF] flex items-center justify-center shadow-2xs">
                             {categoryIcons[cat.slug] || (
                               <Boxes className="w-7 h-7 text-[#B4763A]" />
                             )}
                           </div>
-                          <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-[#B4763A]">
-                            Export Quality
-                          </span>
                         </div>
                       )}
                     </div>
 
                     {/* Card Body */}
                     <div className="p-4 sm:p-5 space-y-1.5">
-                      <h3 className="site-card-title font-serif text-base sm:text-lg font-bold tracking-wide [font-variant-caps:all-small-caps] text-[#1F4A3A] transition-colors">
+                      <h3
+                        className={`site-card-title font-serif text-base sm:text-lg font-bold tracking-wide [font-variant-caps:all-small-caps] text-[#1F4A3A] transition-colors ${
+                          cat.slug === "jaggery" ? "notranslate" : ""
+                        }`}
+                        translate={cat.slug === "jaggery" ? "no" : undefined}
+                      >
                         {cat.name}
                       </h3>
                       <p className="text-xs sm:text-sm text-[#5F6B64] leading-relaxed line-clamp-2">

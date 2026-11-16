@@ -30,7 +30,12 @@ export function HighlightsStrip() {
                   <span className="w-2 h-2 rounded-full bg-[#B4763A]" />
                 )}
               </div>
-              <span className="font-serif font-bold text-xs sm:text-sm tracking-wide [font-variant-caps:all-small-caps] text-[#1E2A24] whitespace-nowrap">
+              <span
+                className={`font-serif font-bold text-xs sm:text-sm tracking-wide [font-variant-caps:all-small-caps] text-[#1E2A24] whitespace-nowrap ${
+                  item === "Jaggery" ? "notranslate" : ""
+                }`}
+                translate={item === "Jaggery" ? "no" : undefined}
+              >
                 {item}
               </span>
             </div>
@@ -53,7 +58,12 @@ export function HighlightsStrip() {
                     <span className="w-1.5 h-1.5 rounded-full bg-[#B4763A]" />
                   )}
                 </div>
-                <span className="font-serif font-bold text-xs tracking-wide [font-variant-caps:all-small-caps] text-[#1E2A24] truncate">
+                <span
+                  className={`font-serif font-bold text-xs tracking-wide [font-variant-caps:all-small-caps] text-[#1E2A24] truncate ${
+                    item === "Jaggery" ? "notranslate" : ""
+                  }`}
+                  translate={item === "Jaggery" ? "no" : undefined}
+                >
                   {item}
                 </span>
               </div>
