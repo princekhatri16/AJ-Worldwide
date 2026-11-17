@@ -40,9 +40,17 @@ const SLUG_TO_NAME_MAP: Record<string, "Textile" | "Fruit & Vegetables" | "Cocon
   steel: "Steel",
 };
 
+// Map sub-type slug to clean item name for pre-filling message
+const TYPE_SLUG_TO_NAME_MAP: Record<string, string> = {
+  "steel-pipes": "Steel Pipes",
+  "steel-blocks": "Steel Blocks",
+  "steel-rods": "Steel Rods",
+};
+
 export function EnquiryForm() {
   const searchParams = useSearchParams();
   const productParam = searchParams.get("product");
+  const typeParam = searchParams.get("type");
   const captchaInstanceId = useId();
 
   const [captchaInput, setCaptchaInput] = useState("");
@@ -54,6 +62,14 @@ export function EnquiryForm() {
   const defaultProduct = productParam && SLUG_TO_NAME_MAP[productParam.toLowerCase()]
     ? SLUG_TO_NAME_MAP[productParam.toLowerCase()]
     : "Textile";
+
+  const defaultMessage = typeParam
+    ? TYPE_SLUG_TO_NAME_MAP[typeParam.toLowerCase()] ||
+      typeParam
+        .split("-")
+        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .join(" ")
+    : "";
 
   const {
     register,
@@ -72,7 +88,7 @@ export function EnquiryForm() {
       product: defaultProduct,
       quantity: "",
       destination: "",
-      message: "",
+      message: defaultMessage,
       honeypot: "",
     },
   });
@@ -86,12 +102,21 @@ export function EnquiryForm() {
     }
   }, [captchaInstanceId]);
 
-  // Update product selection when query param changes
+  // Update product selection and message pre-fill when query params change
   useEffect(() => {
     if (productParam && SLUG_TO_NAME_MAP[productParam.toLowerCase()]) {
       setValue("product", SLUG_TO_NAME_MAP[productParam.toLowerCase()]);
     }
-  }, [productParam, setValue]);
+    if (typeParam) {
+      const typeName =
+        TYPE_SLUG_TO_NAME_MAP[typeParam.toLowerCase()] ||
+        typeParam
+          .split("-")
+          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+          .join(" ");
+      setValue("message", typeName);
+    }
+  }, [productParam, typeParam, setValue]);
 
   const reloadCaptcha = () => {
     try {

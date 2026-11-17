@@ -7,11 +7,12 @@ export interface SpecRow {
 }
 
 export interface ProductItem {
+  slug: string;
   name: string;
-  botanicalName?: string;
-  hsnCode?: string;
+  description: string;
   image?: string;
-  extraRows?: SpecRow[];
+  hsnCode?: string;
+  specRows: SpecRow[];
 }
 
 export interface CategorySpecData {
@@ -214,8 +215,9 @@ export const productSpecsData: Record<ProductSlug, CategorySpecData> = {
   steel: {
     slug: "steel",
     name: "Steel",
-    description: "Steel products from India.", // DRAFT: confirm wording and exact product types with client
+    description: "Steel pipes, blocks and rods from India.", // DRAFT: confirm wording with client
     icon: "Factory",
+    image: "/products/steel/steel-pipes-1.jpeg",
     specRows: [
       {
         key: "product-name",
@@ -256,7 +258,179 @@ export const productSpecsData: Record<ProductSlug, CategorySpecData> = {
           "Varies according to the product (Chapter 72: iron and steel; Chapter 73: articles of iron or steel).", // DRAFT: confirm with client
       },
     ],
-    items: [],
+    items: [
+      {
+        slug: "steel-pipes",
+        name: "Steel Pipes",
+        description: "Round steel pipes in a range of sizes.", // DRAFT: confirm wording with client
+        image: "/products/steel/steel-pipes-1.jpeg",
+        hsnCode: "7304 / 7306",
+        specRows: [
+          {
+            key: "product-name",
+            label: "Product Name",
+            value: "Steel Pipes",
+          },
+          {
+            key: "origin",
+            label: "Origin",
+            value: "India.",
+          },
+          {
+            key: "material",
+            label: "Material",
+            value: "Steel", // DRAFT: confirm with client
+          },
+          {
+            key: "form",
+            label: "Form",
+            value: "Round pipes.", // DRAFT: confirm with client
+          },
+          {
+            key: "sizes",
+            label: "Sizes",
+            value:
+              "Available in various diameters, wall thicknesses and lengths as per buyer requirements.", // DRAFT: confirm with client
+          },
+          {
+            key: "grade",
+            label: "Grade / Specification",
+            value: "As per buyer requirements and applicable standards.", // DRAFT: confirm with client
+          },
+          {
+            key: "packaging",
+            label: "Packaging",
+            value:
+              "Bundled and strapped, with end protection, or packed as agreed with the buyer.", // DRAFT: confirm with client
+          },
+          {
+            key: "storage",
+            label: "Storage",
+            value:
+              "Kept dry and covered to prevent rust and surface damage before dispatch.", // DRAFT: confirm with client
+          },
+          {
+            key: "hsn-code",
+            label: "HSN Code (Indicative)",
+            value: "7304 / 7306 (varies according to the type of pipe).", // DRAFT: confirm with client
+          },
+        ],
+      },
+      {
+        slug: "steel-blocks",
+        name: "Steel Blocks",
+        description: "Steel blocks and bars in square and rectangular sections.", // DRAFT: confirm wording with client
+        image: "/products/steel/steel-blocks-2.jpeg",
+        hsnCode: "Chapter 72",
+        specRows: [
+          {
+            key: "product-name",
+            label: "Product Name",
+            value: "Steel Blocks",
+          },
+          {
+            key: "origin",
+            label: "Origin",
+            value: "India.",
+          },
+          {
+            key: "material",
+            label: "Material",
+            value: "Steel", // DRAFT: confirm with client
+          },
+          {
+            key: "form",
+            label: "Form",
+            value: "Square and rectangular blocks and bars.", // DRAFT: confirm with client
+          },
+          {
+            key: "sizes",
+            label: "Sizes",
+            value:
+              "Available in various sections and lengths as per buyer requirements.", // DRAFT: confirm with client
+          },
+          {
+            key: "grade",
+            label: "Grade / Specification",
+            value: "As per buyer requirements and applicable standards.", // DRAFT: confirm with client
+          },
+          {
+            key: "packaging",
+            label: "Packaging",
+            value:
+              "Stacked, strapped and protected for transit, or packed as agreed with the buyer.", // DRAFT: confirm with client
+          },
+          {
+            key: "storage",
+            label: "Storage",
+            value:
+              "Kept dry and covered to prevent rust and surface damage before dispatch.", // DRAFT: confirm with client
+          },
+          {
+            key: "hsn-code",
+            label: "HSN Code (Indicative)",
+            value: "Chapter 72 (varies according to the product).", // DRAFT: confirm with client
+          },
+        ],
+      },
+      {
+        slug: "steel-rods",
+        name: "Steel Rods",
+        description: "Steel rods in a range of diameters.", // DRAFT: confirm wording with client
+        image: "/products/steel/steel-rods-1.jpeg",
+        hsnCode: "7214",
+        specRows: [
+          {
+            key: "product-name",
+            label: "Product Name",
+            value: "Steel Rods",
+          },
+          {
+            key: "origin",
+            label: "Origin",
+            value: "India.",
+          },
+          {
+            key: "material",
+            label: "Material",
+            value: "Steel", // DRAFT: confirm with client
+          },
+          {
+            key: "form",
+            label: "Form",
+            value: "Round and ribbed rods.", // DRAFT: confirm with client
+          },
+          {
+            key: "sizes",
+            label: "Sizes",
+            value:
+              "Available in various diameters and lengths as per buyer requirements.", // DRAFT: confirm with client
+          },
+          {
+            key: "grade",
+            label: "Grade / Specification",
+            value: "As per buyer requirements and applicable standards.", // DRAFT: confirm with client
+          },
+          {
+            key: "packaging",
+            label: "Packaging",
+            value:
+              "Bundled and tied for transit, or packed as agreed with the buyer.", // DRAFT: confirm with client
+          },
+          {
+            key: "storage",
+            label: "Storage",
+            value:
+              "Kept dry and covered to prevent rust and surface damage before dispatch.", // DRAFT: confirm with client
+          },
+          {
+            key: "hsn-code",
+            label: "HSN Code (Indicative)",
+            value: "7214 (varies according to the type of rod).", // DRAFT: confirm with client
+          },
+        ],
+      },
+    ],
   },
 };
 
@@ -268,4 +442,11 @@ export const productOrder: ProductSlug[] = [
   "spices",
   "steel",
 ];
+
+export const steelItemsOrder = [
+  "steel-pipes",
+  "steel-blocks",
+  "steel-rods",
+] as const;
+export type SteelItemSlug = (typeof steelItemsOrder)[number];
 

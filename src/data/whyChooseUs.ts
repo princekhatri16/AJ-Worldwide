@@ -92,6 +92,10 @@ export const whyChooseUsData: WhyChooseUsData = {
           src: "/products/spices/spices-2.jpg",
           alt: "Assorted spices, chillies and herbs in bowls",
         },
+        {
+          src: "/products/steel/steel-pipes-1.jpeg",
+          alt: "Polished round steel pipes in assorted diameters",
+        },
       ],
     },
     {

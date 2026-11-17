@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
   ArrowLeft,
@@ -181,7 +182,71 @@ export default async function ProductDetailPage({
         </div>
       </section>
 
-      {/* 4. Bottom Navigation: Back to Products + Prev / Next Category */}
+      {/* 4. Available Types Section (when category has specific sub-items, e.g. Steel) */}
+      {category?.items && category.items.length > 0 && (
+        <section className="py-16 sm:py-20 bg-white border-b border-[#E3DDCF]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+            <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
+              <span className="pill-label">Product Range</span>
+              <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold tracking-wide [font-variant-caps:all-small-caps] text-[#1F4A3A]">
+                Available Types
+              </h3>
+              <p className="text-sm sm:text-base text-[#5F6B64] leading-relaxed">
+                Explore our range of {product.name.toLowerCase()} products prepared for international trade and specifications.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 min-[360px]:grid-cols-2 md:grid-cols-3 gap-6 lg:gap-8">
+              {category.items.map((item, index) => {
+                const isThirdItem = index === 2;
+                return (
+                  <div
+                    key={item.slug}
+                    className={`group flex flex-col bg-white rounded-2xl border border-[#E3DDCF] overflow-hidden shadow-xs hover:shadow-md hover:border-[#B4763A]/40 transition-all duration-300 ${
+                      isThirdItem
+                        ? "col-span-1 min-[360px]:col-span-2 min-[360px]:max-w-[calc(50%-0.75rem)] min-[360px]:justify-self-center md:col-span-1 md:max-w-none w-full"
+                        : "w-full"
+                    }`}
+                  >
+                    {/* Cover photo slot */}
+                    <div className="relative aspect-[4/3] w-full bg-[#F6F3EC] border-b border-[#E3DDCF] overflow-hidden">
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                      />
+                    </div>
+
+                    {/* Card details & button */}
+                    <div className="p-5 sm:p-6 flex flex-col flex-1 justify-between gap-4">
+                      <div className="space-y-2">
+                        <h4 className="font-serif text-xl sm:text-2xl font-bold tracking-wide [font-variant-caps:all-small-caps] text-[#1F4A3A] group-hover:text-[#B4763A] transition-colors">
+                          {item.name}
+                        </h4>
+                        <p className="text-xs sm:text-sm text-[#5F6B64] leading-relaxed line-clamp-2">
+                          {item.description}
+                        </p>
+                      </div>
+
+                      <Link
+                        href={`/products/${slug}/${item.slug}`}
+                        className="w-full py-3 px-4 rounded-xl bg-[#1F4A3A] hover:bg-[#163829] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-xs inline-flex items-center justify-center gap-2 group-hover:bg-[#163829] active:scale-[0.98]"
+                      >
+                        <span>View Product</span>
+                        <ArrowRight className="w-3.5 h-3.5 rtl-flip transition-transform duration-200 group-hover:translate-x-1" />
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 5. Bottom Navigation: Back to Products + Prev / Next Category */}
       <section className="py-8 sm:py-10 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">

@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { productOrder } from "@/data/productSpecs";
+import { productOrder, steelItemsOrder } from "@/data/productSpecs";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ajworldwide.com";
@@ -56,6 +56,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
-  return [...staticRoutes, ...productRoutes];
+  const steelItemRoutes: MetadataRoute.Sitemap = steelItemsOrder.map((item) => ({
+    url: `${baseUrl}/products/steel/${item}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly",
+    priority: 0.8,
+  }));
+
+  return [...staticRoutes, ...productRoutes, ...steelItemRoutes];
 }
 

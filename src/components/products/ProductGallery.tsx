@@ -8,6 +8,7 @@ export interface GalleryImage {
   src: string;
   alt: string;
   position?: string;
+  fit?: "cover" | "contain";
 }
 
 interface ProductGalleryProps {
@@ -147,7 +148,7 @@ export function ProductGallery({ gallery = [], name, slug }: ProductGalleryProps
                 alt={item.alt}
                 fill
                 priority={idx === 0}
-                className="object-cover"
+                className={item.fit === "contain" ? "object-contain p-3 bg-white" : "object-cover"}
                 style={{ objectPosition: item.position || "center" }}
                 sizes="(max-width: 1024px) 100vw, 42vw"
               />
@@ -212,7 +213,7 @@ export function ProductGallery({ gallery = [], name, slug }: ProductGalleryProps
                   src={item.src}
                   alt=""
                   fill
-                  className="object-cover"
+                  className={item.fit === "contain" ? "object-contain p-1 bg-white" : "object-cover"}
                   style={{ objectPosition: item.position || "center" }}
                   sizes="80px"
                 />

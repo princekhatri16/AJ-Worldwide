@@ -132,7 +132,7 @@ export const homeData: HomeData = {
     heading: "Trusted Worldwide",
     buttonLabel: "Send an Inquiry",
     buttonHref: "/contact",
-    phoneLabel: "+91 96653 67718",
-    phoneHref: "tel:+919665367718",
+    phoneLabel: "+91 80874 36212",
+    phoneHref: "tel:+918087436212",
   },
 };

@@ -504,8 +504,8 @@ export function Header() {
                                     className="flex flex-col h-full justify-between gap-3.5"
                                   >
                                     <div className="space-y-3">
-                                      {/* 16:10 aspect ratio image slot */}
-                                      <div className="aspect-16/10 rounded-xl overflow-hidden relative border border-[#E3DDCF] bg-gradient-to-br from-[#1F4A3A]/10 via-[#F6F3EC] to-[#1F4A3A]/5 flex items-center justify-center">
+                                      {/* Aspect ratio image slot */}
+                                      <div className="aspect-16/10 max-h-[170px] rounded-xl overflow-hidden relative border border-[#E3DDCF] bg-gradient-to-br from-[#1F4A3A]/10 via-[#F6F3EC] to-[#1F4A3A]/5 flex items-center justify-center">
                                         {activeCategory.image ? (
                                           <Image
                                             src={activeCategory.image}
@@ -540,6 +540,24 @@ export function Header() {
                                       <p className="text-xs text-[#5F6B64] leading-relaxed line-clamp-2">
                                         {activeCategory.description}
                                       </p>
+
+                                      {/* Type chips when active category has sub-items (e.g. Steel) */}
+                                      {activeCategory.slug === "steel" &&
+                                        activeCategory.items &&
+                                        activeCategory.items.length > 0 && (
+                                          <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                                            {activeCategory.items.map((item) => (
+                                              <Link
+                                                key={item.slug}
+                                                href={`/products/steel/${item.slug}`}
+                                                onClick={() => setMegaMenuOpen(false)}
+                                                className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-[#F6F3EC] text-[#1F4A3A] border border-[#E3DDCF] hover:bg-[#1F4A3A] hover:text-white transition-colors duration-150"
+                                              >
+                                                {item.name}
+                                              </Link>
+                                            ))}
+                                          </div>
+                                        )}
                                     </div>
 
                                     {/* Pill button: View Product → */}
@@ -807,16 +825,6 @@ export function Header() {
                     >
                       <Phone className="w-4 h-4 text-white" />
                       <span>Call {siteData.phones[0].display}</span>
-                    </a>
-
-                    <a
-                      href={siteData.phones[1].tel}
-                      dir="ltr"
-                      className="min-h-[48px] w-full py-3 px-4 rounded-full border border-[#E3DDCF] bg-white hover:bg-[#F6F3EC] active:scale-98 text-[#1E2A24] text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer notranslate"
-                      translate="no"
-                    >
-                      <Phone className="w-4 h-4 text-[#B4763A]" />
-                      <span>Mobile: {siteData.phones[1].display}</span>
                     </a>
 
                     <a

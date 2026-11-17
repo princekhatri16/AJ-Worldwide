@@ -69,10 +69,10 @@ To edit any text on the website:
 Open `src/data/site.ts` and `src/data/contact.ts`:
 ```ts
 export const siteData = {
-  phone: "+91 96653 67718",
-  phoneRaw: "919665367718",
-  whatsapp: "+91 96653 67718",
-  whatsappRaw: "919665367718",
+  phone: "+91 80874 36212",
+  phoneRaw: "918087436212",
+  whatsapp: "+91 80874 36212",
+  whatsappRaw: "918087436212",
   ...
 };
 ```

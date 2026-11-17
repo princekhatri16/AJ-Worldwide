@@ -2,6 +2,16 @@ export interface ProductGalleryItem {
   src: string;
   alt: string;
   position?: string;
+  fit?: "cover" | "contain";
+}
+
+export interface ProductTypeItem {
+  slug: string;
+  name: string;
+  description: string;
+  image: string;
+  gallery: ProductGalleryItem[];
+  hsnCode?: string;
 }
 
 export interface ProductCategoryCard {
@@ -11,7 +21,7 @@ export interface ProductCategoryCard {
   icon: "Shirt" | "Apple" | "Leaf" | "Wheat" | "Flame" | "Factory" | string;
   image?: string;
   gallery?: ProductGalleryItem[];
-  items?: string[];
+  items?: ProductTypeItem[];
   buttonLabel: string;
 }
 
@@ -147,13 +157,103 @@ export const productsData: ProductsData = {
     {
       name: "Steel",
       slug: "steel",
-      description: "Steel products from India.", // DRAFT: confirm wording and exact product types with client
+      description: "Steel pipes, blocks and rods from India.", // DRAFT: confirm wording with client
       icon: "Factory",
-      image: undefined,
-      gallery: [],
-      items: [],
+      image: "/products/steel/steel-pipes-1.jpeg",
+      gallery: [
+        {
+          src: "/products/steel/steel-pipes-1.jpeg",
+          alt: "Polished round steel pipes in assorted diameters",
+          position: "center",
+        },
+        {
+          src: "/products/steel/steel-pipes-2.jpeg",
+          alt: "Stack of hollow round steel pipes viewed from the end",
+          position: "center",
+        },
+        {
+          src: "/products/steel/steel-blocks-2.jpeg",
+          alt: "Industrial stack of banded rectangular steel bars and blocks",
+          position: "center",
+        },
+        {
+          src: "/products/steel/steel-blocks-1.jpeg",
+          alt: "Solid square and rectangular steel billets and blocks",
+          position: "center",
+          fit: "contain",
+        },
+        {
+          src: "/products/steel/steel-rods-1.jpeg",
+          alt: "Bundle of ribbed structural steel reinforcement rods",
+          position: "center",
+        },
+        {
+          src: "/products/steel/steel-rods-2.jpeg",
+          alt: "Round ribbed steel rebar rods in varying diameters",
+          position: "center",
+        },
+      ],
+      items: [
+        {
+          slug: "steel-pipes",
+          name: "Steel Pipes",
+          description: "Round steel pipes in a range of sizes.", // DRAFT: confirm wording with client
+          image: "/products/steel/steel-pipes-1.jpeg",
+          hsnCode: "7304 / 7306",
+          gallery: [
+            {
+              src: "/products/steel/steel-pipes-1.jpeg",
+              alt: "Polished round steel pipes in assorted diameters",
+              position: "center",
+            },
+            {
+              src: "/products/steel/steel-pipes-2.jpeg",
+              alt: "Stack of hollow round steel pipes viewed from the end",
+              position: "center",
+            },
+          ],
+        },
+        {
+          slug: "steel-blocks",
+          name: "Steel Blocks",
+          description: "Steel blocks and bars in square and rectangular sections.", // DRAFT: confirm wording with client
+          image: "/products/steel/steel-blocks-2.jpeg",
+          hsnCode: "Chapter 72",
+          gallery: [
+            {
+              src: "/products/steel/steel-blocks-2.jpeg",
+              alt: "Industrial stack of banded rectangular steel bars and blocks",
+              position: "center",
+            },
+            {
+              src: "/products/steel/steel-blocks-1.jpeg",
+              alt: "Solid square and rectangular steel billets and blocks",
+              position: "center",
+              fit: "contain",
+            },
+          ],
+        },
+        {
+          slug: "steel-rods",
+          name: "Steel Rods",
+          description: "Steel rods in a range of diameters.", // DRAFT: confirm wording with client
+          image: "/products/steel/steel-rods-1.jpeg",
+          hsnCode: "7214",
+          gallery: [
+            {
+              src: "/products/steel/steel-rods-1.jpeg",
+              alt: "Bundle of ribbed structural steel reinforcement rods",
+              position: "center",
+            },
+            {
+              src: "/products/steel/steel-rods-2.jpeg",
+              alt: "Round ribbed steel rebar rods in varying diameters",
+              position: "center",
+            },
+          ],
+        },
+      ],
       buttonLabel: "Send an Inquiry",
-      // TODO: client to supply Steel images
     },
   ],
 };

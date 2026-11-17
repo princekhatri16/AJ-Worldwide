@@ -12,7 +12,7 @@ import { Card } from "@/components/ui/Card";
 export const metadata: Metadata = {
   title: "Contact Us | AJ Worldwide — Export Desk",
   description:
-    "Direct contact details and trade inquiry form for AJ Worldwide in Kumbhari, Buldhana, Maharashtra. Phone & WhatsApp: +91 96653 67718. Open 7 days a week.",
+    "Direct contact details and trade inquiry form for AJ Worldwide in Kumbhari, Buldhana, Maharashtra. Phone & WhatsApp: +91 80874 36212. Open 7 days a week.",
 };
 
 // Inline WhatsApp SVG glyph

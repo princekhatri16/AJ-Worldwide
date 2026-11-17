@@ -112,7 +112,7 @@ export default function RootLayout({
     url: siteUrl,
     logo: `${siteUrl}/brand/logo-full.png`,
     description: siteData.tagline,
-    telephone: siteData.phones.map((p) => p.tel.replace("tel:", "")),
+    telephone: siteData.phones[0].tel.replace("tel:", ""),
     address: {
       "@type": "PostalAddress",
       streetAddress: siteData.address,

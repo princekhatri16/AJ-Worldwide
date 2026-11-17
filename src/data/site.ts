@@ -37,22 +37,17 @@ export const siteData: SiteData = {
   businessType: "Import & Export",
   location: "Kumbhari, Buldhana, Maharashtra, India",
   address: "Plot No. 1 & 2, Gat No. 179, Kumbhari Road, Village Kumbhari, Tehsil Deulgaon Raja, District Buldhana, Maharashtra, India",
-  phone: "+91 96653 67718",
-  phoneRaw: "919665367718",
+  phone: "+91 80874 36212",
+  phoneRaw: "918087436212",
   phones: [
     {
       label: "Phone / WhatsApp",
-      display: "+91 96653 67718",
-      tel: "tel:+919665367718",
-    },
-    {
-      label: "Mobile",
       display: "+91 80874 36212",
       tel: "tel:+918087436212",
     },
   ],
-  whatsapp: "+91 96653 67718",
-  whatsappRaw: "919665367718",
+  whatsapp: "+91 80874 36212",
+  whatsappRaw: "918087436212",
   whatsappMessage: "Hello AJ Worldwide, I would like to enquire about your products. Please share the details and a quotation. Thank you.",
   openDays: "7 days a week, all year round",
   navigation: [

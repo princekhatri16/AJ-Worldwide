@@ -74,16 +74,6 @@ export function PreFooterCta() {
                   <Phone className="w-4 h-4 text-[#B4763A]" />
                   <span>Call {siteData.phones[0].display}</span>
                 </a>
-
-                <a
-                  href={siteData.phones[1].tel}
-                  dir="ltr"
-                  className="px-5 py-3.5 min-h-[48px] rounded-full border border-[#E3DDCF] bg-white/70 hover:bg-white hover:border-[#B4763A] text-[#5F6B64] hover:text-[#1E2A24] font-semibold text-xs tracking-wider transition-all text-center inline-flex items-center justify-center gap-1.5 notranslate shadow-2xs active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A]"
-                  translate="no"
-                >
-                  <Phone className="w-3.5 h-3.5 text-[#B4763A]" />
-                  <span>Mobile: {siteData.phones[1].display}</span>
-                </a>
               </div>
 
               {/* WhatsApp direct text link */}

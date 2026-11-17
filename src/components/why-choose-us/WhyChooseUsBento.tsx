@@ -78,8 +78,8 @@ export function WhyChooseUsBento({ reasons }: WhyChooseUsBentoProps) {
     {
       name: "Steel",
       slug: "steel",
-      image: undefined,
-      alt: "Steel products for export",
+      image: "/products/steel/steel-pipes-1.jpeg",
+      alt: "Polished round steel pipes in assorted diameters",
       position: "center",
     },
   ];
