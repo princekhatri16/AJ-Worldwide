@@ -9,7 +9,7 @@ import { InnerPageHeader } from "@/components/ui/InnerPageHeader";
 export const metadata: Metadata = {
   title: "Products | AJ Worldwide — Export Portfolio",
   description:
-    "Explore AJ Worldwide's export product lines: Textile, Fruit & Vegetables, Coconut, Jaggery, and Spices.",
+    "Explore AJ Worldwide's export product lines: Textile, Fruit & Vegetables, Coconut, Jaggery, Spices, and Steel.",
 };
 
 export default function ProductsPage() {
@@ -26,7 +26,7 @@ export default function ProductsPage() {
         ]}
       />
 
-      {/* 2. Four Product Category Cards on surface-base (#FFFFFF) */}
+      {/* 2. Six Product Category Cards on surface-base (#FFFFFF) */}
       <section className="py-16 sm:py-20 lg:py-24 bg-white border-b border-[#E3DDCF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
           <div className="max-w-2xl mx-auto text-center mb-10 sm:mb-14 space-y-3">

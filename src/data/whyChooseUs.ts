@@ -65,11 +65,11 @@ export const whyChooseUsData: WhyChooseUsData = {
       imageAlt: "Container ship sailing through shipping channel with cranes and cargo plane overhead",
     },
     {
-      id: "five-product-lines",
+      id: "six-product-lines",
       numeral: "02",
-      title: "Five Product Lines",
-      // CLIENT-ADDED: Spices, confirm wording
-      description: "Textile, fruit and vegetables, coconut, jaggery and spices from one company.",
+      title: "Six Product Lines", // CLIENT-ADDED: Steel, confirm wording
+      // CLIENT-ADDED: Steel, confirm wording
+      description: "Textile, fruit and vegetables, coconut, jaggery, spices and steel from one company.",
       icon: "Layers",
       mosaicImages: [
         {
@@ -124,7 +124,7 @@ export const whyChooseUsData: WhyChooseUsData = {
       label: "Established",
     },
     {
-      numericValue: 5, // CLIENT-ADDED: Spices, confirm wording
+      numericValue: 6, // CLIENT-ADDED: Steel, confirm wording
       label: "Product lines",
     },
     {

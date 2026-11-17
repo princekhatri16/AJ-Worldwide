@@ -59,7 +59,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: The 5 Product Categories */}
+          {/* Column 3: The 6 Product Categories */}
           <div className="space-y-3.5">
             <h3 className="font-serif text-xs font-bold uppercase tracking-widest [font-variant-caps:all-small-caps] text-[#B4763A]">
               Our Products

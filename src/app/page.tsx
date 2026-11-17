@@ -11,6 +11,7 @@ import {
   CircleDot,
   Boxes,
   Flame,
+  Factory,
   ShieldCheck,
   Ship,
   Clock,
@@ -41,6 +42,7 @@ export default function HomePage() {
     coconut: <CircleDot className="w-8 h-8 text-[#B4763A]" />,
     jaggery: <Boxes className="w-8 h-8 text-[#B4763A]" />,
     spices: <Flame className="w-8 h-8 text-[#B4763A]" />,
+    steel: <Factory className="w-8 h-8 text-[#B4763A]" />,
   };
 
   const stepIcons = [
@@ -127,22 +129,15 @@ export default function HomePage() {
             <div className="section-rule mx-auto" />
           </div>
 
-          {/* 5 Product Cards Grid:
-              ≥1536px: 5 cols in 1 row (2xl:grid-cols-5)
-              1024-1535px: 3 cols with last row centered (lg:grid-cols-6 with 2-col spans and col-start-2 for 4th card)
-              640-1023px: 2 cols with 5th card centered at half width
-              mobile: 2 cols with 5th card centered at the width of one column
+          {/* 6 Product Cards Grid:
+              ≥1536px: 6 cols in 1 row (2xl:grid-cols-6)
+              1024-1535px: 3 cols by 2 rows (lg:grid-cols-3)
+              640-1023px: 2 cols by 3 rows (sm:grid-cols-2)
+              mobile: 2 cols by 3 rows (min-[360px]:grid-cols-2 / grid-cols-1)
+              No orphan row at any width.
           */}
-          <div className="grid grid-cols-1 min-[360px]:grid-cols-2 lg:grid-cols-6 2xl:grid-cols-5 gap-4 sm:gap-6">
-            {categories.map((cat, idx) => {
-              const isFourth = idx === 3;
-              const isFifth = idx === 4;
-              const colSpanClass = isFifth
-                ? "col-span-1 min-[360px]:col-span-2 min-[360px]:justify-self-center min-[360px]:w-full min-[360px]:max-w-[calc(50%-0.5rem)] sm:max-w-[calc(50%-0.75rem)] lg:col-span-2 lg:col-start-auto lg:max-w-none 2xl:col-span-1"
-                : isFourth
-                ? "lg:col-span-2 lg:col-start-2 2xl:col-span-1 2xl:col-start-auto"
-                : "lg:col-span-2 2xl:col-span-1";
-
+          <div className="grid grid-cols-1 min-[360px]:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6 gap-4 sm:gap-6">
+            {categories.map((cat) => {
               return (
                 <motion.div
                   key={cat.slug}
@@ -150,7 +145,7 @@ export default function HomePage() {
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.2 }}
-                  className={`h-full w-full ${colSpanClass}`}
+                  className="h-full w-full"
                 >
                 <div id={cat.slug} className="site-card group h-full rounded-2xl border border-[#E3DDCF] bg-white overflow-hidden flex flex-col justify-between shadow-xs transition-all duration-300 relative [@media(hover:hover)]:hover:-translate-y-1 [@media(hover:hover)]:hover:border-[#B4763A]/50 [@media(hover:hover)]:hover:shadow-[0_12px_28px_-12px_rgba(30,42,36,0.18)] active:scale-[0.98]">
                   {/* Copper Top Reveal Bar */}
@@ -168,7 +163,7 @@ export default function HomePage() {
                           alt={cat.name}
                           fill
                           className="object-cover site-card-image transition-transform duration-500 ease-out"
-                          sizes="(min-width:1536px) 20vw, (min-width:1280px) 25vw, (min-width:640px) 50vw, 50vw"
+                          sizes="(min-width:1536px) 16vw, (min-width:1024px) 33vw, 50vw"
                         />
                       ) : (
                         <div className="site-card-image transition-transform duration-500 ease-out flex items-center justify-center p-4">

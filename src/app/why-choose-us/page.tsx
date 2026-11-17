@@ -9,7 +9,7 @@ import { StatCounter } from "@/components/ui/StatCounter";
 export const metadata: Metadata = {
   title: "Why Choose Us | AJ Worldwide — Export Strengths",
   description:
-    "Five reasons international buyers partner with AJ Worldwide: Trust first, five product lines, registered credentials, always open, and direct contact.",
+    "Five reasons international buyers partner with AJ Worldwide: Trust first, six product lines, registered credentials, always open, and direct contact.",
 };
 
 export default function WhyChooseUsPage() {

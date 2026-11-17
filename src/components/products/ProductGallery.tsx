@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, Layers, Apple, CircleDot, Boxes, Flame } from "lucide-react";
+import { ChevronLeft, ChevronRight, Layers, Apple, CircleDot, Boxes, Flame, Factory } from "lucide-react";
 
 export interface GalleryImage {
   src: string;
@@ -100,6 +100,8 @@ export function ProductGallery({ gallery = [], name, slug }: ProductGalleryProps
         return <Boxes className="w-10 h-10 text-[#B4763A]" />;
       case "spices":
         return <Flame className="w-10 h-10 text-[#B4763A]" />;
+      case "steel":
+        return <Factory className="w-10 h-10 text-[#B4763A]" />;
       default:
         return <Boxes className="w-10 h-10 text-[#B4763A]" />;
     }

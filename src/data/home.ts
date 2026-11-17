@@ -40,8 +40,8 @@ export const homeData: HomeData = {
   hero: {
     heading: "AJ Worldwide",
     tagline: "Trusted Worldwide",
-    // CLIENT-ADDED: Spices, confirm wording
-    text: "From Maharashtra to the world: AJ Worldwide brings textiles, fresh fruit and vegetables, coconut, jaggery and spices to buyers you can trust.",
+    // CLIENT-ADDED: Steel, confirm wording
+    text: "From Maharashtra to the world: AJ Worldwide brings textiles, fresh fruit and vegetables, coconut, jaggery, spices and steel to buyers you can trust.",
     buttons: {
       viewProducts: {
         label: "View Our Products",
@@ -71,7 +71,8 @@ export const homeData: HomeData = {
     "Fruit & Vegetables",
     "Coconut",
     "Jaggery",
-    "Spices", // CLIENT-ADDED: Spices, confirm wording
+    "Spices",
+    "Steel", // CLIENT-ADDED: Steel, confirm wording
     "Open 7 Days a Week",
   ],
   // Array of image paths for the About section slider.
@@ -118,6 +119,12 @@ export const homeData: HomeData = {
         slug: "spices",
         href: "/products/spices",
         description: "Spices from India.", // DRAFT: confirm wording with client
+      },
+      {
+        name: "Steel",
+        slug: "steel",
+        href: "/products/steel",
+        description: "Steel products from India.", // DRAFT: confirm wording and exact product types with client
       },
     ],
   },

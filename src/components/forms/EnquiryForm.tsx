@@ -19,7 +19,7 @@ const FormSchema = z.object({
   country: z.string().trim().min(2, "Country is required"),
   email: z.string().trim().email("Please enter a valid email address"),
   phone: z.string().trim().min(4, "Please enter a valid WhatsApp / Phone number"),
-  product: z.enum(["Textile", "Fruit & Vegetables", "Coconut", "Jaggery", "Spices"], {
+  product: z.enum(["Textile", "Fruit & Vegetables", "Coconut", "Jaggery", "Spices", "Steel"], {
     message: "Please select a product",
   }),
   quantity: z.string().trim().min(1, "Quantity Required is required"),
@@ -31,12 +31,13 @@ const FormSchema = z.object({
 type FormInput = z.infer<typeof FormSchema>;
 
 // Map product slug to official product name
-const SLUG_TO_NAME_MAP: Record<string, "Textile" | "Fruit & Vegetables" | "Coconut" | "Jaggery" | "Spices"> = {
+const SLUG_TO_NAME_MAP: Record<string, "Textile" | "Fruit & Vegetables" | "Coconut" | "Jaggery" | "Spices" | "Steel"> = {
   textile: "Textile",
   "fruit-and-vegetables": "Fruit & Vegetables",
   coconut: "Coconut",
   jaggery: "Jaggery",
   spices: "Spices",
+  steel: "Steel",
 };
 
 export function EnquiryForm() {
@@ -363,6 +364,7 @@ export function EnquiryForm() {
                 Jaggery
               </option>
               <option value="Spices">Spices</option>
+              <option value="Steel">Steel</option>
             </select>
             {errors.product && (
               <p id="product-error" aria-live="polite" className="text-xs text-red-500 mt-1">

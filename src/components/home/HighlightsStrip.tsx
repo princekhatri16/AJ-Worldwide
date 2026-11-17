@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Layers, Apple, CircleDot, Boxes, Clock, Flame } from "lucide-react";
+import { Layers, Apple, CircleDot, Boxes, Clock, Flame, Factory } from "lucide-react";
 import { homeData } from "@/data/home";
 
 export function HighlightsStrip() {
@@ -13,14 +13,15 @@ export function HighlightsStrip() {
     Coconut: <CircleDot className="w-4 h-4 text-[#B4763A]" />,
     Jaggery: <Boxes className="w-4 h-4 text-[#B4763A]" />,
     Spices: <Flame className="w-4 h-4 text-[#B4763A]" />,
+    Steel: <Factory className="w-4 h-4 text-[#B4763A]" />,
     "Open 7 Days a Week": <Clock className="w-4 h-4 text-[#B4763A]" />,
   };
 
   return (
     <div className="relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 -mt-10 sm:-mt-12 lg:-mt-14">
       <div className="rounded-2xl border border-[#E3DDCF] bg-white shadow-lg p-3 sm:p-5">
-        {/* Desktop Single Row: 6 items evenly spaced */}
-        <div className="hidden lg:grid lg:grid-cols-6 divide-x divide-[#E3DDCF]">
+        {/* Desktop Single Row: 7 items evenly spaced */}
+        <div className="hidden lg:grid lg:grid-cols-7 divide-x divide-[#E3DDCF]">
           {highlights.map((item) => (
             <div
               key={item}

@@ -1,4 +1,4 @@
-export type ProductSlug = "textile" | "fruit-and-vegetables" | "coconut" | "jaggery" | "spices";
+export type ProductSlug = "textile" | "fruit-and-vegetables" | "coconut" | "jaggery" | "spices" | "steel";
 
 export interface SpecRow {
   key: string;
@@ -210,6 +210,54 @@ export const productSpecsData: Record<ProductSlug, CategorySpecData> = {
     ],
     items: [],
   },
+  // DRAFT: confirm with client
+  steel: {
+    slug: "steel",
+    name: "Steel",
+    description: "Steel products from India.", // DRAFT: confirm wording and exact product types with client
+    icon: "Factory",
+    specRows: [
+      {
+        key: "product-name",
+        label: "Product Name",
+        value: "Steel",
+      },
+      {
+        key: "origin",
+        label: "Origin",
+        value: "India.",
+      },
+      {
+        key: "material",
+        label: "Material",
+        value: "Steel", // DRAFT: confirm with client
+      },
+      {
+        key: "grade",
+        label: "Grade / Specification",
+        value: "As per buyer requirements and applicable standards.", // DRAFT: confirm with client
+      },
+      {
+        key: "packaging",
+        label: "Packaging",
+        value:
+          "Packed to protect against moisture and handling damage during transit: bundles, bands, wooden or steel packing or suitable export packing, as agreed with the buyer.", // DRAFT: confirm with client
+      },
+      {
+        key: "storage",
+        label: "Storage",
+        value:
+          "Kept dry and covered to prevent rust and surface damage before dispatch.", // DRAFT: confirm with client
+      },
+      {
+        key: "hsn-code",
+        label: "HSN Code (Indicative)",
+        value:
+          "Varies according to the product (Chapter 72: iron and steel; Chapter 73: articles of iron or steel).", // DRAFT: confirm with client
+      },
+    ],
+    items: [],
+  },
 };
 
 export const productOrder: ProductSlug[] = [
@@ -218,5 +266,6 @@ export const productOrder: ProductSlug[] = [
   "coconut",
   "jaggery",
   "spices",
+  "steel",
 ];
 

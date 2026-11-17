@@ -35,6 +35,7 @@ export const contactData: ContactData = {
       { label: "Coconut", value: "coconut" },
       { label: "Jaggery", value: "jaggery" },
       { label: "Spices", value: "spices" },
+      { label: "Steel", value: "steel" },
     ],
   },
 };

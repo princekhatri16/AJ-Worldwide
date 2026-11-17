@@ -9,6 +9,7 @@ import {
   Globe2,
   Clock,
   Phone,
+  Factory,
 } from "lucide-react";
 import type { ReasonItem } from "@/data/whyChooseUs";
 import { productsData } from "@/data/products";
@@ -45,8 +46,6 @@ export function WhyChooseUsBento({ reasons }: WhyChooseUsBentoProps) {
       image: "/products/textile/textile-2.jpeg",
       alt: "Assortment of folded export quality towels and textiles with flower",
       position: "center",
-      span: "col-span-2",
-      aspect: "aspect-[4/3]",
     },
     {
       name: "Fruit & Vegetables",
@@ -54,8 +53,6 @@ export function WhyChooseUsBento({ reasons }: WhyChooseUsBentoProps) {
       image: fruitVeg?.image || "/products/fruit-vegetables/freshvegetables2.jpg",
       alt: "Selection of farm fresh Indian vegetables for export",
       position: "center",
-      span: "col-span-2",
-      aspect: "aspect-[4/3]",
     },
     {
       name: "Coconut",
@@ -63,8 +60,6 @@ export function WhyChooseUsBento({ reasons }: WhyChooseUsBentoProps) {
       image: coconut?.image || "/products/coconut/coconut2.jpg",
       alt: "Premium graded mature coconuts from Maharashtra",
       position: "center",
-      span: "col-span-2",
-      aspect: "aspect-[4/3]",
     },
     {
       name: "Jaggery",
@@ -72,8 +67,6 @@ export function WhyChooseUsBento({ reasons }: WhyChooseUsBentoProps) {
       image: jaggery?.image || "/products/jaggery/jaggery2.jpg",
       alt: "Natural organic chemical-free jaggery cubes",
       position: "center",
-      span: "col-span-3",
-      aspect: "aspect-[16/9]",
     },
     {
       name: "Spices",
@@ -81,8 +74,13 @@ export function WhyChooseUsBento({ reasons }: WhyChooseUsBentoProps) {
       image: "/products/spices/spices-2.jpg",
       alt: "Assorted spices, chillies and herbs in bowls",
       position: "center",
-      span: "col-span-3",
-      aspect: "aspect-[16/9]",
+    },
+    {
+      name: "Steel",
+      slug: "steel",
+      image: undefined,
+      alt: "Steel products for export",
+      position: "center",
     },
   ];
 
@@ -194,7 +192,7 @@ export function WhyChooseUsBento({ reasons }: WhyChooseUsBentoProps) {
 
       {/* 2. Cards 2 to 5 in Balanced Grid */}
       {gridCards.map((item, idx) => {
-        const isProductLines = item.id === "five-product-lines" || item.id === "four-product-lines";
+        const isProductLines = item.id === "six-product-lines" || item.id === "five-product-lines" || item.id === "four-product-lines";
         const isExperience = item.id === "import-export-experience";
 
         return (
@@ -234,49 +232,66 @@ export function WhyChooseUsBento({ reasons }: WhyChooseUsBentoProps) {
                   </span>
                 </div>
 
-                {/* Card 2: Rebuilt 6-Column Grid with 5 Tiles */}
+                {/* Card 2: 3x2 Grid with 6 Tiles */}
                 {isProductLines && (
                   <motion.div
                     variants={mosaicContainerVariant}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.1 }}
-                    className="grid grid-cols-6 gap-2 mb-4"
+                    className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-4"
                   >
                     {mosaicTiles.map((tile) => (
                       <motion.div
                         key={tile.slug}
                         variants={mosaicTileVariant}
-                        className={`${tile.span} ${tile.aspect} rounded-xl overflow-hidden relative border border-[#E3DDCF] bg-[#F6F3EC] group/tile cursor-pointer active:scale-[0.98] transition-all duration-300 [@media(hover:hover)]:hover:border-[#B4763A]`}
+                        className="aspect-[4/3] rounded-xl overflow-hidden relative border border-[#E3DDCF] bg-[#F6F3EC] group/tile cursor-pointer active:scale-[0.98] transition-all duration-300 [@media(hover:hover)]:hover:border-[#B4763A]"
                       >
-                        <div className="relative w-full h-full transition-transform duration-300 ease-out group-hover/tile:scale-108">
-                          <Image
-                            src={tile.image}
-                            alt={tile.alt}
-                            fill
-                            className="object-cover"
-                            style={{ objectPosition: tile.position || "center" }}
-                            sizes="(min-width: 1024px) 15vw, 30vw"
-                            quality={85}
-                            priority={false}
-                          />
-                        </div>
+                        {tile.image ? (
+                          <>
+                            <div className="relative w-full h-full transition-transform duration-300 ease-out group-hover/tile:scale-108">
+                              <Image
+                                src={tile.image}
+                                alt={tile.alt}
+                                fill
+                                className="object-cover"
+                                style={{ objectPosition: tile.position || "center" }}
+                                sizes="(min-width: 1024px) 15vw, 30vw"
+                                quality={85}
+                                priority={false}
+                              />
+                            </div>
 
-                        {/* Bottom Label Chip: Soft dark-green gradient (40% height) */}
-                        <div
-                          aria-hidden="true"
-                          className="absolute bottom-0 inset-x-0 h-[40%] bg-gradient-to-t from-[#163829]/80 to-transparent pointer-events-none"
-                        />
-                        <div className="absolute bottom-0 inset-x-0 p-1.5 sm:p-2 text-start transition-transform duration-300 ease-out group-hover/tile:-translate-y-[2px] z-10 pointer-events-none">
-                          <span
-                            className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-white select-none block truncate ${
-                              tile.slug === "jaggery" ? "notranslate" : ""
-                            }`}
-                            translate={tile.slug === "jaggery" ? "no" : undefined}
-                          >
-                            {tile.name}
-                          </span>
-                        </div>
+                            {/* Bottom Label Chip: Soft dark-green gradient (40% height) */}
+                            <div
+                              aria-hidden="true"
+                              className="absolute bottom-0 inset-x-0 h-[40%] bg-gradient-to-t from-[#163829]/80 to-transparent pointer-events-none"
+                            />
+                            <div className="absolute bottom-0 inset-x-0 p-1.5 sm:p-2 text-start transition-transform duration-300 ease-out group-hover/tile:-translate-y-[2px] z-10 pointer-events-none">
+                              <span
+                                className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-white select-none block truncate ${
+                                  tile.slug === "jaggery" ? "notranslate" : ""
+                                }`}
+                                translate={tile.slug === "jaggery" ? "no" : undefined}
+                              >
+                                {tile.name}
+                              </span>
+                            </div>
+                          </>
+                        ) : (
+                          <div className="w-full h-full flex flex-col justify-between p-2 sm:p-2.5">
+                            <div className="flex-1 flex items-center justify-center">
+                              <div className="w-8 h-8 rounded-lg bg-white border border-[#E3DDCF] flex items-center justify-center shadow-2xs group-hover/tile:border-[#B4763A]/40 transition-colors">
+                                <Factory className="w-4 h-4 text-[#B4763A]" />
+                              </div>
+                            </div>
+                            <div className="text-center z-10 pointer-events-none">
+                              <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-[#1E2A24] select-none block truncate">
+                                {tile.name}
+                              </span>
+                            </div>
+                          </div>
+                        )}
                       </motion.div>
                     ))}
                   </motion.div>

@@ -6,9 +6,9 @@ export interface ProductGalleryItem {
 
 export interface ProductCategoryCard {
   name: string;
-  slug: "textile" | "fruit-and-vegetables" | "coconut" | "jaggery" | "spices";
+  slug: "textile" | "fruit-and-vegetables" | "coconut" | "jaggery" | "spices" | "steel";
   description: string;
-  icon: "Shirt" | "Apple" | "Leaf" | "Wheat" | "Flame" | string;
+  icon: "Shirt" | "Apple" | "Leaf" | "Wheat" | "Flame" | "Factory" | string;
   image?: string;
   gallery?: ProductGalleryItem[];
   items?: string[];
@@ -143,6 +143,17 @@ export const productsData: ProductsData = {
       ],
       items: [],
       buttonLabel: "Send an Inquiry",
+    },
+    {
+      name: "Steel",
+      slug: "steel",
+      description: "Steel products from India.", // DRAFT: confirm wording and exact product types with client
+      icon: "Factory",
+      image: undefined,
+      gallery: [],
+      items: [],
+      buttonLabel: "Send an Inquiry",
+      // TODO: client to supply Steel images
     },
   ],
 };

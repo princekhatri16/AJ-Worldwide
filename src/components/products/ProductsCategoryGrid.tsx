@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Layers, Apple, CircleDot, Boxes, Flame } from "lucide-react";
+import { ArrowRight, Layers, Apple, CircleDot, Boxes, Flame, Factory } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ProductCategoryCard } from "@/data/products";
 
@@ -18,6 +18,7 @@ const FILTER_OPTIONS = [
   { label: "Coconut", slug: "coconut" },
   { label: "Jaggery", slug: "jaggery" },
   { label: "Spices", slug: "spices" },
+  { label: "Steel", slug: "steel" },
 ];
 
 export function ProductsCategoryGrid({ categories }: ProductsCategoryGridProps) {
@@ -55,9 +56,8 @@ export function ProductsCategoryGrid({ categories }: ProductsCategoryGridProps) 
     coconut: <CircleDot className="w-8 h-8 text-[#B4763A]" />,
     jaggery: <Boxes className="w-8 h-8 text-[#B4763A]" />,
     spices: <Flame className="w-8 h-8 text-[#B4763A]" />,
+    steel: <Factory className="w-8 h-8 text-[#B4763A]" />,
   };
-
-  const isFullFiveGrid = filteredCategories.length === 5;
 
   return (
     <div className="space-y-8 sm:space-y-10">
@@ -89,23 +89,13 @@ export function ProductsCategoryGrid({ categories }: ProductsCategoryGridProps) 
       <motion.div
         layout
         className={
-          isFullFiveGrid
-            ? "grid grid-cols-1 min-[360px]:grid-cols-2 lg:grid-cols-6 2xl:grid-cols-5 gap-4 sm:gap-6"
-            : "grid grid-cols-1 min-[360px]:grid-cols-2 lg:grid-cols-3 max-w-4xl mx-auto gap-4 sm:gap-6"
+          activeFilter === "all"
+            ? "grid grid-cols-1 min-[360px]:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6 gap-4 sm:gap-6"
+            : "grid grid-cols-1 min-[360px]:grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 max-w-4xl mx-auto gap-4 sm:gap-6"
         }
       >
         <AnimatePresence>
-          {filteredCategories.map((cat, idx) => {
-            const isFourth = isFullFiveGrid && idx === 3;
-            const isFifth = isFullFiveGrid && idx === 4;
-            const colSpanClass = isFifth
-              ? "col-span-1 min-[360px]:col-span-2 min-[360px]:justify-self-center min-[360px]:w-full min-[360px]:max-w-[calc(50%-0.5rem)] sm:max-w-[calc(50%-0.75rem)] lg:col-span-2 lg:col-start-auto lg:max-w-none 2xl:col-span-1"
-              : isFourth
-              ? "lg:col-span-2 lg:col-start-2 2xl:col-span-1 2xl:col-start-auto"
-              : isFullFiveGrid
-              ? "lg:col-span-2 2xl:col-span-1"
-              : "";
-
+          {filteredCategories.map((cat) => {
             return (
               <motion.div
                 key={cat.slug}
@@ -114,7 +104,7 @@ export function ProductsCategoryGrid({ categories }: ProductsCategoryGridProps) 
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.35, ease: "easeInOut" }}
-                className={`h-full w-full ${colSpanClass}`}
+                className="h-full w-full"
               >
               <div
                 id={cat.slug}
@@ -135,7 +125,7 @@ export function ProductsCategoryGrid({ categories }: ProductsCategoryGridProps) 
                         alt={cat.name}
                         fill
                         className="object-cover site-card-image transition-transform duration-500 ease-out"
-                        sizes="(min-width:1536px) 20vw, (min-width:1280px) 25vw, (min-width:640px) 50vw, 50vw"
+                        sizes="(min-width:1536px) 16vw, (min-width:1024px) 33vw, 50vw"
                       />
                     ) : (
                       <div className="site-card-image transition-transform duration-500 ease-out flex items-center justify-center p-4">

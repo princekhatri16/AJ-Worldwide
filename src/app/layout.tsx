@@ -41,7 +41,7 @@ export async function generateMetadata(): Promise<Metadata> {
       default: `${siteData.name} | ${siteData.tagline}`,
       template: `%s | ${siteData.name}`,
     },
-    description: "From Maharashtra to the world: AJ Worldwide brings textiles, fresh fruit and vegetables, coconut, jaggery and spices to buyers you can trust.",
+    description: "From Maharashtra to the world: AJ Worldwide brings textiles, fresh fruit and vegetables, coconut, jaggery, spices and steel to buyers you can trust.",
     keywords: [
       "AJ Worldwide",
       "Trusted Worldwide",
@@ -55,6 +55,7 @@ export async function generateMetadata(): Promise<Metadata> {
       "Coconut export",
       "Jaggery export",
       "Spices export",
+      "Steel export",
     ],
     authors: [{ name: siteData.name }],
     creator: siteData.name,
@@ -69,7 +70,7 @@ export async function generateMetadata(): Promise<Metadata> {
       locale: "en_US",
       url: siteUrl,
       title: `${siteData.name} | ${siteData.tagline}`,
-      description: "From Maharashtra to the world: AJ Worldwide brings textiles, fresh fruit and vegetables, coconut, jaggery and spices to buyers you can trust.",
+      description: "From Maharashtra to the world: AJ Worldwide brings textiles, fresh fruit and vegetables, coconut, jaggery, spices and steel to buyers you can trust.",
       siteName: siteData.name,
       images: [
         {
@@ -83,7 +84,7 @@ export async function generateMetadata(): Promise<Metadata> {
     twitter: {
       card: "summary_large_image",
       title: `${siteData.name} | ${siteData.tagline}`,
-      description: "From Maharashtra to the world: AJ Worldwide brings textiles, fresh fruit and vegetables, coconut, jaggery and spices to buyers you can trust.",
+      description: "From Maharashtra to the world: AJ Worldwide brings textiles, fresh fruit and vegetables, coconut, jaggery, spices and steel to buyers you can trust.",
       images: ["/og-image.png"],
     },
     icons: {

@@ -20,6 +20,7 @@ import {
   Phone,
   MessageCircle,
   Boxes,
+  Factory,
 } from "lucide-react";
 import { siteData } from "@/data/site";
 import { productsData } from "@/data/products";
@@ -70,6 +71,8 @@ export function Header() {
         return <Wheat className={`${size} ${colorClass}`} />;
       case "spices":
         return <Flame className={`${size} ${colorClass}`} />;
+      case "steel":
+        return <Factory className={`${size} ${colorClass}`} />;
       default:
         return <Boxes className={`${size} ${colorClass}`} />;
     }
@@ -733,15 +736,14 @@ export function Header() {
                                   transition={{ duration: shouldReduceMotion ? 0 : 0.22, ease: "easeOut" }}
                                   className="overflow-hidden mt-2 space-y-2 bg-[#F6F3EC] rounded-xl p-2.5 border border-[#E3DDCF]"
                                 >
-                                  {/* 2-Column Grid with 5th Category Card Spanning Both Columns */}
+                                  {/* 2-Column Grid: 3 rows of 2 with no empty cell */}
                                   <div className="grid grid-cols-2 gap-2">
-                                    {productsData.categories.map((cat, idx) => (
+                                    {productsData.categories.map((cat) => (
                                       <Link
                                         key={cat.slug}
                                         href={`/products/${cat.slug}`}
                                         onClick={closeMobileMenu}
-                                        className={`p-2.5 rounded-xl bg-white border border-[#E3DDCF] hover:border-[#1F4A3A]/40 transition-all flex flex-col gap-1 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] ${idx === 4 ? "col-span-2" : ""
-                                          }`}
+                                        className="p-2.5 rounded-xl bg-white border border-[#E3DDCF] hover:border-[#1F4A3A]/40 transition-all flex flex-col gap-1 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A]"
                                       >
                                         <div className="w-8 h-8 rounded-lg bg-[#F6F3EC] border border-[#E3DDCF] flex items-center justify-center text-[#B4763A] shrink-0">
                                           {renderCategoryIcon(cat.slug, false, "w-4 h-4")}
