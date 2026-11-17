@@ -40,7 +40,8 @@ export const homeData: HomeData = {
   hero: {
     heading: "AJ Worldwide",
     tagline: "Trusted Worldwide",
-    text: "From Maharashtra to the world: AJ Worldwide brings textiles, fresh fruit and vegetables, coconut and jaggery to buyers you can trust.",
+    // CLIENT-ADDED: Spices, confirm wording
+    text: "From Maharashtra to the world: AJ Worldwide brings textiles, fresh fruit and vegetables, coconut, jaggery and spices to buyers you can trust.",
     buttons: {
       viewProducts: {
         label: "View Our Products",
@@ -70,6 +71,7 @@ export const homeData: HomeData = {
     "Fruit & Vegetables",
     "Coconut",
     "Jaggery",
+    "Spices", // CLIENT-ADDED: Spices, confirm wording
     "Open 7 Days a Week",
   ],
   // Array of image paths for the About section slider.
@@ -110,6 +112,12 @@ export const homeData: HomeData = {
         slug: "jaggery",
         href: "/products/jaggery",
         description: "Natural sugarcane jaggery, a traditional sweetener.",
+      },
+      {
+        name: "Spices",
+        slug: "spices",
+        href: "/products/spices",
+        description: "Spices from India.", // DRAFT: confirm wording with client
       },
     ],
   },

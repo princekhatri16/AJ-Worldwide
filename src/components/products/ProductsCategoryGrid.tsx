@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Layers, Apple, CircleDot, Boxes } from "lucide-react";
+import { ArrowRight, Layers, Apple, CircleDot, Boxes, Flame } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ProductCategoryCard } from "@/data/products";
 
@@ -17,6 +17,7 @@ const FILTER_OPTIONS = [
   { label: "Fruit & Vegetables", slug: "fruit-and-vegetables" },
   { label: "Coconut", slug: "coconut" },
   { label: "Jaggery", slug: "jaggery" },
+  { label: "Spices", slug: "spices" },
 ];
 
 export function ProductsCategoryGrid({ categories }: ProductsCategoryGridProps) {
@@ -53,48 +54,68 @@ export function ProductsCategoryGrid({ categories }: ProductsCategoryGridProps) 
     "fruit-and-vegetables": <Apple className="w-8 h-8 text-[#B4763A]" />,
     coconut: <CircleDot className="w-8 h-8 text-[#B4763A]" />,
     jaggery: <Boxes className="w-8 h-8 text-[#B4763A]" />,
+    spices: <Flame className="w-8 h-8 text-[#B4763A]" />,
   };
+
+  const isFullFiveGrid = filteredCategories.length === 5;
 
   return (
     <div className="space-y-8 sm:space-y-10">
-      {/* Filter Chips as Pill Buttons */}
-      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
-        {FILTER_OPTIONS.map((opt) => {
-          const isActive = activeFilter === opt.slug;
-          return (
-            <button
-              key={opt.slug}
-              type="button"
-              onClick={() => handleFilterChange(opt.slug)}
-              translate={opt.slug === "jaggery" ? "no" : undefined}
-              className={`py-2 px-4 sm:px-5 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
-                isActive
-                  ? "bg-[#1F4A3A] text-white shadow-xs"
-                  : "bg-white border border-[#E3DDCF] text-[#1E2A24] hover:border-[#1F4A3A] hover:bg-[#F6F3EC]"
-              } ${opt.slug === "jaggery" ? "notranslate" : ""}`}
-            >
-              {opt.label}
-            </button>
-          );
-        })}
+      {/* Filter Chips as Pill Buttons - Horizontally scrollable row on mobile */}
+      <div className="w-full overflow-x-auto no-scrollbar py-1">
+        <div className="flex items-center sm:justify-center gap-2 sm:gap-2.5 min-w-max px-1 mx-auto">
+          {FILTER_OPTIONS.map((opt) => {
+            const isActive = activeFilter === opt.slug;
+            return (
+              <button
+                key={opt.slug}
+                type="button"
+                onClick={() => handleFilterChange(opt.slug)}
+                translate={opt.slug === "jaggery" ? "no" : undefined}
+                className={`py-2 px-4 sm:px-5 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer shrink-0 whitespace-nowrap ${
+                  isActive
+                    ? "bg-[#1F4A3A] text-white shadow-xs"
+                    : "bg-white border border-[#E3DDCF] text-[#1E2A24] hover:border-[#1F4A3A] hover:bg-[#F6F3EC]"
+                } ${opt.slug === "jaggery" ? "notranslate" : ""}`}
+              >
+                {opt.label}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Product Cards Grid with AnimatePresence layout reflow */}
       <motion.div
         layout
-        className="grid grid-cols-1 min-[360px]:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6"
+        className={
+          isFullFiveGrid
+            ? "grid grid-cols-1 min-[360px]:grid-cols-2 lg:grid-cols-6 2xl:grid-cols-5 gap-4 sm:gap-6"
+            : "grid grid-cols-1 min-[360px]:grid-cols-2 lg:grid-cols-3 max-w-4xl mx-auto gap-4 sm:gap-6"
+        }
       >
         <AnimatePresence>
-          {filteredCategories.map((cat) => (
-            <motion.div
-              key={cat.slug}
-              layout
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.35, ease: "easeInOut" }}
-              className="h-full"
-            >
+          {filteredCategories.map((cat, idx) => {
+            const isFourth = isFullFiveGrid && idx === 3;
+            const isFifth = isFullFiveGrid && idx === 4;
+            const colSpanClass = isFifth
+              ? "col-span-1 min-[360px]:col-span-2 min-[360px]:justify-self-center min-[360px]:w-full min-[360px]:max-w-[calc(50%-0.5rem)] sm:max-w-[calc(50%-0.75rem)] lg:col-span-2 lg:col-start-auto lg:max-w-none 2xl:col-span-1"
+              : isFourth
+              ? "lg:col-span-2 lg:col-start-2 2xl:col-span-1 2xl:col-start-auto"
+              : isFullFiveGrid
+              ? "lg:col-span-2 2xl:col-span-1"
+              : "";
+
+            return (
+              <motion.div
+                key={cat.slug}
+                layout
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.35, ease: "easeInOut" }}
+                className={`h-full w-full ${colSpanClass}`}
+              >
               <div
                 id={cat.slug}
                 className="site-card group h-full rounded-2xl border border-[#E3DDCF] bg-white overflow-hidden flex flex-col justify-between shadow-xs transition-all duration-300 relative [@media(hover:hover)]:hover:-translate-y-1 [@media(hover:hover)]:hover:border-[#B4763A]/50 [@media(hover:hover)]:hover:shadow-[0_12px_28px_-12px_rgba(30,42,36,0.18)] active:scale-[0.98] scroll-mt-28"
@@ -114,7 +135,7 @@ export function ProductsCategoryGrid({ categories }: ProductsCategoryGridProps) 
                         alt={cat.name}
                         fill
                         className="object-cover site-card-image transition-transform duration-500 ease-out"
-                        sizes="(max-width: 640px) 50vw, (max-width: 1280px) 50vw, 25vw"
+                        sizes="(min-width:1536px) 20vw, (min-width:1280px) 25vw, (min-width:640px) 50vw, 50vw"
                       />
                     ) : (
                       <div className="site-card-image transition-transform duration-500 ease-out flex items-center justify-center p-4">
@@ -155,7 +176,8 @@ export function ProductsCategoryGrid({ categories }: ProductsCategoryGridProps) 
                 </div>
               </div>
             </motion.div>
-          ))}
+          );
+        })}
         </AnimatePresence>
       </motion.div>
     </div>

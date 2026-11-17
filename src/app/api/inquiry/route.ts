@@ -27,7 +27,7 @@ const InquirySchema = z.object({
   country: z.string().trim().min(2, "Country is required"),
   email: z.string().trim().email("Please enter a valid email address"),
   phone: z.string().trim().min(4, "Please enter a valid WhatsApp / Phone number"),
-  product: z.enum(["Textile", "Fruit & Vegetables", "Coconut", "Jaggery"], {
+  product: z.enum(["Textile", "Fruit & Vegetables", "Coconut", "Jaggery", "Spices"], {
     message: "Please select a valid product",
   }),
   quantity: z.string().trim().min(1, "Quantity Required is required"),

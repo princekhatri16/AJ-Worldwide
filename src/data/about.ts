@@ -24,7 +24,8 @@ export const aboutData: AboutData = {
   whoWeAre: {
     heading: "Who We Are",
     paragraphs: [
-      "AJ Worldwide is an import and export company based in Kumbhari, in Buldhana district of Maharashtra, established in 2025. We trade in textiles, fresh fruit and vegetables, coconut and jaggery, and we work to connect buyers abroad with products from India's farms and markets.",
+      // CLIENT-ADDED: Spices, confirm wording
+      "AJ Worldwide is an import and export company based in Kumbhari, in Buldhana district of Maharashtra, established in 2025. We trade in textiles, fresh fruit and vegetables, coconut, jaggery and spices, and we work to connect buyers abroad with products from India's farms and markets.",
       "Our name carries our promise: to be trusted wherever we trade. We aim to do that through clear communication, honest dealing and dependable delivery.",
     ],
   },

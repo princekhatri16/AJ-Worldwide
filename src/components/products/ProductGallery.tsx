@@ -2,11 +2,12 @@
 
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, Layers, Apple, CircleDot, Boxes } from "lucide-react";
+import { ChevronLeft, ChevronRight, Layers, Apple, CircleDot, Boxes, Flame } from "lucide-react";
 
 export interface GalleryImage {
   src: string;
   alt: string;
+  position?: string;
 }
 
 interface ProductGalleryProps {
@@ -97,12 +98,14 @@ export function ProductGallery({ gallery = [], name, slug }: ProductGalleryProps
         return <CircleDot className="w-10 h-10 text-[#B4763A]" />;
       case "jaggery":
         return <Boxes className="w-10 h-10 text-[#B4763A]" />;
+      case "spices":
+        return <Flame className="w-10 h-10 text-[#B4763A]" />;
       default:
         return <Boxes className="w-10 h-10 text-[#B4763A]" />;
     }
   };
 
-  // Case 0: Empty gallery (e.g. Textile) - Designed placeholder
+  // Fallback for empty gallery: Designed placeholder
   if (total === 0) {
     return (
       <div className="relative w-full aspect-[4/3] rounded-2xl bg-[#F6F3EC] border border-[#E3DDCF] p-6 flex items-center justify-center overflow-hidden shadow-xs">
@@ -133,9 +136,8 @@ export function ProductGallery({ gallery = [], name, slug }: ProductGalleryProps
           return (
             <div
               key={item.src}
-              className={`absolute inset-0 transition-opacity duration-250 ease-in-out ${
-                isActive ? "opacity-100 z-10 pointer-events-auto" : "opacity-0 z-0 pointer-events-none"
-              }`}
+              className={`absolute inset-0 transition-opacity duration-250 ease-in-out ${isActive ? "opacity-100 z-10 pointer-events-auto" : "opacity-0 z-0 pointer-events-none"
+                }`}
               aria-hidden={!isActive}
             >
               <Image
@@ -144,6 +146,7 @@ export function ProductGallery({ gallery = [], name, slug }: ProductGalleryProps
                 fill
                 priority={idx === 0}
                 className="object-cover"
+                style={{ objectPosition: item.position || "center" }}
                 sizes="(max-width: 1024px) 100vw, 42vw"
               />
             </div>
@@ -198,17 +201,17 @@ export function ProductGallery({ gallery = [], name, slug }: ProductGalleryProps
                 aria-selected={isSelected}
                 aria-label={`Thumbnail ${idx + 1}: ${item.alt}`}
                 onClick={() => selectImage(idx)}
-                className={`relative shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden border transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] ${
-                  isSelected
+                className={`relative shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden border transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] ${isSelected
                     ? "ring-2 ring-[#B4763A] border-transparent scale-102 shadow-xs opacity-100"
                     : "border-[#E3DDCF] opacity-65 hover:opacity-100 hover:border-[#1F4A3A]"
-                }`}
+                  }`}
               >
                 <Image
                   src={item.src}
                   alt=""
                   fill
                   className="object-cover"
+                  style={{ objectPosition: item.position || "center" }}
                   sizes="80px"
                 />
               </button>

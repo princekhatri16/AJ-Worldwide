@@ -339,15 +339,20 @@ export function ContactFaq({ items }: ContactFaqProps) {
                 </a>
               </div>
 
-              <a
-                href={`tel:+${siteData.phoneRaw}`}
-                dir="ltr"
-                className="font-mono text-xs sm:text-sm font-bold text-[#1E2A24] hover:text-[#1F4A3A] transition-colors inline-flex items-center gap-1.5 notranslate"
-                translate="no"
-              >
-                <Phone className="w-3.5 h-3.5 text-[#B4763A]" />
-                <span>{siteData.phone}</span>
-              </a>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
+                {siteData.phones.map((p) => (
+                  <a
+                    key={p.tel}
+                    href={p.tel}
+                    dir="ltr"
+                    className="font-mono text-xs sm:text-sm font-bold text-[#1E2A24] hover:text-[#1F4A3A] transition-colors inline-flex items-center gap-1.5 notranslate"
+                    translate="no"
+                  >
+                    <Phone className="w-3.5 h-3.5 text-[#B4763A] shrink-0" />
+                    <span>{p.display}</span>
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -456,15 +461,20 @@ export function ContactFaq({ items }: ContactFaqProps) {
               </a>
             </div>
 
-            <a
-              href={`tel:+${siteData.phoneRaw}`}
-              dir="ltr"
-              className="font-mono text-xs sm:text-sm font-bold text-[#1E2A24] hover:text-[#1F4A3A] transition-colors inline-flex items-center gap-1.5 notranslate self-center pt-1 sm:pt-0"
-              translate="no"
-            >
-              <Phone className="w-3.5 h-3.5 text-[#B4763A]" />
-              <span>{siteData.phone}</span>
-            </a>
+            <div className="flex flex-col items-start gap-1.5 self-stretch sm:self-center pt-2 sm:pt-0">
+              {siteData.phones.map((p) => (
+                <a
+                  key={p.tel}
+                  href={p.tel}
+                  dir="ltr"
+                  className="font-mono text-xs sm:text-sm font-bold text-[#1E2A24] hover:text-[#1F4A3A] transition-colors inline-flex items-center gap-1.5 notranslate"
+                  translate="no"
+                >
+                  <Phone className="w-3.5 h-3.5 text-[#B4763A] shrink-0" />
+                  <span>{p.display}</span>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       )}

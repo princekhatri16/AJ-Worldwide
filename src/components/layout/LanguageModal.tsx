@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import { useLanguage } from "@/context/LanguageContext";
 import { Search, X, Check, Globe, RotateCcw } from "lucide-react";
 
-const emptySubscribe = () => () => {};
+const emptySubscribe = () => () => { };
 
 const POPULAR_CODES = ["en", "hi", "mr", "ar", "es", "fr", "de", "zh-CN", "ja", "ru", "pt"];
 
@@ -165,11 +165,10 @@ export function LanguageModal() {
                     key={lang.code}
                     type="button"
                     onClick={() => changeLanguage(lang.code)}
-                    className={`min-h-[44px] px-3.5 py-2 text-xs rounded-full border transition-all cursor-pointer flex items-center ${
-                      isSelected
-                        ? "bg-[#1F4A3A] text-white border-[#1F4A3A] font-semibold"
-                        : "bg-[#F6F3EC] text-[#1E2A24] border-[#E3DDCF] hover:border-[#B4763A]"
-                    }`}
+                    className={`min-h-[44px] px-3.5 py-2 text-xs rounded-full border transition-all cursor-pointer flex items-center ${isSelected
+                      ? "bg-[#1F4A3A] text-white border-[#1F4A3A] font-semibold"
+                      : "bg-[#F6F3EC] text-[#1E2A24] border-[#E3DDCF] hover:border-[#B4763A]"
+                      }`}
                   >
                     <span className="notranslate" translate="no">
                       {lang.nativeName}
@@ -192,25 +191,22 @@ export function LanguageModal() {
                   key={lang.code}
                   type="button"
                   onClick={() => changeLanguage(lang.code)}
-                  className={`w-full min-h-[48px] p-3 rounded-xl text-start flex items-center justify-between border transition-all cursor-pointer ${
-                    isSelected
-                      ? "bg-[#1F4A3A] text-white border-[#1F4A3A] shadow-xs"
-                      : "bg-white hover:bg-[#F6F3EC] border-[#E3DDCF]/50 hover:border-[#E3DDCF] text-[#1E2A24]"
-                  }`}
+                  className={`w-full min-h-[48px] p-3 rounded-xl text-start flex items-center justify-between border transition-all cursor-pointer ${isSelected
+                    ? "bg-[#1F4A3A] text-white border-[#1F4A3A] shadow-xs"
+                    : "bg-white hover:bg-[#F6F3EC] border-[#E3DDCF]/50 hover:border-[#E3DDCF] text-[#1E2A24]"
+                    }`}
                 >
                   <div className="truncate pe-2">
                     <div
-                      className={`font-semibold text-xs sm:text-sm truncate notranslate ${
-                        isSelected ? "text-[#B4763A]" : "text-[#1E2A24]"
-                      }`}
+                      className={`font-semibold text-xs sm:text-sm truncate notranslate ${isSelected ? "text-[#B4763A]" : "text-[#1E2A24]"
+                        }`}
                       translate="no"
                     >
                       {lang.nativeName}
                     </div>
                     <div
-                      className={`text-[11px] truncate ${
-                        isSelected ? "text-white/80" : "text-[#5F6B64]"
-                      }`}
+                      className={`text-[11px] truncate ${isSelected ? "text-white/80" : "text-[#5F6B64]"
+                        }`}
                     >
                       {lang.name}
                     </div>

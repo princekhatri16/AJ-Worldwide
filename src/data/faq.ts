@@ -15,7 +15,8 @@ export const faqData: FaqData = {
     {
       id: "faq-1",
       question: "What do you trade in?",
-      answer: "Textiles, fresh fruit and vegetables, coconut and jaggery.",
+      // CLIENT-ADDED: Spices, confirm wording
+      answer: "Textiles, fresh fruit and vegetables, coconut, jaggery and spices.",
     },
     {
       id: "faq-2",

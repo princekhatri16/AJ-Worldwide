@@ -1,4 +1,4 @@
-export type ProductSlug = "textile" | "fruit-and-vegetables" | "coconut" | "jaggery";
+export type ProductSlug = "textile" | "fruit-and-vegetables" | "coconut" | "jaggery" | "spices";
 
 export interface SpecRow {
   key: string;
@@ -174,6 +174,42 @@ export const productSpecsData: Record<ProductSlug, CategorySpecData> = {
     ],
     items: [],
   },
+  spices: {
+    slug: "spices",
+    name: "Spices",
+    description: "Spices from India.", // DRAFT: confirm wording with client
+    icon: "Flame",
+    specRows: [
+      {
+        key: "product-name",
+        label: "Product Name",
+        value: "Spices",
+      },
+      {
+        key: "origin",
+        label: "Origin",
+        value: "India.",
+      },
+      {
+        key: "packaging",
+        label: "Packaging",
+        // DRAFT: confirm with client
+        value: "Food-grade airtight master cartons with inner poly liners, bags or pouch packaging.",
+      },
+      {
+        key: "storage",
+        label: "Storage",
+        // DRAFT: confirm with client
+        value: "Cool, dry and moisture-free hygienic warehousing protected from humidity and direct sunlight.",
+      },
+      {
+        key: "hsn-code",
+        label: "HSN Code (Indicative)",
+        value: "Varies according to the product",
+      },
+    ],
+    items: [],
+  },
 };
 
 export const productOrder: ProductSlug[] = [
@@ -181,5 +217,6 @@ export const productOrder: ProductSlug[] = [
   "fruit-and-vegetables",
   "coconut",
   "jaggery",
+  "spices",
 ];
 

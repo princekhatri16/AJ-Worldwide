@@ -65,12 +65,17 @@ export const whyChooseUsData: WhyChooseUsData = {
       imageAlt: "Container ship sailing through shipping channel with cranes and cargo plane overhead",
     },
     {
-      id: "four-product-lines",
+      id: "five-product-lines",
       numeral: "02",
-      title: "Four Product Lines",
-      description: "Textile, fruit and vegetables, coconut and jaggery from one company.",
+      title: "Five Product Lines",
+      // CLIENT-ADDED: Spices, confirm wording
+      description: "Textile, fruit and vegetables, coconut, jaggery and spices from one company.",
       icon: "Layers",
       mosaicImages: [
+        {
+          src: "/products/textile/textile-2.jpeg",
+          alt: "Assortment of folded export quality towels and textiles with flower",
+        },
         {
           src: "/products/fruit-vegetables/freshvegetables2.jpg",
           alt: "Selection of farm fresh Indian vegetables for export",
@@ -82,6 +87,10 @@ export const whyChooseUsData: WhyChooseUsData = {
         {
           src: "/products/jaggery/jaggery2.jpg",
           alt: "Natural organic chemical-free jaggery cubes",
+        },
+        {
+          src: "/products/spices/spices-2.jpg",
+          alt: "Assorted spices, chillies and herbs in bowls",
         },
       ],
     },
@@ -115,7 +124,7 @@ export const whyChooseUsData: WhyChooseUsData = {
       label: "Established",
     },
     {
-      numericValue: 4,
+      numericValue: 5, // CLIENT-ADDED: Spices, confirm wording
       label: "Product lines",
     },
     {

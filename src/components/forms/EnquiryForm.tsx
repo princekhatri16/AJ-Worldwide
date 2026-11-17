@@ -19,7 +19,7 @@ const FormSchema = z.object({
   country: z.string().trim().min(2, "Country is required"),
   email: z.string().trim().email("Please enter a valid email address"),
   phone: z.string().trim().min(4, "Please enter a valid WhatsApp / Phone number"),
-  product: z.enum(["Textile", "Fruit & Vegetables", "Coconut", "Jaggery"], {
+  product: z.enum(["Textile", "Fruit & Vegetables", "Coconut", "Jaggery", "Spices"], {
     message: "Please select a product",
   }),
   quantity: z.string().trim().min(1, "Quantity Required is required"),
@@ -31,11 +31,12 @@ const FormSchema = z.object({
 type FormInput = z.infer<typeof FormSchema>;
 
 // Map product slug to official product name
-const SLUG_TO_NAME_MAP: Record<string, "Textile" | "Fruit & Vegetables" | "Coconut" | "Jaggery"> = {
+const SLUG_TO_NAME_MAP: Record<string, "Textile" | "Fruit & Vegetables" | "Coconut" | "Jaggery" | "Spices"> = {
   textile: "Textile",
   "fruit-and-vegetables": "Fruit & Vegetables",
   coconut: "Coconut",
   jaggery: "Jaggery",
+  spices: "Spices",
 };
 
 export function EnquiryForm() {
@@ -216,11 +217,10 @@ export function EnquiryForm() {
             aria-describedby={errors.fullName ? "fullName-error" : undefined}
             placeholder="Your Name"
             {...register("fullName")}
-            className={`w-full min-h-[48px] px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-base text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors ${
-              errors.fullName
-                ? "border-red-500 focus:ring-red-500"
-                : "border-[#E3DDCF] focus:border-[#B4763A] focus:ring-[#B4763A]/20"
-            }`}
+            className={`w-full min-h-[48px] px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-base text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors ${errors.fullName
+              ? "border-red-500 focus:ring-red-500"
+              : "border-[#E3DDCF] focus:border-[#B4763A] focus:ring-[#B4763A]/20"
+              }`}
           />
           {errors.fullName && (
             <p id="fullName-error" aria-live="polite" className="text-xs text-red-500 mt-1">
@@ -266,11 +266,10 @@ export function EnquiryForm() {
               aria-describedby={errors.country ? "country-error" : undefined}
               placeholder="e.g. United Arab Emirates"
               {...register("country")}
-              className={`w-full min-h-[48px] px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-base text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors ${
-                errors.country
-                  ? "border-red-500 focus:ring-red-500"
-                  : "border-[#E3DDCF] focus:border-[#B4763A] focus:ring-[#B4763A]/20"
-              }`}
+              className={`w-full min-h-[48px] px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-base text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors ${errors.country
+                ? "border-red-500 focus:ring-red-500"
+                : "border-[#E3DDCF] focus:border-[#B4763A] focus:ring-[#B4763A]/20"
+                }`}
             />
             {errors.country && (
               <p id="country-error" aria-live="polite" className="text-xs text-red-500 mt-1">
@@ -296,11 +295,10 @@ export function EnquiryForm() {
               aria-describedby={errors.email ? "email-error" : undefined}
               placeholder="buyer@example.com"
               {...register("email")}
-              className={`w-full min-h-[48px] px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-base text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors ${
-                errors.email
-                  ? "border-red-500 focus:ring-red-500"
-                  : "border-[#E3DDCF] focus:border-[#B4763A] focus:ring-[#B4763A]/20"
-              }`}
+              className={`w-full min-h-[48px] px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-base text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors ${errors.email
+                ? "border-red-500 focus:ring-red-500"
+                : "border-[#E3DDCF] focus:border-[#B4763A] focus:ring-[#B4763A]/20"
+                }`}
             />
             {errors.email && (
               <p id="email-error" aria-live="polite" className="text-xs text-red-500 mt-1">
@@ -329,11 +327,10 @@ export function EnquiryForm() {
               aria-describedby={errors.phone ? "phone-error" : undefined}
               placeholder="+1 555 123 4567"
               {...register("phone")}
-              className={`w-full min-h-[48px] px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-base text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors ${
-                errors.phone
-                  ? "border-red-500 focus:ring-red-500"
-                  : "border-[#E3DDCF] focus:border-[#B4763A] focus:ring-[#B4763A]/20"
-              }`}
+              className={`w-full min-h-[48px] px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-base text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors ${errors.phone
+                ? "border-red-500 focus:ring-red-500"
+                : "border-[#E3DDCF] focus:border-[#B4763A] focus:ring-[#B4763A]/20"
+                }`}
             />
             {errors.phone && (
               <p id="phone-error" aria-live="polite" className="text-xs text-red-500 mt-1">
@@ -354,11 +351,10 @@ export function EnquiryForm() {
               aria-invalid={errors.product ? "true" : "false"}
               aria-describedby={errors.product ? "product-error" : undefined}
               {...register("product")}
-              className={`w-full min-h-[48px] px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-base text-[#1E2A24] focus:outline-none focus:ring-2 transition-colors cursor-pointer ${
-                errors.product
-                  ? "border-red-500 focus:ring-red-500"
-                  : "border-[#E3DDCF] focus:border-[#B4763A] focus:ring-[#B4763A]/20"
-              }`}
+              className={`w-full min-h-[48px] px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-base text-[#1E2A24] focus:outline-none focus:ring-2 transition-colors cursor-pointer ${errors.product
+                ? "border-red-500 focus:ring-red-500"
+                : "border-[#E3DDCF] focus:border-[#B4763A] focus:ring-[#B4763A]/20"
+                }`}
             >
               <option value="Textile">Textile</option>
               <option value="Fruit & Vegetables">Fruit &amp; Vegetables</option>
@@ -366,6 +362,7 @@ export function EnquiryForm() {
               <option value="Jaggery" translate="no" className="notranslate">
                 Jaggery
               </option>
+              <option value="Spices">Spices</option>
             </select>
             {errors.product && (
               <p id="product-error" aria-live="polite" className="text-xs text-red-500 mt-1">
@@ -392,11 +389,10 @@ export function EnquiryForm() {
               aria-describedby={errors.quantity ? "quantity-error" : undefined}
               placeholder="e.g. 1 x 40ft Container or 20 Metric Tons"
               {...register("quantity")}
-              className={`w-full min-h-[48px] px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-base text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors ${
-                errors.quantity
-                  ? "border-red-500 focus:ring-red-500"
-                  : "border-[#E3DDCF] focus:border-[#B4763A] focus:ring-[#B4763A]/20"
-              }`}
+              className={`w-full min-h-[48px] px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-base text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors ${errors.quantity
+                ? "border-red-500 focus:ring-red-500"
+                : "border-[#E3DDCF] focus:border-[#B4763A] focus:ring-[#B4763A]/20"
+                }`}
             />
             {errors.quantity && (
               <p id="quantity-error" aria-live="polite" className="text-xs text-red-500 mt-1">
@@ -420,11 +416,10 @@ export function EnquiryForm() {
               aria-describedby={errors.destination ? "destination-error" : undefined}
               placeholder="e.g. Jebel Ali, Dubai or Rotterdam"
               {...register("destination")}
-              className={`w-full min-h-[48px] px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-base text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors ${
-                errors.destination
-                  ? "border-red-500 focus:ring-red-500"
-                  : "border-[#E3DDCF] focus:border-[#B4763A] focus:ring-[#B4763A]/20"
-              }`}
+              className={`w-full min-h-[48px] px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-base text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors ${errors.destination
+                ? "border-red-500 focus:ring-red-500"
+                : "border-[#E3DDCF] focus:border-[#B4763A] focus:ring-[#B4763A]/20"
+                }`}
             />
             {errors.destination && (
               <p id="destination-error" aria-live="polite" className="text-xs text-red-500 mt-1">
@@ -450,11 +445,10 @@ export function EnquiryForm() {
             aria-describedby={errors.message ? "message-error" : undefined}
             placeholder="Please detail your grade requirements, packaging preferences, and delivery timeline..."
             {...register("message")}
-            className={`w-full min-h-[120px] px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-base text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors resize-y ${
-              errors.message
-                ? "border-red-500 focus:ring-red-500"
-                : "border-[#E3DDCF] focus:border-[#B4763A] focus:ring-[#B4763A]/20"
-            }`}
+            className={`w-full min-h-[120px] px-3.5 py-2.5 bg-[#F6F3EC] border rounded-xl text-base text-[#1E2A24] placeholder:text-[#5F6B64]/60 focus:outline-none focus:ring-2 transition-colors resize-y ${errors.message
+              ? "border-red-500 focus:ring-red-500"
+              : "border-[#E3DDCF] focus:border-[#B4763A] focus:ring-[#B4763A]/20"
+              }`}
           />
           {errors.message && (
             <p id="message-error" aria-live="polite" className="text-xs text-red-500 mt-1">

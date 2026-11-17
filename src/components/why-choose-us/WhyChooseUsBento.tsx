@@ -9,7 +9,6 @@ import {
   Globe2,
   Clock,
   Phone,
-  Shirt,
 } from "lucide-react";
 import type { ReasonItem } from "@/data/whyChooseUs";
 import { productsData } from "@/data/products";
@@ -38,15 +37,25 @@ export function WhyChooseUsBento({ reasons }: WhyChooseUsBentoProps) {
   );
   const coconut = productsData.categories.find((c) => c.slug === "coconut");
   const jaggery = productsData.categories.find((c) => c.slug === "jaggery");
-  const textile = productsData.categories.find((c) => c.slug === "textile");
 
   const mosaicTiles = [
+    {
+      name: "Textile",
+      slug: "textile",
+      image: "/products/textile/textile-2.jpeg",
+      alt: "Assortment of folded export quality towels and textiles with flower",
+      position: "center",
+      span: "col-span-2",
+      aspect: "aspect-[4/3]",
+    },
     {
       name: "Fruit & Vegetables",
       slug: "fruit-and-vegetables",
       image: fruitVeg?.image || "/products/fruit-vegetables/freshvegetables2.jpg",
       alt: "Selection of farm fresh Indian vegetables for export",
       position: "center",
+      span: "col-span-2",
+      aspect: "aspect-[4/3]",
     },
     {
       name: "Coconut",
@@ -54,6 +63,8 @@ export function WhyChooseUsBento({ reasons }: WhyChooseUsBentoProps) {
       image: coconut?.image || "/products/coconut/coconut2.jpg",
       alt: "Premium graded mature coconuts from Maharashtra",
       position: "center",
+      span: "col-span-2",
+      aspect: "aspect-[4/3]",
     },
     {
       name: "Jaggery",
@@ -61,13 +72,17 @@ export function WhyChooseUsBento({ reasons }: WhyChooseUsBentoProps) {
       image: jaggery?.image || "/products/jaggery/jaggery2.jpg",
       alt: "Natural organic chemical-free jaggery cubes",
       position: "center",
+      span: "col-span-3",
+      aspect: "aspect-[16/9]",
     },
     {
-      name: "Textile",
-      slug: "textile",
-      image: textile?.image, // undefined until client supplies photo
-      alt: "Textile products for export",
+      name: "Spices",
+      slug: "spices",
+      image: "/products/spices/spices-2.jpg",
+      alt: "Assorted spices, chillies and herbs in bowls",
       position: "center",
+      span: "col-span-3",
+      aspect: "aspect-[16/9]",
     },
   ];
 
@@ -179,7 +194,7 @@ export function WhyChooseUsBento({ reasons }: WhyChooseUsBentoProps) {
 
       {/* 2. Cards 2 to 5 in Balanced Grid */}
       {gridCards.map((item, idx) => {
-        const isProductLines = item.id === "four-product-lines";
+        const isProductLines = item.id === "five-product-lines" || item.id === "four-product-lines";
         const isExperience = item.id === "import-export-experience";
 
         return (
@@ -219,78 +234,51 @@ export function WhyChooseUsBento({ reasons }: WhyChooseUsBentoProps) {
                   </span>
                 </div>
 
-                {/* Card 2: Redesigned 2×2 Mosaic of Equal 4:3 Tiles with Bottom Label Chips */}
+                {/* Card 2: Rebuilt 6-Column Grid with 5 Tiles */}
                 {isProductLines && (
                   <motion.div
                     variants={mosaicContainerVariant}
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true, amount: 0.1 }}
-                    className="grid grid-cols-2 gap-2 mb-4"
+                    className="grid grid-cols-6 gap-2 mb-4"
                   >
-                    {mosaicTiles.map((tile) => {
-                      const hasImage = Boolean(tile.image);
+                    {mosaicTiles.map((tile) => (
+                      <motion.div
+                        key={tile.slug}
+                        variants={mosaicTileVariant}
+                        className={`${tile.span} ${tile.aspect} rounded-xl overflow-hidden relative border border-[#E3DDCF] bg-[#F6F3EC] group/tile cursor-pointer active:scale-[0.98] transition-all duration-300 [@media(hover:hover)]:hover:border-[#B4763A]`}
+                      >
+                        <div className="relative w-full h-full transition-transform duration-300 ease-out group-hover/tile:scale-108">
+                          <Image
+                            src={tile.image}
+                            alt={tile.alt}
+                            fill
+                            className="object-cover"
+                            style={{ objectPosition: tile.position || "center" }}
+                            sizes="(min-width: 1024px) 15vw, 30vw"
+                            quality={85}
+                            priority={false}
+                          />
+                        </div>
 
-                      if (hasImage && tile.image) {
-                        return (
-                          <motion.div
-                            key={tile.slug}
-                            variants={mosaicTileVariant}
-                            className="aspect-[4/3] rounded-xl overflow-hidden relative border border-[#E3DDCF] bg-[#F6F3EC] group/tile cursor-pointer active:scale-[0.98] transition-all duration-300 [@media(hover:hover)]:hover:border-[#B4763A]"
+                        {/* Bottom Label Chip: Soft dark-green gradient (40% height) */}
+                        <div
+                          aria-hidden="true"
+                          className="absolute bottom-0 inset-x-0 h-[40%] bg-gradient-to-t from-[#163829]/80 to-transparent pointer-events-none"
+                        />
+                        <div className="absolute bottom-0 inset-x-0 p-1.5 sm:p-2 text-start transition-transform duration-300 ease-out group-hover/tile:-translate-y-[2px] z-10 pointer-events-none">
+                          <span
+                            className={`text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-white select-none block truncate ${
+                              tile.slug === "jaggery" ? "notranslate" : ""
+                            }`}
+                            translate={tile.slug === "jaggery" ? "no" : undefined}
                           >
-                            <div className="relative w-full h-full transition-transform duration-300 ease-out group-hover/tile:scale-108">
-                              <Image
-                                src={tile.image}
-                                alt={tile.alt}
-                                fill
-                                className="object-cover"
-                                style={{ objectPosition: tile.position || "center" }}
-                                sizes="(min-width: 1024px) 15vw, 40vw"
-                                quality={85}
-                                priority={false}
-                              />
-                            </div>
-
-                            {/* Bottom Label Chip: Soft dark-green gradient (40% height) */}
-                            <div
-                              aria-hidden="true"
-                              className="absolute bottom-0 inset-x-0 h-[40%] bg-gradient-to-t from-[#163829]/80 to-transparent pointer-events-none"
-                            />
-                            <div className="absolute bottom-0 inset-x-0 p-2 text-start transition-transform duration-300 ease-out group-hover/tile:-translate-y-[2px] z-10 pointer-events-none">
-                              <span
-                                className={`text-[10px] sm:text-[11px] max-[640px]:text-[9px] font-bold uppercase tracking-wider text-white select-none block truncate ${
-                                  tile.slug === "jaggery" ? "notranslate" : ""
-                                }`}
-                                translate={tile.slug === "jaggery" ? "no" : undefined}
-                              >
-                                {tile.name}
-                              </span>
-                            </div>
-                          </motion.div>
-                        );
-                      }
-
-                      {/* Textile Designed Placeholder Tile (No photo yet) */}
-                      return (
-                        <motion.div
-                          key={tile.slug}
-                          variants={mosaicTileVariant}
-                          className="aspect-[4/3] rounded-xl overflow-hidden relative border border-[#E3DDCF] bg-gradient-to-br from-[#F6F3EC] via-[#FAF7F2] to-white group/tile cursor-pointer active:scale-[0.98] transition-all duration-300 flex flex-col items-center justify-center p-2 [@media(hover:hover)]:hover:border-[#B4763A]"
-                        >
-                          {/* Centered 36px copper-outlined circle holding Shirt icon */}
-                          <div className="w-9 h-9 rounded-full border border-[#B4763A] bg-white/90 shadow-2xs flex items-center justify-center text-[#B4763A] transition-transform duration-300 ease-out group-hover/tile:scale-110 mb-2">
-                            <Shirt className="w-4 h-4 text-[#B4763A]" />
-                          </div>
-
-                          {/* Textile label in muted ink at bottom start */}
-                          <div className="absolute bottom-0 inset-x-0 p-2 text-start transition-transform duration-300 ease-out group-hover/tile:-translate-y-[2px] z-10 pointer-events-none">
-                            <span className="text-[10px] sm:text-[11px] max-[640px]:text-[9px] font-bold uppercase tracking-wider text-[#5F6B64] select-none block truncate">
-                              {tile.name}
-                            </span>
-                          </div>
-                        </motion.div>
-                      );
-                    })}
+                            {tile.name}
+                          </span>
+                        </div>
+                      </motion.div>
+                    ))}
                   </motion.div>
                 )}
 

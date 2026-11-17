@@ -9,7 +9,7 @@ import { InnerPageHeader } from "@/components/ui/InnerPageHeader";
 export const metadata: Metadata = {
   title: "Products | AJ Worldwide — Export Portfolio",
   description:
-    "Explore AJ Worldwide's four export product lines: Textile, Fruit & Vegetables, Coconut, and Jaggery.",
+    "Explore AJ Worldwide's export product lines: Textile, Fruit & Vegetables, Coconut, Jaggery, and Spices.",
 };
 
 export default function ProductsPage() {

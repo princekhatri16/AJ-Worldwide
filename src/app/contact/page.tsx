@@ -27,7 +27,6 @@ function WhatsAppIcon({ className = "w-5 h-5" }: { className?: string }) {
 export default function ContactPage() {
   const encodedWaMsg = encodeURIComponent(siteData.whatsappMessage);
   const waUrl = `https://wa.me/${siteData.whatsappRaw}?text=${encodedWaMsg}`;
-  const phoneUrl = `tel:+${siteData.phoneRaw}`;
 
   // Structured Data (FAQPage JSON-LD)
   const faqSchema = {
@@ -80,19 +79,33 @@ export default function ContactPage() {
               {/* Contact Cards Stack */}
               <div className="space-y-3">
                 {/* Telephone */}
-                <Card surface="warm" index={0} href={phoneUrl}>
-                  <div className="flex items-start gap-3.5">
-                    <div className="site-card-icon w-10 h-10 rounded-xl bg-white border border-[#E3DDCF] text-[#B4763A] flex items-center justify-center shrink-0 transition-all duration-300">
-                      <Phone className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-[11px] uppercase tracking-wider text-[#5F6B64] font-bold">
-                        Phone / Telephone
-                      </div>
-                      <div className="site-card-title font-mono text-sm sm:text-base font-bold text-[#1E2A24] transition-colors notranslate" translate="no">
-                        {contactData.phone}
-                      </div>
-                    </div>
+                <Card surface="warm" index={0} disableHover>
+                  <div className="space-y-3">
+                    {siteData.phones.map((phoneItem) => (
+                      <a
+                        key={phoneItem.tel}
+                        href={phoneItem.tel}
+                        dir="ltr"
+                        translate="no"
+                        className="group flex items-start gap-3.5 p-1 -m-1 rounded-lg hover:bg-white/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] notranslate"
+                      >
+                        <div className="site-card-icon w-10 h-10 rounded-xl bg-white border border-[#E3DDCF] text-[#B4763A] flex items-center justify-center shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:border-[#B4763A]">
+                          <Phone className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <div className="text-[11px] uppercase tracking-wider text-[#5F6B64] font-bold">
+                            {phoneItem.label}
+                          </div>
+                          <div
+                            className="site-card-title font-mono text-sm sm:text-base font-bold text-[#1E2A24] transition-colors group-hover:text-[#1F4A3A] notranslate"
+                            translate="no"
+                            dir="ltr"
+                          >
+                            {phoneItem.display}
+                          </div>
+                        </div>
+                      </a>
+                    ))}
                   </div>
                 </Card>
 

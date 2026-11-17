@@ -9,7 +9,7 @@ import { Card } from "@/components/ui/Card";
 export const metadata: Metadata = {
   title: "About Us | AJ Worldwide — Import & Export",
   description:
-    "Learn about AJ Worldwide, established in 2025 in Kumbhari, Buldhana, Maharashtra. Trading in textiles, fresh fruit and vegetables, coconut and jaggery.",
+    "Learn about AJ Worldwide, established in 2025 in Kumbhari, Buldhana, Maharashtra. Trading in textiles, fresh fruit and vegetables, coconut, jaggery and spices.",
 };
 
 export default function AboutPage() {

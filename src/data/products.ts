@@ -1,13 +1,14 @@
 export interface ProductGalleryItem {
   src: string;
   alt: string;
+  position?: string;
 }
 
 export interface ProductCategoryCard {
   name: string;
-  slug: "textile" | "fruit-and-vegetables" | "coconut" | "jaggery";
+  slug: "textile" | "fruit-and-vegetables" | "coconut" | "jaggery" | "spices";
   description: string;
-  icon: "Shirt" | "Apple" | "Leaf" | "Wheat" | string;
+  icon: "Shirt" | "Apple" | "Leaf" | "Wheat" | "Flame" | string;
   image?: string;
   gallery?: ProductGalleryItem[];
   items?: string[];
@@ -27,9 +28,25 @@ export const productsData: ProductsData = {
       slug: "textile",
       description: "Textile products for international buyers.",
       icon: "Shirt",
-      // TODO: client to supply Textile images
-      image: undefined,
-      gallery: [],
+      image: "/products/textile/textile-1.jpeg",
+      gallery: [
+        {
+          src: "/products/textile/textile-1.jpeg",
+          alt: "Stack of folded towels in assorted colours",
+        },
+        {
+          src: "/products/textile/textile-2.jpeg",
+          alt: "Stack of rolled and folded towels with decorative flower",
+        },
+        {
+          src: "/products/textile/textile-3.jpeg",
+          alt: "Folded towels stacked on wooden surface",
+        },
+        {
+          src: "/products/textile/textile-4.jpeg",
+          alt: "Folded pastel textile cloths held in hand",
+        },
+      ],
       items: [],
       buttonLabel: "Send an Inquiry",
     },
@@ -101,6 +118,27 @@ export const productsData: ProductsData = {
         {
           src: "/products/jaggery/jaggery3.jpg",
           alt: "Artisanal jaggery chunks prepared for global distribution",
+        },
+      ],
+      items: [],
+      buttonLabel: "Send an Inquiry",
+    },
+    {
+      name: "Spices",
+      slug: "spices",
+      description: "Spices from India.", // DRAFT: confirm wording with client
+      icon: "Flame",
+      image: "/products/spices/spices-2.jpg",
+      gallery: [
+        {
+          src: "/products/spices/spices-2.jpg",
+          alt: "Assorted spices, chillies and herbs in bowls",
+          position: "center",
+        },
+        {
+          src: "/products/spices/spices-1.jpg",
+          alt: "Brass mortar and pestle with whole spices and dried red chillies",
+          position: "center 45%",
         },
       ],
       items: [],

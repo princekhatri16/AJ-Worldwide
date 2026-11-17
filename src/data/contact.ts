@@ -34,6 +34,7 @@ export const contactData: ContactData = {
       { label: "Fruit & Vegetables", value: "fruit-and-vegetables" },
       { label: "Coconut", value: "coconut" },
       { label: "Jaggery", value: "jaggery" },
+      { label: "Spices", value: "spices" },
     ],
   },
 };

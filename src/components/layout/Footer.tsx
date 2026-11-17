@@ -12,8 +12,6 @@ export function Footer() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const phoneUrl = `tel:+${siteData.phoneRaw}`;
-
   return (
     <footer className="relative bg-[#163829] text-[#F6F3EC] border-t border-[#B4763A] pt-12 sm:pt-14 pb-28 sm:pb-16 overflow-hidden">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
@@ -61,7 +59,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: The 4 Product Categories */}
+          {/* Column 3: The 5 Product Categories */}
           <div className="space-y-3.5">
             <h3 className="font-serif text-xs font-bold uppercase tracking-widest [font-variant-caps:all-small-caps] text-[#B4763A]">
               Our Products
@@ -71,9 +69,8 @@ export function Footer() {
                 <li key={cat.slug}>
                   <Link
                     href={`/products/${cat.slug}`}
-                    className={`link-underline text-xs text-[#F6F3EC]/80 hover:text-white transition-colors py-1.5 inline-block ${
-                      cat.slug === "jaggery" ? "notranslate" : ""
-                    }`}
+                    className={`link-underline text-xs text-[#F6F3EC]/80 hover:text-white transition-colors py-1.5 inline-block ${cat.slug === "jaggery" ? "notranslate" : ""
+                      }`}
                     translate={cat.slug === "jaggery" ? "no" : undefined}
                   >
                     <span>{cat.name}</span>
@@ -90,17 +87,25 @@ export function Footer() {
             </h3>
 
             <div className="space-y-2.5 text-xs text-[#F6F3EC]/85">
-              {/* Phone / WhatsApp */}
+              {/* Phone / Mobile */}
               <div className="flex items-start gap-2.5">
                 <Phone className="w-3.5 h-3.5 text-[#B4763A] shrink-0 mt-0.5" />
-                <div>
-                  <a
-                    href={phoneUrl}
-                    className="hover:text-[#B4763A] font-mono transition-colors notranslate py-1 inline-block"
-                    translate="no"
-                  >
-                    {siteData.phone}
-                  </a>
+                <div className="flex flex-col space-y-1.5">
+                  {siteData.phones.map((phoneItem) => (
+                    <div key={phoneItem.tel}>
+                      <span className="text-[10px] uppercase font-bold tracking-wider text-[#F6F3EC]/60 block">
+                        {phoneItem.label}
+                      </span>
+                      <a
+                        href={phoneItem.tel}
+                        dir="ltr"
+                        className="hover:text-[#B4763A] font-mono transition-colors notranslate py-0.5 inline-block text-xs"
+                        translate="no"
+                      >
+                        {phoneItem.display}
+                      </a>
+                    </div>
+                  ))}
                 </div>
               </div>
 

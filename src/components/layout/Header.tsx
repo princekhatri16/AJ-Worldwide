@@ -15,6 +15,7 @@ import {
   Apple,
   Leaf,
   Wheat,
+  Flame,
   ArrowRight,
   Phone,
   MessageCircle,
@@ -24,7 +25,7 @@ import { siteData } from "@/data/site";
 import { productsData } from "@/data/products";
 import { useLanguage } from "@/context/LanguageContext";
 
-const emptySubscribe = () => () => {};
+const emptySubscribe = () => () => { };
 
 export function Header() {
   const pathname = usePathname();
@@ -67,6 +68,8 @@ export function Header() {
         return <Leaf className={`${size} ${colorClass}`} />;
       case "jaggery":
         return <Wheat className={`${size} ${colorClass}`} />;
+      case "spices":
+        return <Flame className={`${size} ${colorClass}`} />;
       default:
         return <Boxes className={`${size} ${colorClass}`} />;
     }
@@ -334,14 +337,12 @@ export function Header() {
   const isProductsActive = pathname.startsWith("/products");
   const encodedWaMsg = encodeURIComponent(siteData.whatsappMessage);
   const waUrl = `https://wa.me/${siteData.whatsappRaw}?text=${encodedWaMsg}`;
-  const phoneUrl = `tel:+${siteData.phoneRaw}`;
 
   return (
     <>
       <header
-        className={`sticky top-0 z-40 w-full transition-all duration-200 border-b border-[#E3DDCF] ${
-          isScrolled ? "bg-white/95 backdrop-blur-md shadow-sm" : "bg-white"
-        }`}
+        className={`sticky top-0 z-40 w-full transition-all duration-200 border-b border-[#E3DDCF] ${isScrolled ? "bg-white/95 backdrop-blur-md shadow-sm" : "bg-white"
+          }`}
       >
         <div className="w-full px-4 sm:px-6 lg:px-10">
           <div className="flex items-center justify-between h-16 lg:h-22 gap-6">
@@ -385,19 +386,17 @@ export function Header() {
                         aria-haspopup="true"
                         aria-expanded={megaMenuOpen}
                         aria-controls="products-mega-menu"
-                        className={`relative px-1 py-1 text-sm font-semibold transition-colors cursor-pointer inline-flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] rounded ${
-                          isProductsActive
-                            ? "text-[#1F4A3A] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-0.5 after:bg-[#1F4A3A] after:rounded-full"
-                            : "text-[#1E2A24]/90 hover:text-[#1F4A3A]"
-                        }`}
+                        className={`relative px-1 py-1 text-sm font-semibold transition-colors cursor-pointer inline-flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] rounded ${isProductsActive
+                          ? "text-[#1F4A3A] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-0.5 after:bg-[#1F4A3A] after:rounded-full"
+                          : "text-[#1E2A24]/90 hover:text-[#1F4A3A]"
+                          }`}
                       >
                         <span className="font-serif [font-variant-caps:all-small-caps] tracking-wide text-[15px]">
                           {item.label}
                         </span>
                         <ChevronDown
-                          className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                            megaMenuOpen ? "rotate-180 text-[#1F4A3A]" : "text-[#5F6B64]"
-                          }`}
+                          className={`w-3.5 h-3.5 transition-transform duration-200 ${megaMenuOpen ? "rotate-180 text-[#1F4A3A]" : "text-[#5F6B64]"
+                            }`}
                         />
                       </button>
 
@@ -439,36 +438,32 @@ export function Header() {
                                       onFocus={() => setActiveCategoryIndex(idx)}
                                       onClick={() => setMegaMenuOpen(false)}
                                       onKeyDown={(e) => handleCategoryKeyDown(idx, e)}
-                                      className={`w-full flex items-center justify-between p-2.5 rounded-xl transition-all duration-200 text-start group cursor-pointer relative overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] ${
-                                        isActive
-                                          ? "bg-white shadow-xs"
-                                          : "bg-transparent hover:bg-white/60 text-[#1E2A24]"
-                                      }`}
+                                      className={`w-full flex items-center justify-between p-2.5 rounded-xl transition-all duration-200 text-start group cursor-pointer relative overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] ${isActive
+                                        ? "bg-white shadow-xs"
+                                        : "bg-transparent hover:bg-white/60 text-[#1E2A24]"
+                                        }`}
                                     >
                                       {/* 3px copper bar on start edge when active */}
                                       <span
                                         aria-hidden="true"
-                                        className={`absolute top-0 bottom-0 start-0 w-[3px] bg-[#B4763A] transition-opacity duration-200 ${
-                                          isActive ? "opacity-100" : "opacity-0"
-                                        }`}
+                                        className={`absolute top-0 bottom-0 start-0 w-[3px] bg-[#B4763A] transition-opacity duration-200 ${isActive ? "opacity-100" : "opacity-0"
+                                          }`}
                                       />
 
                                       <div className="flex items-center gap-3 min-w-0 ps-1">
                                         <div
-                                          className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 ${
-                                            isActive
-                                              ? "bg-[#1F4A3A] text-white shadow-xs"
-                                              : "bg-white border border-[#E3DDCF] text-[#B4763A] group-hover:border-[#1F4A3A]/30"
-                                          }`}
+                                          className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 ${isActive
+                                            ? "bg-[#1F4A3A] text-white shadow-xs"
+                                            : "bg-white border border-[#E3DDCF] text-[#B4763A] group-hover:border-[#1F4A3A]/30"
+                                            }`}
                                         >
                                           {renderCategoryIcon(cat.slug, isActive)}
                                         </div>
                                         <span
-                                          className={`font-serif text-sm tracking-wide [font-variant-caps:all-small-caps] truncate transition-colors ${
-                                            isActive
-                                              ? "text-[#1F4A3A] font-bold"
-                                              : "text-[#1E2A24] font-semibold group-hover:text-[#1F4A3A]"
-                                          } ${cat.slug === "jaggery" ? "notranslate" : ""}`}
+                                          className={`font-serif text-sm tracking-wide [font-variant-caps:all-small-caps] truncate transition-colors ${isActive
+                                            ? "text-[#1F4A3A] font-bold"
+                                            : "text-[#1E2A24] font-semibold group-hover:text-[#1F4A3A]"
+                                            } ${cat.slug === "jaggery" ? "notranslate" : ""}`}
                                           translate={cat.slug === "jaggery" ? "no" : undefined}
                                         >
                                           {cat.name}
@@ -476,11 +471,10 @@ export function Header() {
                                       </div>
 
                                       <ChevronRight
-                                        className={`w-4 h-4 shrink-0 transition-transform duration-200 rtl-flip ${
-                                          isActive
-                                            ? "text-[#1F4A3A] translate-x-0.5"
-                                            : "text-[#5F6B64]/50 group-hover:text-[#5F6B64]"
-                                        }`}
+                                        className={`w-4 h-4 shrink-0 transition-transform duration-200 rtl-flip ${isActive
+                                          ? "text-[#1F4A3A] translate-x-0.5"
+                                          : "text-[#5F6B64]/50 group-hover:text-[#5F6B64]"
+                                          }`}
                                       />
                                     </Link>
                                   );
@@ -488,7 +482,7 @@ export function Header() {
                               </div>
 
                               {/* Right Pane (~56%, white) */}
-                              <div className="w-[56%] bg-white p-5 flex flex-col justify-between min-h-[300px]">
+                              <div className="w-[56%] bg-white p-5 flex flex-col justify-between min-h-[360px]">
                                 <AnimatePresence mode="wait">
                                   <motion.div
                                     key={activeCategory.slug}
@@ -515,6 +509,7 @@ export function Header() {
                                             alt={activeCategory.name}
                                             fill
                                             className="object-cover"
+                                            sizes="320px"
                                           />
                                         ) : (
                                           <div className="flex items-center justify-center p-4">
@@ -531,9 +526,8 @@ export function Header() {
 
                                       {/* Category name in small-caps serif */}
                                       <h4
-                                        className={`font-serif text-base sm:text-lg font-bold [font-variant-caps:all-small-caps] tracking-wide text-[#1F4A3A] ${
-                                          activeCategory.slug === "jaggery" ? "notranslate" : ""
-                                        }`}
+                                        className={`font-serif text-base sm:text-lg font-bold [font-variant-caps:all-small-caps] tracking-wide text-[#1F4A3A] ${activeCategory.slug === "jaggery" ? "notranslate" : ""
+                                          }`}
                                         translate={activeCategory.slug === "jaggery" ? "no" : undefined}
                                       >
                                         {activeCategory.name}
@@ -591,11 +585,10 @@ export function Header() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`relative px-1 py-1 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] rounded ${
-                      isActive
-                        ? "text-[#1F4A3A] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-0.5 after:bg-[#1F4A3A] after:rounded-full"
-                        : "text-[#1E2A24]/90 hover:text-[#1F4A3A] font-medium"
-                    }`}
+                    className={`relative px-1 py-1 text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] rounded ${isActive
+                      ? "text-[#1F4A3A] font-bold after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-0.5 after:bg-[#1F4A3A] after:rounded-full"
+                      : "text-[#1E2A24]/90 hover:text-[#1F4A3A] font-medium"
+                      }`}
                   >
                     <span className="font-serif [font-variant-caps:all-small-caps] tracking-wide text-[15px]">
                       {item.label}
@@ -671,9 +664,8 @@ export function Header() {
                   }}
                   onTouchStart={handleTouchStart}
                   onTouchEnd={handleTouchEnd}
-                  className={`fixed inset-y-0 ${
-                    isRtl ? "left-0" : "right-0"
-                  } z-[100] w-[min(88vw,380px)] h-[100dvh] max-h-[100dvh] bg-white shadow-2xl flex flex-col justify-between overflow-y-auto overscroll-contain border-s border-[#E3DDCF] pb-[env(safe-area-inset-bottom)]`}
+                  className={`fixed inset-y-0 ${isRtl ? "left-0" : "right-0"
+                    } z-[100] w-[min(88vw,380px)] h-[100dvh] max-h-[100dvh] bg-white shadow-2xl flex flex-col justify-between overflow-y-auto overscroll-contain border-s border-[#E3DDCF] pb-[env(safe-area-inset-bottom)]`}
                 >
                   {/* Drawer Header (Logo + 44px Close Button) */}
                   <div className="p-4 sm:p-5 flex items-center justify-between border-b border-[#E3DDCF] bg-[#F6F3EC] shrink-0">
@@ -717,19 +709,17 @@ export function Header() {
                               type="button"
                               onClick={() => setMobileProductsOpen((prev) => !prev)}
                               aria-expanded={mobileProductsOpen}
-                              className={`w-full min-h-[48px] flex items-center justify-between px-3 py-2.5 rounded-xl text-base font-semibold transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] ${
-                                isThisActive
-                                  ? "text-[#1F4A3A] font-bold bg-[#F6F3EC]"
-                                  : "text-[#1E2A24] hover:text-[#1F4A3A] hover:bg-[#F6F3EC]/50"
-                              }`}
+                              className={`w-full min-h-[48px] flex items-center justify-between px-3 py-2.5 rounded-xl text-base font-semibold transition-colors cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] ${isThisActive
+                                ? "text-[#1F4A3A] font-bold bg-[#F6F3EC]"
+                                : "text-[#1E2A24] hover:text-[#1F4A3A] hover:bg-[#F6F3EC]/50"
+                                }`}
                             >
                               <span className="font-serif [font-variant-caps:all-small-caps] tracking-wide text-base">
                                 {item.label}
                               </span>
                               <ChevronDown
-                                className={`w-4 h-4 transition-transform duration-200 ${
-                                  mobileProductsOpen ? "rotate-180 text-[#1F4A3A]" : "text-[#5F6B64]"
-                                }`}
+                                className={`w-4 h-4 transition-transform duration-200 ${mobileProductsOpen ? "rotate-180 text-[#1F4A3A]" : "text-[#5F6B64]"
+                                  }`}
                               />
                             </button>
 
@@ -743,22 +733,22 @@ export function Header() {
                                   transition={{ duration: shouldReduceMotion ? 0 : 0.22, ease: "easeOut" }}
                                   className="overflow-hidden mt-2 space-y-2 bg-[#F6F3EC] rounded-xl p-2.5 border border-[#E3DDCF]"
                                 >
-                                  {/* Compact 2x2 Grid of Category Cards */}
+                                  {/* 2-Column Grid with 5th Category Card Spanning Both Columns */}
                                   <div className="grid grid-cols-2 gap-2">
-                                    {productsData.categories.map((cat) => (
+                                    {productsData.categories.map((cat, idx) => (
                                       <Link
                                         key={cat.slug}
                                         href={`/products/${cat.slug}`}
                                         onClick={closeMobileMenu}
-                                        className="p-2.5 rounded-xl bg-white border border-[#E3DDCF] hover:border-[#1F4A3A]/40 transition-all flex flex-col gap-1 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A]"
+                                        className={`p-2.5 rounded-xl bg-white border border-[#E3DDCF] hover:border-[#1F4A3A]/40 transition-all flex flex-col gap-1 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] ${idx === 4 ? "col-span-2" : ""
+                                          }`}
                                       >
                                         <div className="w-8 h-8 rounded-lg bg-[#F6F3EC] border border-[#E3DDCF] flex items-center justify-center text-[#B4763A] shrink-0">
                                           {renderCategoryIcon(cat.slug, false, "w-4 h-4")}
                                         </div>
                                         <span
-                                          className={`font-serif text-xs font-bold text-[#1F4A3A] [font-variant-caps:all-small-caps] tracking-wide truncate ${
-                                            cat.slug === "jaggery" ? "notranslate" : ""
-                                          }`}
+                                          className={`font-serif text-xs font-bold text-[#1F4A3A] [font-variant-caps:all-small-caps] tracking-wide truncate ${cat.slug === "jaggery" ? "notranslate" : ""
+                                            }`}
                                           translate={cat.slug === "jaggery" ? "no" : undefined}
                                         >
                                           {cat.name}
@@ -792,11 +782,10 @@ export function Header() {
                           key={item.href}
                           href={item.href}
                           onClick={closeMobileMenu}
-                          className={`min-h-[48px] flex items-center px-3.5 py-2.5 rounded-xl text-base font-semibold border-b border-[#E3DDCF]/40 transition-all relative overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] ${
-                            isActive
-                              ? "text-[#1F4A3A] font-bold bg-[#F6F3EC] border-s-4 border-[#B4763A]"
-                              : "text-[#1E2A24]/90 hover:text-[#1F4A3A] hover:bg-[#F6F3EC]/50"
-                          }`}
+                          className={`min-h-[48px] flex items-center px-3.5 py-2.5 rounded-xl text-base font-semibold border-b border-[#E3DDCF]/40 transition-all relative overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] ${isActive
+                            ? "text-[#1F4A3A] font-bold bg-[#F6F3EC] border-s-4 border-[#B4763A]"
+                            : "text-[#1E2A24]/90 hover:text-[#1F4A3A] hover:bg-[#F6F3EC]/50"
+                            }`}
                         >
                           <span className="font-serif [font-variant-caps:all-small-caps] tracking-wide text-base">
                             {item.label}
@@ -809,12 +798,23 @@ export function Header() {
                   {/* Drawer Bottom: Direct Call & WhatsApp Buttons */}
                   <div className="p-4 sm:p-5 border-t border-[#E3DDCF] bg-[#F6F3EC] space-y-2.5 shrink-0">
                     <a
-                      href={phoneUrl}
+                      href={siteData.phones[0].tel}
+                      dir="ltr"
                       className="min-h-[48px] w-full py-3 px-4 rounded-full bg-[#1F4A3A] hover:bg-[#163829] active:scale-98 text-white text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer notranslate"
                       translate="no"
                     >
                       <Phone className="w-4 h-4 text-white" />
-                      <span>Call {siteData.phone}</span>
+                      <span>Call {siteData.phones[0].display}</span>
+                    </a>
+
+                    <a
+                      href={siteData.phones[1].tel}
+                      dir="ltr"
+                      className="min-h-[48px] w-full py-3 px-4 rounded-full border border-[#E3DDCF] bg-white hover:bg-[#F6F3EC] active:scale-98 text-[#1E2A24] text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer notranslate"
+                      translate="no"
+                    >
+                      <Phone className="w-4 h-4 text-[#B4763A]" />
+                      <span>Mobile: {siteData.phones[1].display}</span>
                     </a>
 
                     <a
