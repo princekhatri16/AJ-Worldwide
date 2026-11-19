@@ -134,7 +134,7 @@ Typography pairings in `src/app/layout.tsx`:
 
 ---
 
-## 7. Email Inquiry Setup & Environment Variables
+## 7. EmailJS Setup & Environment Variables
 
 Copy `.env.example` to `.env.local`:
 ```bash
@@ -144,25 +144,36 @@ cp .env.example .env.local
 ### Environment Variables Reference
 | Variable | Description |
 | :--- | :--- |
-| `NEXT_PUBLIC_SITE_URL` | Canonical website domain (e.g., `https://ajworldwide.com`). |
+| `NEXT_PUBLIC_SITE_URL` | Canonical website domain (e.g., `https://ajworldwide.com` or local dev `http://localhost:3000`). |
 | `NEXT_PUBLIC_GA_ID` | Optional Google Analytics 4 Measurement ID (`G-XXXXXXXXXX`). Rendered only when set. |
-| `NEXT_PUBLIC_CONTACT_EMAIL` | Optional contact email. Rendered only when set (no email was provided by the client). |
-| `INQUIRY_TO_EMAIL` | Recipient email for trade inquiries submitted on `/contact`. |
-| `INQUIRY_FROM_EMAIL` | Sender email address for Nodemailer. |
-| `SMTP_HOST` | SMTP server host (e.g., `smtp.gmail.com`). |
-| `SMTP_PORT` | SMTP port (e.g., `587` or `465`). |
-| `SMTP_USER` | SMTP username. |
-| `SMTP_PASS` | SMTP application password. |
+| `NEXT_PUBLIC_EMAILJS_SERVICE_ID` | Your EmailJS Service ID (found in EmailJS Dashboard under **Email Services**). |
+| `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID` | Your EmailJS Template ID (found in EmailJS Dashboard under **Email Templates → [Your Template] → Settings** tab, typically `template_xxxxxxx`). |
+| `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY` | Your EmailJS Public Key (found in EmailJS Dashboard under **Account → General / API Keys**). |
 
-*In development mode without SMTP credentials, submissions are logged cleanly to the terminal console without throwing errors.*
+### EmailJS Setup Guide
+1. **Locate Credentials in EmailJS Dashboard:**
+   - **Service ID:** Navigate to **Email Services** and copy your configured service ID.
+   - **Template ID:** Navigate to **Email Templates**, open your enquiry template, click the **Settings** tab, and copy the **Template ID** (typically `template_xxxxxxx`, not the URL route segment).
+   - **Public Key:** Go to **Account** (bottom-left) → **API Keys** / **General**, and copy the **Public Key**.
+2. **Configure Allowed Origins (Security):**
+   - In EmailJS Dashboard, navigate to **Account → Security**.
+   - Under **Allowed Domains / Origins**, add your production domain (e.g. `https://ajworldwide.co.in`), any preview domains, and `http://localhost:3000` for local development testing.
+3. **Deploying to Vercel / Hosting:**
+   - Go to **Vercel Project Dashboard → Settings → Environment Variables**.
+   - Add `NEXT_PUBLIC_EMAILJS_SERVICE_ID`, `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`, and `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`.
+   - Trigger a redeploy for the environment variables to take effect in the production build.
+4. **Plan Limit & Testing:**
+   - The EmailJS Free Tier includes **200 free emails per month**.
+   - Use the **Test It** button inside the EmailJS Template Editor to verify template variable bindings before running end-to-end tests.
 
 ---
 
-## 8. Anti-Spam Security
+## 8. Anti-Spam Security & Submission Protections
 
-- **react-simple-captcha:** Generates a real-time canvas captcha challenge that must be successfully solved before submission. Automatically regenerates on submit attempt.
-- **Hidden Honeypot Field:** Automated spambots filling hidden fields are rejected immediately.
-- **Server-Side Rate Limiting:** Enforces a maximum of 5 requests per 10-minute window per IP.
+- **react-simple-captcha:** Generates a real-time canvas security challenge that must be solved before submission. Automatically regenerates after every attempt (pass or fail).
+- **Hidden Honeypot Field:** Automated spambots filling hidden fields are intercepted and ignored silently without sending an email.
+- **Client-Side Cooldown Protection:** Limits successful form submissions to at most 1 per 60 seconds and 5 per hour (persisted via `localStorage`) to protect the monthly free tier email quota.
+- **Direct Lead Fallback:** If EmailJS is unconfigured, network is offline, or quota is reached, user-entered data is preserved and direct call, WhatsApp, and email links are surfaced immediately.
 
 ---
 

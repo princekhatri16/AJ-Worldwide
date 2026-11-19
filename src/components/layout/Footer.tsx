@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, MapPin, Clock, ArrowUp } from "lucide-react";
+import { Phone, MapPin, Clock, ArrowUp, Mail } from "lucide-react";
 import { siteData } from "@/data/site";
 import { productsData } from "@/data/products";
 
@@ -99,10 +99,32 @@ export function Footer() {
                       <a
                         href={phoneItem.tel}
                         dir="ltr"
-                        className="hover:text-[#B4763A] font-mono transition-colors notranslate py-0.5 inline-block text-xs"
+                        className="hover:text-[#B4763A] transition-colors notranslate py-0.5 inline-block text-xs"
                         translate="no"
                       >
                         {phoneItem.display}
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Email */}
+              <div className="flex items-start gap-2.5">
+                <Mail className="w-3.5 h-3.5 text-[#B4763A] shrink-0 mt-0.5" />
+                <div className="flex flex-col space-y-1.5">
+                  {siteData.emails.map((emailItem) => (
+                    <div key={emailItem.href}>
+                      <span className="text-[10px] uppercase font-bold tracking-wider text-[#F6F3EC]/60 block">
+                        {emailItem.label || "Email"}
+                      </span>
+                      <a
+                        href={emailItem.href}
+                        dir="ltr"
+                        className="hover:text-[#B4763A] transition-colors notranslate py-0.5 inline-block text-xs [overflow-wrap:anywhere]"
+                        translate="no"
+                      >
+                        {emailItem.display}
                       </a>
                     </div>
                   ))}

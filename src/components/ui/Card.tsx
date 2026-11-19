@@ -7,6 +7,7 @@ import { motion, useReducedMotion, type Variants } from "framer-motion";
 export interface CardProps {
   children: React.ReactNode;
   className?: string;
+  wrapperClassName?: string;
   surface?: "white" | "warm";
   index?: number;
   href?: string;
@@ -21,6 +22,7 @@ export interface CardProps {
 export function Card({
   children,
   className = "",
+  wrapperClassName = "",
   surface = "white",
   index = 0,
   href,
@@ -79,7 +81,7 @@ export function Card({
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        className="h-full"
+        className={`h-full ${wrapperClassName}`}
       >
         <Link
           href={href}
@@ -101,7 +103,7 @@ export function Card({
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
-      className="h-full"
+      className={`h-full ${wrapperClassName}`}
     >
       <div
         id={id}

@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import type { Metadata } from "next";
-import { Phone, MapPin, Clock } from "lucide-react";
+import { Phone, MapPin, Clock, Mail } from "lucide-react";
 import { contactData } from "@/data/contact";
 import { faqData } from "@/data/faq";
 import { siteData } from "@/data/site";
@@ -60,7 +60,7 @@ export default function ContactPage() {
       />
 
       {/* 2. Main Section: Contact Info & Form on surface-base (#FFFFFF) */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-white border-b border-[#E3DDCF]">
+      <section className="pt-16 pb-28 sm:py-20 lg:py-24 bg-white border-b border-[#E3DDCF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             {/* Left Column: Direct Contact Info (Warm cards on white section) */}
@@ -76,86 +76,133 @@ export default function ContactPage() {
                 </p>
               </div>
 
-              {/* Contact Cards Stack */}
-              <div className="space-y-3">
+              {/* Contact Cards Grid: 1 col on mobile (<640px), 2 cols on tablet (640-1023px), 1 col on desktop (>=1024px) */}
+              <div id="contact-cards-grid" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3 items-start">
                 {/* Telephone */}
-                <Card surface="warm" index={0} disableHover>
-                  <div className="space-y-3">
-                    {siteData.phones.map((phoneItem) => (
-                      <a
-                        key={phoneItem.tel}
-                        href={phoneItem.tel}
+                <Card
+                  surface="warm"
+                  index={0}
+                  href={siteData.phones[0].tel}
+                  className="!p-3.5 sm:!p-4 md:!p-5"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="site-card-icon w-[36px] h-[36px] sm:w-[44px] sm:h-[44px] rounded-xl bg-white border border-[#E3DDCF] text-[#B4763A] flex items-center justify-center shrink-0 transition-all duration-300 mt-0.5">
+                      <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="text-[11px] uppercase tracking-wider text-[#5F6B64] font-bold leading-normal">
+                        {siteData.phones[0].label}
+                      </div>
+                      <div
                         dir="ltr"
                         translate="no"
-                        className="group flex items-start gap-3.5 p-1 -m-1 rounded-lg hover:bg-white/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] notranslate"
+                        className="site-card-title text-[#1E2A24] font-semibold text-[clamp(0.875rem,3.8vw,1rem)] leading-snug transition-colors notranslate max-[319px]:break-normal min-[320px]:whitespace-nowrap"
                       >
-                        <div className="site-card-icon w-10 h-10 rounded-xl bg-white border border-[#E3DDCF] text-[#B4763A] flex items-center justify-center shrink-0 transition-all duration-300 group-hover:scale-105 group-hover:border-[#B4763A]">
-                          <Phone className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <div className="text-[11px] uppercase tracking-wider text-[#5F6B64] font-bold">
-                            {phoneItem.label}
-                          </div>
-                          <div
-                            className="site-card-title font-mono text-sm sm:text-base font-bold text-[#1E2A24] transition-colors group-hover:text-[#1F4A3A] notranslate"
-                            translate="no"
-                            dir="ltr"
-                          >
-                            {phoneItem.display}
-                          </div>
-                        </div>
-                      </a>
-                    ))}
+                        {siteData.phones[0].display}
+                      </div>
+                    </div>
                   </div>
                 </Card>
 
-                {/* WhatsApp */}
-                <Card surface="warm" index={1} href={waUrl}>
-                  <div className="flex items-start gap-3.5">
-                    <div className="site-card-icon w-10 h-10 rounded-xl bg-[#25D366]/20 border border-[#25D366]/30 text-[#25D366] flex items-center justify-center shrink-0 transition-all duration-300">
-                      <WhatsAppIcon className="w-4 h-4" />
+                {/* Email: One card with one icon tile and two stacked rows */}
+                <Card surface="warm" index={1} disableHover className="!p-3.5 sm:!p-4 md:!p-5">
+                  <div className="flex items-start gap-3">
+                    <div className="site-card-icon w-[36px] h-[36px] sm:w-[44px] sm:h-[44px] rounded-xl bg-white border border-[#E3DDCF] text-[#B4763A] flex items-center justify-center shrink-0 transition-all duration-300 mt-0.5">
+                      <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
                     </div>
-                    <div>
-                      <div className="text-[11px] uppercase tracking-wider text-[#5F6B64] font-bold">
+                    <div className="min-w-0 flex-1 flex flex-col">
+                      {/* Row 1: Sales */}
+                      <a
+                        href={siteData.emails[0].href}
+                        className="group/mail flex flex-col justify-center min-h-[44px] py-1 -my-1 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] transition-colors"
+                      >
+                        <span className="text-[11px] uppercase tracking-wider text-[#5F6B64] font-bold leading-normal">
+                          {siteData.emails[0].label || "Sales"}
+                        </span>
+                        <span
+                          dir="ltr"
+                          translate="no"
+                          className="text-[#1E2A24] font-semibold text-[clamp(0.875rem,3.8vw,1rem)] leading-snug group-hover/mail:text-[#1F4A3A] transition-colors notranslate [overflow-wrap:normal] [word-break:normal] max-[300px]:[overflow-wrap:anywhere] max-[300px]:[word-break:break-all]"
+                        >
+                          {siteData.emails[0].display}
+                        </span>
+                      </a>
+
+                      {/* Thin divider with py-2 spacing equivalent */}
+                      <div className="my-2 border-t border-[#E3DDCF]" />
+
+                      {/* Row 2: Info */}
+                      <a
+                        href={siteData.emails[1].href}
+                        className="group/mail flex flex-col justify-center min-h-[44px] py-1 -my-1 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] transition-colors"
+                      >
+                        <span className="text-[11px] uppercase tracking-wider text-[#5F6B64] font-bold leading-normal">
+                          {siteData.emails[1].label || "Info"}
+                        </span>
+                        <span
+                          dir="ltr"
+                          translate="no"
+                          className="text-[#1E2A24] font-semibold text-[clamp(0.875rem,3.8vw,1rem)] leading-snug group-hover/mail:text-[#1F4A3A] transition-colors notranslate [overflow-wrap:normal] [word-break:normal] max-[300px]:[overflow-wrap:anywhere] max-[300px]:[word-break:break-all]"
+                        >
+                          {siteData.emails[1].display}
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </Card>
+
+                {/* WhatsApp Quick Chat */}
+                <Card
+                  surface="warm"
+                  index={2}
+                  href={waUrl}
+                  className="!p-3.5 sm:!p-4 md:!p-5"
+                  wrapperClassName="sm:col-span-2 lg:col-span-1"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="site-card-icon w-[36px] h-[36px] sm:w-[44px] sm:h-[44px] rounded-xl bg-[#25D366]/20 border border-[#25D366]/30 text-[#25D366] flex items-center justify-center shrink-0 transition-all duration-300 mt-0.5">
+                      <WhatsAppIcon className="w-4 h-4 sm:w-5 sm:h-5" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="text-[11px] uppercase tracking-wider text-[#5F6B64] font-bold leading-normal">
                         WhatsApp Quick Chat
                       </div>
-                      <div className="site-card-title font-mono text-sm sm:text-base font-bold text-[#1E2A24] transition-colors notranslate" translate="no">
+                      <div
+                        dir="ltr"
+                        translate="no"
+                        className="site-card-title text-[#1E2A24] font-semibold text-[clamp(0.875rem,3.8vw,1rem)] leading-snug transition-colors notranslate min-[320px]:whitespace-nowrap"
+                      >
                         {contactData.whatsapp}
                       </div>
                     </div>
                   </div>
                 </Card>
 
-                {/* Address */}
-                <Card surface="warm" index={2} disableHover>
-                  <div className="flex items-start gap-3.5">
-                    <div className="w-10 h-10 rounded-xl bg-white border border-[#E3DDCF] text-[#B4763A] flex items-center justify-center shrink-0">
-                      <MapPin className="w-4 h-4" />
+                {/* Address & Operating Schedule (Full width on tablet) */}
+                <Card
+                  surface="warm"
+                  index={3}
+                  disableHover
+                  className="!p-3.5 sm:!p-4 md:!p-5"
+                  wrapperClassName="sm:col-span-2 lg:col-span-1"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="w-[36px] h-[36px] sm:w-[44px] sm:h-[44px] rounded-xl bg-white border border-[#E3DDCF] text-[#B4763A] flex items-center justify-center shrink-0 mt-0.5">
+                      <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
                     </div>
-                    <div>
-                      <div className="text-[11px] uppercase tracking-wider text-[#5F6B64] font-bold">
-                        Registered Address
+                    <div className="space-y-2 min-w-0 flex-1">
+                      <div>
+                        <div className="text-[11px] uppercase tracking-wider text-[#5F6B64] font-bold leading-normal">
+                          Registered Address
+                        </div>
+                        <p className="text-sm text-[#1E2A24] leading-relaxed mt-0.5">
+                          {contactData.address}
+                        </p>
                       </div>
-                      <p className="text-xs sm:text-sm text-[#1E2A24] leading-relaxed mt-0.5">
-                        {contactData.address}
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-
-                {/* Operating Schedule */}
-                <Card surface="warm" index={3} disableHover>
-                  <div className="flex items-start gap-3.5">
-                    <div className="w-10 h-10 rounded-xl bg-white border border-[#E3DDCF] text-[#B4763A] flex items-center justify-center shrink-0">
-                      <Clock className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-[11px] uppercase tracking-wider text-[#5F6B64] font-bold">
-                        Operating Schedule
+                      <div className="pt-2 border-t border-[#E3DDCF] flex items-center gap-1.5 text-[11px] font-semibold text-[#5F6B64]">
+                        <Clock className="w-3.5 h-3.5 text-[#B4763A] shrink-0" />
+                        <span>{contactData.openDays}</span>
                       </div>
-                      <p className="text-xs sm:text-sm font-bold text-[#B4763A] mt-0.5">
-                        {contactData.openDays}
-                      </p>
                     </div>
                   </div>
                 </Card>

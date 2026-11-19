@@ -21,6 +21,7 @@ import {
   MessageCircle,
   Boxes,
   Factory,
+  Mail,
 } from "lucide-react";
 import { siteData } from "@/data/site";
 import { productsData } from "@/data/products";
@@ -835,6 +836,16 @@ export function Header() {
                     >
                       <MessageCircle className="w-4 h-4 text-white fill-white/20" />
                       <span>Chat on WhatsApp</span>
+                    </a>
+
+                    <a
+                      href={siteData.email.href}
+                      dir="ltr"
+                      className="min-h-[48px] w-full py-3 px-4 rounded-full border border-[#1F4A3A]/30 bg-white hover:bg-[#F6F3EC] active:scale-98 text-[#1F4A3A] text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-2xs cursor-pointer notranslate"
+                      translate="no"
+                    >
+                      <Mail className="w-4 h-4 text-[#B4763A]" />
+                      <span>Email Us</span>
                     </a>
                   </div>
                 </motion.div>

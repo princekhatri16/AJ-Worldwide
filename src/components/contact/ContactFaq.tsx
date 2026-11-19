@@ -9,6 +9,7 @@ import {
   User,
   Phone,
   ArrowDown,
+  Mail,
 } from "lucide-react";
 import { siteData } from "@/data/site";
 import type { FaqItem } from "@/data/faq";
@@ -231,9 +232,8 @@ export function ContactFaq({ items }: ContactFaqProps) {
                   tabIndex={isActive ? 0 : -1}
                   onClick={() => setActiveDesktopIndex(idx)}
                   onKeyDown={(e) => handleTabKeyDown(idx, e)}
-                  className={`relative w-full p-3.5 sm:p-4 rounded-xl text-start transition-all duration-200 cursor-pointer flex items-center justify-between gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] active:scale-[0.98] ${
-                    isActive ? "" : "hover:bg-white/60"
-                  }`}
+                  className={`relative w-full p-3.5 sm:p-4 rounded-xl text-start transition-all duration-200 cursor-pointer flex items-center justify-between gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A] active:scale-[0.98] ${isActive ? "" : "hover:bg-white/60"
+                    }`}
                 >
                   {/* Shared highlight gliding between rows */}
                   {isActive && (
@@ -255,22 +255,20 @@ export function ContactFaq({ items }: ContactFaqProps) {
                   <div className="relative z-10 flex items-center gap-3 min-w-0 ps-1">
                     {/* 32px number circle */}
                     <div
-                      className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 tabular-nums font-mono text-xs font-bold transition-all duration-200 ${
-                        isActive
+                      className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 tabular-nums font-mono text-xs font-bold transition-all duration-200 ${isActive
                           ? "bg-[#1F4A3A] text-white shadow-xs"
                           : "bg-white border border-[#E3DDCF] text-[#B4763A] group-hover:border-[#1F4A3A]/40"
-                      }`}
+                        }`}
                     >
                       {String(idx + 1).padStart(2, "0")}
                     </div>
 
                     {/* Question text */}
                     <span
-                      className={`font-serif text-sm sm:text-base font-bold transition-all duration-200 line-clamp-2 ${
-                        isActive
+                      className={`font-serif text-sm sm:text-base font-bold transition-all duration-200 line-clamp-2 ${isActive
                           ? "text-[#1F4A3A]"
                           : "text-[#5F6B64] group-hover:text-[#1F4A3A] group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5"
-                      }`}
+                        }`}
                     >
                       {item.question}
                     </span>
@@ -278,11 +276,10 @@ export function ContactFaq({ items }: ContactFaqProps) {
 
                   {/* Chevron at end */}
                   <ChevronRight
-                    className={`relative z-10 w-4 h-4 rtl-flip shrink-0 transition-transform duration-200 ${
-                      isActive
+                    className={`relative z-10 w-4 h-4 rtl-flip shrink-0 transition-transform duration-200 ${isActive
                         ? "text-[#1F4A3A] translate-x-1 rtl:-translate-x-1"
                         : "text-[#5F6B64]/40 group-hover:text-[#5F6B64]"
-                    }`}
+                      }`}
                   />
                 </button>
               );
@@ -352,6 +349,15 @@ export function ContactFaq({ items }: ContactFaqProps) {
                     <span>{p.display}</span>
                   </a>
                 ))}
+                <a
+                  href={siteData.email.href}
+                  dir="ltr"
+                  className="font-mono text-xs sm:text-sm font-bold text-[#1E2A24] hover:text-[#1F4A3A] transition-colors inline-flex items-center gap-1.5 notranslate [overflow-wrap:anywhere]"
+                  translate="no"
+                >
+                  <Mail className="w-3.5 h-3.5 text-[#B4763A] shrink-0" />
+                  <span>{siteData.email.display}</span>
+                </a>
               </div>
             </div>
           </div>
@@ -364,11 +370,10 @@ export function ContactFaq({ items }: ContactFaqProps) {
             return (
               <div
                 key={item.id}
-                className={`rounded-xl border bg-white p-4 transition-all duration-300 shadow-2xs ${
-                  isOpen
+                className={`rounded-xl border bg-white p-4 transition-all duration-300 shadow-2xs ${isOpen
                     ? "border-[#B4763A]/60 shadow-xs"
                     : "border-[#E3DDCF] hover:border-[#B4763A]/40"
-                }`}
+                  }`}
               >
                 <button
                   type="button"
@@ -380,11 +385,10 @@ export function ContactFaq({ items }: ContactFaqProps) {
                 >
                   <div className="flex items-center gap-3 min-w-0">
                     <div
-                      className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 tabular-nums font-mono text-xs font-bold transition-all duration-200 ${
-                        isOpen
+                      className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 tabular-nums font-mono text-xs font-bold transition-all duration-200 ${isOpen
                           ? "bg-[#1F4A3A] text-white shadow-xs"
                           : "bg-white border border-[#E3DDCF] text-[#B4763A]"
-                      }`}
+                        }`}
                     >
                       {String(idx + 1).padStart(2, "0")}
                     </div>
@@ -394,9 +398,8 @@ export function ContactFaq({ items }: ContactFaqProps) {
                   </div>
 
                   <ChevronDown
-                    className={`w-4 h-4 shrink-0 transition-transform duration-200 ${
-                      isOpen ? "rotate-180 text-[#1F4A3A]" : "text-[#5F6B64]"
-                    }`}
+                    className={`w-4 h-4 shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180 text-[#1F4A3A]" : "text-[#5F6B64]"
+                      }`}
                   />
                 </button>
 
@@ -461,7 +464,7 @@ export function ContactFaq({ items }: ContactFaqProps) {
               </a>
             </div>
 
-            <div className="flex flex-col items-start gap-1.5 self-stretch sm:self-center pt-2 sm:pt-0">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1.5 sm:gap-3 self-stretch sm:self-center pt-2 sm:pt-0">
               {siteData.phones.map((p) => (
                 <a
                   key={p.tel}
@@ -474,6 +477,15 @@ export function ContactFaq({ items }: ContactFaqProps) {
                   <span>{p.display}</span>
                 </a>
               ))}
+              <a
+                href={siteData.email.href}
+                dir="ltr"
+                className="font-mono text-xs sm:text-sm font-bold text-[#1E2A24] hover:text-[#1F4A3A] transition-colors inline-flex items-center gap-1.5 notranslate [overflow-wrap:anywhere]"
+                translate="no"
+              >
+                <Mail className="w-3.5 h-3.5 text-[#B4763A] shrink-0" />
+                <span>{siteData.email.display}</span>
+              </a>
             </div>
           </div>
         </div>

@@ -113,6 +113,7 @@ export default function RootLayout({
     logo: `${siteUrl}/brand/logo-full.png`,
     description: siteData.tagline,
     telephone: siteData.phones[0].tel.replace("tel:", ""),
+    email: siteData.email.display,
     address: {
       "@type": "PostalAddress",
       streetAddress: siteData.address,

@@ -9,6 +9,12 @@ export interface PhoneItem {
   tel: string;
 }
 
+export interface EmailItem {
+  label?: string;
+  display: string;
+  href: string;
+}
+
 export interface SiteData {
   name: string;
   tagline: string;
@@ -21,6 +27,8 @@ export interface SiteData {
   phone: string;
   phoneRaw: string;
   phones: PhoneItem[];
+  email: EmailItem;
+  emails: EmailItem[];
   whatsapp: string;
   whatsappRaw: string;
   whatsappMessage: string;
@@ -44,6 +52,23 @@ export const siteData: SiteData = {
       label: "Phone / WhatsApp",
       display: "+91 80874 36212",
       tel: "tel:+918087436212",
+    },
+  ],
+  email: {
+    label: "Sales",
+    display: "sales@ajworldwide.co.in",
+    href: "mailto:sales@ajworldwide.co.in",
+  },
+  emails: [
+    {
+      label: "Sales",
+      display: "sales@ajworldwide.co.in",
+      href: "mailto:sales@ajworldwide.co.in",
+    },
+    {
+      label: "General / Info",
+      display: "info@ajworldwide.co.in",
+      href: "mailto:info@ajworldwide.co.in",
     },
   ],
   whatsapp: "+91 80874 36212",

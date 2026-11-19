@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Phone, Clock } from "lucide-react";
+import { ArrowRight, Phone, Clock, Mail } from "lucide-react";
 import { siteData } from "@/data/site";
 
 // Inline WhatsApp SVG glyph
@@ -73,6 +73,16 @@ export function PreFooterCta() {
                 >
                   <Phone className="w-4 h-4 text-[#B4763A]" />
                   <span>Call {siteData.phones[0].display}</span>
+                </a>
+
+                <a
+                  href={siteData.email.href}
+                  dir="ltr"
+                  className="px-6 py-3.5 min-h-[48px] rounded-full border border-[#E3DDCF] bg-white hover:bg-[#F6F3EC] hover:border-[#1F4A3A] text-[#1E2A24] hover:text-[#1F4A3A] font-bold text-xs uppercase tracking-wider transition-all text-center inline-flex items-center justify-center gap-2 notranslate shadow-2xs [@media(hover:hover)]:hover:-translate-y-0.5 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B4763A]"
+                  translate="no"
+                >
+                  <Mail className="w-4 h-4 text-[#B4763A]" />
+                  <span>Email Us</span>
                 </a>
               </div>
 
