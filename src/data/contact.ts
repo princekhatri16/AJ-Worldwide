@@ -1,4 +1,8 @@
 export interface ContactData {
+  seo: {
+    title: string;
+    description: string;
+  };
   title: string;
   phone: string;
   phoneRaw: string;
@@ -38,6 +42,11 @@ export const formMessages: FormMessages = {
 };
 
 export const contactData: ContactData = {
+  seo: {
+    title: "Contact Export Desk | AJ Worldwide — Kumbhari India",
+    description:
+      "Get in touch with AJ Worldwide in Kumbhari, Buldhana, Maharashtra for export pricing and product details. Reach our trade desk by phone, WhatsApp, or email.",
+  },
   title: "Contact Us",
   phone: "+91 80874 36212",
   phoneRaw: "918087436212",

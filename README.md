@@ -192,3 +192,56 @@ As strictly mandated by the project brief:
 - **Registrations appears ONLY on `/registrations`**.
 - It does **NOT** appear on Home, About Us, or the Footer.
 - Shows no unverified certificate numbers, issue dates, or badges.
+
+---
+
+## 11. SEO and Search Console Setup
+
+### Environment Variables & Domain Configuration
+Before deploying to production (e.g. Vercel, Netlify, or custom VPS), set the following environment variables in your hosting provider's project dashboard:
+- `NEXT_PUBLIC_SITE_URL`: The live canonical domain without a trailing slash (e.g., `https://www.yourdomain.com` or `https://yourdomain.com`). All canonical tags, sitemaps, Open Graph cards, Twitter cards, and JSON-LD structured data use this value automatically.
+- `NEXT_PUBLIC_GA_ID` (optional): Your Google Analytics 4 Measurement ID (e.g., `G-XXXXXXXXXX`). Loaded asynchronously via `next/script` only when defined.
+- `NEXT_PUBLIC_GSC_VERIFICATION` (optional): Fallback Google Search Console verification meta tag value.
+
+### Canonical URL & Trailing Slash Policy
+- **Trailing Slash:** Configured to `false` in `next.config.ts`. URLs do not have trailing slashes (e.g., `/products/steel`, not `/products/steel/`).
+- **Domain Canonicalization:** Choose either `www` or non-`www` at your DNS/hosting provider level and configure an automatic 301 redirect to your chosen canonical host.
+- **Protocol:** Always enforce HTTPS with automatic HTTP to HTTPS redirect in your hosting settings.
+
+### Google Site-Verification File
+> [!IMPORTANT]
+> **Do not delete `/public/google*.html`.** Google re-checks it periodically. Removing it un-verifies the site in Search Console.
+- The verification file is located at `public/googlebaaf52ae2060b2ba.html` (53 bytes).
+- It is served unchanged at the root: `https://<your-domain>/googlebaaf52ae2060b2ba.html` with a `200 OK` status and `text/html` header.
+- `robots.txt` explicitly allows it, and no middleware or redirect shadows or alters it.
+
+### Sitemaps & Robots Configuration
+- **Sitemap URL:** `https://<your-domain>/sitemap.xml`
+  Dynamically maps all 7 main static pages, all 6 product categories, and all 3 steel item pages. Automatically excludes query strings, verification files, and 404 pages.
+- **Robots URL:** `https://<your-domain>/robots.txt`
+  - In production (`VERCEL_ENV=production` or `NODE_ENV=production`), allows all crawlers (`Allow: /`) and declares the sitemap location.
+  - In preview and development builds (`VERCEL_ENV=preview`), automatically sets `Disallow: /` and `noindex` to prevent staging indexing.
+
+### How to Edit SEO Titles & Descriptions
+SEO titles and meta descriptions are managed directly in each data file under the `seo` property:
+- `src/data/home.ts` (`homeData.seo`): Home page title (50–60 characters) and description (120–160 characters).
+- `src/data/about.ts` (`aboutData.seo`): About page title and description.
+- `src/data/products.ts` (`productsData.seo`): Products catalog page title and description.
+- `src/data/productSpecs.ts` (`productSpecsData[slug].seo`): Titles and descriptions for each category (`textile`, `fruit-and-vegetables`, `coconut`, `jaggery`, `spices`, `steel`) and individual steel items (`steel-pipes`, `steel-blocks`, `steel-rods`).
+- `src/data/whyChooseUs.ts` (`whyChooseUsData.seo`): Why Choose Us page title and description.
+- `src/data/quality-export-process.ts` (`qualityExportProcessData.seo`): Quality & Export Process page title and description.
+- `src/data/registrations.ts` (`registrationsData.seo`): Registrations page title and description.
+- `src/data/contact.ts` (`contactData.seo`): Contact Us page title and description.
+
+### Steps for the Client in Google Search Console
+1. **Open Google Search Console:**
+   Navigate to [https://search.google.com/search-console](https://search.google.com/search-console) and sign in with the Google Account that manages the business.
+2. **Add Property:**
+   Click **Add Property** in the property selector. Choose **URL prefix** and enter the full production URL (e.g., `https://www.yourdomain.com`). Click **Continue**.
+3. **Verify Ownership (HTML File):**
+   Under verification methods, select **HTML file**. Because `googlebaaf52ae2060b2ba.html` is already deployed to the root of the site, click **Verify**. Search Console will confirm verification immediately.
+4. **Submit Sitemap:**
+   In the left sidebar, click **Sitemaps** under Indexing. In the "Add a new sitemap" input, enter `sitemap.xml` and click **Submit**. Google will fetch and process all 16 canonical URLs.
+5. **Inspect & Request Indexing:**
+   Use the **URL Inspection** bar at the top to test `https://<your-domain>/` and click **Request Indexing**. Repeat for key category pages if desired.
+

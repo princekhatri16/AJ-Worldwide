@@ -4,12 +4,41 @@ import Link from "next/link";
 import Image from "next/image";
 import { BadgeCheck, Award, FileCheck2, ShieldCheck, ArrowRight } from "lucide-react";
 import { registrationsData } from "@/data/registrations";
+import { siteData } from "@/data/site";
+import { SITE_URL, absoluteUrl } from "@/lib/siteUrl";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { InnerPageHeader } from "@/components/ui/InnerPageHeader";
 
 export const metadata: Metadata = {
-  title: "Our Registrations & Compliance | AJ Worldwide",
-  description:
-    "Official commercial and regulatory registrations for AJ Worldwide: GST, Aadhar Udyam, IEC (Import Export Code), and FCI.",
+  title: {
+    absolute: registrationsData.seo.title,
+  },
+  description: registrationsData.seo.description,
+  alternates: {
+    canonical: "/registrations",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: absoluteUrl("/registrations"),
+    siteName: siteData.name,
+    title: registrationsData.seo.title,
+    description: registrationsData.seo.description,
+    images: [
+      {
+        url: absoluteUrl("/og-image.png"),
+        width: 1200,
+        height: 630,
+        alt: `${siteData.name} — ${siteData.tagline}`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: registrationsData.seo.title,
+    description: registrationsData.seo.description,
+    images: [absoluteUrl("/og-image.png")],
+  },
 };
 
 const REGISTRATION_ICONS: Record<string, React.ReactNode> = {
@@ -22,8 +51,28 @@ const REGISTRATION_ICONS: Record<string, React.ReactNode> = {
 export default function RegistrationsPage() {
   const { title, intro, items } = registrationsData;
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: SITE_URL,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Registrations",
+        item: absoluteUrl("/registrations"),
+      },
+    ],
+  };
+
   return (
     <div className="bg-white text-[#1E2A24] min-h-screen">
+      <JsonLd schema={breadcrumbSchema} />
       {/* 1. Deep-Green Inner-Page Banner */}
       <InnerPageHeader
         title={title}

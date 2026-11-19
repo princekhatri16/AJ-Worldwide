@@ -4,15 +4,43 @@ import { Phone, MapPin, Clock, Mail } from "lucide-react";
 import { contactData } from "@/data/contact";
 import { faqData } from "@/data/faq";
 import { siteData } from "@/data/site";
+import { SITE_URL, absoluteUrl } from "@/lib/siteUrl";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { EnquiryForm } from "@/components/forms/EnquiryForm";
 import { ContactFaq } from "@/components/contact/ContactFaq";
 import { InnerPageHeader } from "@/components/ui/InnerPageHeader";
 import { Card } from "@/components/ui/Card";
 
 export const metadata: Metadata = {
-  title: "Contact Us | AJ Worldwide — Export Desk",
-  description:
-    "Direct contact details and trade inquiry form for AJ Worldwide in Kumbhari, Buldhana, Maharashtra. Phone & WhatsApp: +91 80874 36212. Open 7 days a week.",
+  title: {
+    absolute: contactData.seo.title,
+  },
+  description: contactData.seo.description,
+  alternates: {
+    canonical: "/contact",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: absoluteUrl("/contact"),
+    siteName: siteData.name,
+    title: contactData.seo.title,
+    description: contactData.seo.description,
+    images: [
+      {
+        url: absoluteUrl("/og-image.png"),
+        width: 1200,
+        height: 630,
+        alt: `${siteData.name} — ${siteData.tagline}`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: contactData.seo.title,
+    description: contactData.seo.description,
+    images: [absoluteUrl("/og-image.png")],
+  },
 };
 
 // Inline WhatsApp SVG glyph
@@ -28,7 +56,26 @@ export default function ContactPage() {
   const encodedWaMsg = encodeURIComponent(siteData.whatsappMessage);
   const waUrl = `https://wa.me/${siteData.whatsappRaw}?text=${encodedWaMsg}`;
 
-  // Structured Data (FAQPage JSON-LD)
+  // Structured Data (BreadcrumbList & FAQPage JSON-LD)
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: SITE_URL,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Contact Us",
+        item: absoluteUrl("/contact"),
+      },
+    ],
+  };
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -44,11 +91,8 @@ export default function ContactPage() {
 
   return (
     <div className="bg-white text-[#1E2A24] min-h-screen">
-      {/* FAQ Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+      <JsonLd schema={breadcrumbSchema} />
+      <JsonLd schema={faqSchema} />
 
       {/* 1. Deep-Green Inner-Page Banner */}
       <InnerPageHeader

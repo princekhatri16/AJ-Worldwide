@@ -23,6 +23,10 @@ export interface FactItem {
 }
 
 export interface WhyChooseUsData {
+  seo: {
+    title: string;
+    description: string;
+  };
   title: string;
   reasons: ReasonItem[];
   facts: FactItem[];
@@ -35,6 +39,11 @@ export interface WhyChooseUsData {
 }
 
 export const whyChooseUsData: WhyChooseUsData = {
+  seo: {
+    title: "Why Choose AJ Worldwide | Commercial Export Strengths",
+    description:
+      "Commercial strengths of AJ Worldwide: six product categories, verified credentials, direct sourcing from India, transparent dealings, and global delivery.",
+  },
   title: "Why Choose Us",
   homeCollage: {
     main: {

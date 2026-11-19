@@ -10,12 +10,21 @@ export interface RegistrationItem {
 }
 
 export interface RegistrationsData {
+  seo: {
+    title: string;
+    description: string;
+  };
   title: string;
   intro: string;
   items: RegistrationItem[];
 }
 
 export const registrationsData: RegistrationsData = {
+  seo: {
+    title: "Official Registrations & Compliance | AJ Worldwide",
+    description:
+      "Verified commercial credentials for AJ Worldwide in Kumbhari, Maharashtra, including GST, Udyam MSME, and DGFT Import Export Code (IEC) registrations.",
+  },
   title: "Our Registrations & Compliance",
   intro: "Registrations (as listed)",
   items: [

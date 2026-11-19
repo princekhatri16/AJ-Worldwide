@@ -3,20 +3,69 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Compass, Eye, ShieldCheck, MapPin, Calendar, Briefcase } from "lucide-react";
 import { aboutData } from "@/data/about";
+import { siteData } from "@/data/site";
+import { SITE_URL, absoluteUrl } from "@/lib/siteUrl";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { InnerPageHeader } from "@/components/ui/InnerPageHeader";
 import { Card } from "@/components/ui/Card";
 
 export const metadata: Metadata = {
-  title: "About Us | AJ Worldwide — Import & Export",
-  description:
-    "Learn about AJ Worldwide, established in 2025 in Kumbhari, Buldhana, Maharashtra. Trading in textiles, fresh fruit and vegetables, coconut, jaggery, spices and steel.",
+  title: {
+    absolute: aboutData.seo.title,
+  },
+  description: aboutData.seo.description,
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: absoluteUrl("/about"),
+    siteName: siteData.name,
+    title: aboutData.seo.title,
+    description: aboutData.seo.description,
+    images: [
+      {
+        url: absoluteUrl("/og-image.png"),
+        width: 1200,
+        height: 630,
+        alt: `${siteData.name} — ${siteData.tagline}`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: aboutData.seo.title,
+    description: aboutData.seo.description,
+    images: [absoluteUrl("/og-image.png")],
+  },
 };
 
 export default function AboutPage() {
   const { whoWeAre, mission, vision, facts } = aboutData;
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: SITE_URL,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "About Us",
+        item: absoluteUrl("/about"),
+      },
+    ],
+  };
+
   return (
     <div className="bg-white text-[#1E2A24] min-h-screen">
+      <JsonLd schema={breadcrumbSchema} />
       {/* 1. Deep-Green Inner-Page Banner */}
       <InnerPageHeader
         title={aboutData.title}

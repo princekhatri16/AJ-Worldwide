@@ -15,6 +15,8 @@ import {
 } from "@/data/productSpecs";
 import { productsData } from "@/data/products";
 import { siteData } from "@/data/site";
+import { SITE_URL, absoluteUrl } from "@/lib/siteUrl";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { InnerPageHeader } from "@/components/ui/InnerPageHeader";
 import { ProductGallery } from "@/components/products/ProductGallery";
 
@@ -42,12 +44,42 @@ export async function generateMetadata({
   if (!product) {
     return {
       title: "Product Not Found | AJ Worldwide",
+      robots: { index: false, follow: false },
     };
   }
 
+  const category = productsData.categories.find((c) => c.slug === slug);
+  const ogImageUrl = category?.image ? absoluteUrl(category.image) : absoluteUrl("/og-image.png");
+  const canonicalUrl = `/products/${slug}`;
+
   return {
-    title: `${product.name} | AJ Worldwide — Export Specifications`,
-    description: product.description,
+    title: {
+      absolute: product.seo.title,
+    },
+    description: product.seo.description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      type: "website",
+      locale: "en_IN",
+      url: absoluteUrl(canonicalUrl),
+      siteName: siteData.name,
+      title: product.seo.title,
+      description: product.seo.description,
+      images: [
+        {
+          url: ogImageUrl,
+          alt: `${product.name} — ${siteData.name}`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: product.seo.title,
+      description: product.seo.description,
+      images: [ogImageUrl],
+    },
   };
 }
 
@@ -82,8 +114,54 @@ export default async function ProductDetailPage({
 
 
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: SITE_URL,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Products",
+        item: absoluteUrl("/products"),
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: product.name,
+        item: absoluteUrl(`/products/${slug}`),
+      },
+    ],
+  };
+
+  const productImages =
+    gallery.length > 0
+      ? gallery.map((g) => absoluteUrl(g.src))
+      : category?.image
+        ? [absoluteUrl(category.image)]
+        : [absoluteUrl("/og-image.png")];
+
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.seo.description,
+    image: productImages,
+    brand: {
+      "@type": "Brand",
+      name: siteData.name,
+    },
+  };
+
   return (
     <div className="bg-white text-[#1E2A24] min-h-screen">
+      <JsonLd schema={breadcrumbSchema} />
+      <JsonLd schema={productSchema} />
       {/* 1. Deep-Green Inner Page Banner */}
       <InnerPageHeader
         title={product.name}
@@ -202,11 +280,10 @@ export default async function ProductDetailPage({
                 return (
                   <div
                     key={item.slug}
-                    className={`group flex flex-col bg-white rounded-2xl border border-[#E3DDCF] overflow-hidden shadow-xs hover:shadow-md hover:border-[#B4763A]/40 transition-all duration-300 ${
-                      isThirdItem
+                    className={`group flex flex-col bg-white rounded-2xl border border-[#E3DDCF] overflow-hidden shadow-xs hover:shadow-md hover:border-[#B4763A]/40 transition-all duration-300 ${isThirdItem
                         ? "col-span-1 min-[360px]:col-span-2 min-[360px]:max-w-[calc(50%-0.75rem)] min-[360px]:justify-self-center md:col-span-1 md:max-w-none w-full"
                         : "w-full"
-                    }`}
+                      }`}
                   >
                     {/* Cover photo slot */}
                     <div className="relative aspect-[4/3] w-full bg-[#F6F3EC] border-b border-[#E3DDCF] overflow-hidden">

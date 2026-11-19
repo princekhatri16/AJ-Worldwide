@@ -26,11 +26,20 @@ export interface ProductCategoryCard {
 }
 
 export interface ProductsData {
+  seo: {
+    title: string;
+    description: string;
+  };
   title: string;
   categories: ProductCategoryCard[];
 }
 
 export const productsData: ProductsData = {
+  seo: {
+    title: "Export Products & Commodities | AJ Worldwide India",
+    description:
+      "Explore AJ Worldwide's export categories: textiles, fresh fruits and vegetables, semi-husked coconuts, natural jaggery, whole spices, and manufactured steel.",
+  },
   title: "Products",
   categories: [
     {

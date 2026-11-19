@@ -13,6 +13,10 @@ export interface ProductItem {
   image?: string;
   hsnCode?: string;
   specRows: SpecRow[];
+  seo: {
+    title: string;
+    description: string;
+  };
 }
 
 export interface CategorySpecData {
@@ -22,6 +26,10 @@ export interface CategorySpecData {
   icon: string;
   image?: string;
   specRows: SpecRow[];
+  seo: {
+    title: string;
+    description: string;
+  };
   // Optional items array for when client names individual products (empty by default)
   items: ProductItem[];
 }
@@ -32,6 +40,11 @@ export const productSpecsData: Record<ProductSlug, CategorySpecData> = {
     name: "Fruit & Vegetables",
     description: "Fresh Indian fruit and vegetables for export.",
     icon: "Apple",
+    seo: {
+      title: "Fresh Fruit & Vegetables Export | AJ Worldwide India",
+      description:
+        "Fresh Indian fruit and vegetables for global export from AJ Worldwide. Graded produce packed in ventilated corrugated cartons for international shipment.",
+    },
     specRows: [
       {
         key: "botanical-name",
@@ -74,6 +87,11 @@ export const productSpecsData: Record<ProductSlug, CategorySpecData> = {
     name: "Coconut",
     description: "Coconut products from India.",
     icon: "CircleDot",
+    seo: {
+      title: "Fresh Coconuts for Export | AJ Worldwide Trade Desk",
+      description:
+        "Export-grade Indian coconuts from AJ Worldwide. Carefully selected mature, semi-husked coconuts packed in mesh bags for international market delivery.",
+    },
     specRows: [
       {
         key: "product-name",
@@ -110,6 +128,11 @@ export const productSpecsData: Record<ProductSlug, CategorySpecData> = {
     name: "Jaggery",
     description: "Natural sugarcane jaggery, a traditional sweetener.",
     icon: "Boxes",
+    seo: {
+      title: "Natural Jaggery for Export | AJ Worldwide Trade Desk",
+      description:
+        "Pure traditional Indian jaggery from AJ Worldwide. Export-grade natural sweetener available in blocks and cubes, packaged securely for overseas markets.",
+    },
     specRows: [
       {
         key: "product-name",
@@ -146,6 +169,11 @@ export const productSpecsData: Record<ProductSlug, CategorySpecData> = {
     name: "Textile",
     description: "Textile products for international buyers.",
     icon: "Layers",
+    seo: {
+      title: "Textiles Export Category | AJ Worldwide Trade Desk",
+      description:
+        "Textile products for international buyers from AJ Worldwide. Quality fabrics, towels, and linen packed for export from Kumbhari, Maharashtra, India.",
+    },
     specRows: [
       {
         key: "product-name",
@@ -180,6 +208,11 @@ export const productSpecsData: Record<ProductSlug, CategorySpecData> = {
     name: "Spices",
     description: "Spices from India.", // DRAFT: confirm wording with client
     icon: "Flame",
+    seo: {
+      title: "Indian Spices for Export | AJ Worldwide Trade Desk",
+      description:
+        "Whole and ground export-grade Indian spices from AJ Worldwide. Sourced from India's agricultural centers and packed securely for international transit.",
+    },
     specRows: [
       {
         key: "product-name",
@@ -218,6 +251,11 @@ export const productSpecsData: Record<ProductSlug, CategorySpecData> = {
     description: "Steel pipes, blocks and rods from India.", // DRAFT: confirm wording with client
     icon: "Factory",
     image: "/products/steel/steel-pipes-1.jpeg",
+    seo: {
+      title: "Manufactured Steel Export | AJ Worldwide Trade Desk",
+      description:
+        "Industrial and manufactured steel products from AJ Worldwide, including pipes, blocks, and rods for international construction and industrial buyers.",
+    },
     specRows: [
       {
         key: "product-name",
@@ -265,6 +303,11 @@ export const productSpecsData: Record<ProductSlug, CategorySpecData> = {
         description: "Round steel pipes in a range of sizes.", // DRAFT: confirm wording with client
         image: "/products/steel/steel-pipes-1.jpeg",
         hsnCode: "7304 / 7306",
+        seo: {
+          title: "Export Grade Steel Pipes | AJ Worldwide Trade Desk",
+          description:
+            "Export specifications for steel pipes from AJ Worldwide. Hollow structural sections, seamless and ERW steel tubes supplied for international trade.",
+        },
         specRows: [
           {
             key: "product-name",
@@ -322,6 +365,11 @@ export const productSpecsData: Record<ProductSlug, CategorySpecData> = {
         description: "Steel blocks and bars in square and rectangular sections.", // DRAFT: confirm wording with client
         image: "/products/steel/steel-blocks-2.jpeg",
         hsnCode: "Chapter 72",
+        seo: {
+          title: "Export Grade Steel Blocks | AJ Worldwide Trade Desk",
+          description:
+            "Export specifications for steel blocks from AJ Worldwide. Solid carbon and alloy steel billets and forged blocks supplied for industrial processing.",
+        },
         specRows: [
           {
             key: "product-name",
@@ -379,6 +427,11 @@ export const productSpecsData: Record<ProductSlug, CategorySpecData> = {
         description: "Steel rods in a range of diameters.", // DRAFT: confirm wording with client
         image: "/products/steel/steel-rods-1.jpeg",
         hsnCode: "7214",
+        seo: {
+          title: "Export Steel Rods & Rebar | AJ Worldwide Trade Desk",
+          description:
+            "Export specifications for steel rods and round bars from AJ Worldwide. High-tensile reinforcement and carbon steel bars for construction and industry.",
+        },
         specRows: [
           {
             key: "product-name",

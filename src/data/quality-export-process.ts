@@ -5,6 +5,10 @@ export interface ProcessStep {
 }
 
 export interface QualityExportProcessData {
+  seo: {
+    title: string;
+    description: string;
+  };
   title: string;
   qualityPacking: {
     heading: string;
@@ -17,6 +21,11 @@ export interface QualityExportProcessData {
 }
 
 export const qualityExportProcessData: QualityExportProcessData = {
+  seo: {
+    title: "Quality & Export Process | AJ Worldwide Trade Desk",
+    description:
+      "Learn our six-step export workflow from inquiry to port dispatch: transparent quotations, rigorous quality inspection, export packaging, and freight shipping.",
+  },
   title: "Quality & Export Process",
   qualityPacking: {
     heading: "Quality & Packing",

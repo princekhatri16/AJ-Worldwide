@@ -7,9 +7,12 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
+  themeColor: "#1F4A3A",
 };
 
 import { siteData } from "@/data/site";
+import { SITE_URL, absoluteUrl } from "@/lib/siteUrl";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { GoogleTranslateScript } from "@/components/layout/GoogleTranslateScript";
 import { Header } from "@/components/layout/Header";
@@ -33,15 +36,24 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ajworldwide.com";
+  const isVercel = Boolean(process.env.VERCEL_ENV);
+  const isProduction = isVercel
+    ? process.env.VERCEL_ENV === "production"
+    : process.env.NODE_ENV === "production";
+
+  const gscVerification = process.env.NEXT_PUBLIC_GSC_VERIFICATION?.trim();
 
   return {
-    metadataBase: new URL(siteUrl),
+    metadataBase: new URL(SITE_URL),
     title: {
-      default: `${siteData.name} | ${siteData.tagline}`,
+      default: `${siteData.name} — ${siteData.tagline} | ${siteData.businessType}`,
       template: `%s | ${siteData.name}`,
     },
     description: "From Maharashtra to the world: AJ Worldwide brings textiles, fresh fruit and vegetables, coconut, jaggery, spices and steel to buyers you can trust.",
+    applicationName: siteData.name,
+    alternates: {
+      canonical: "/",
+    },
     keywords: [
       "AJ Worldwide",
       "Trusted Worldwide",
@@ -65,35 +77,56 @@ export async function generateMetadata(): Promise<Metadata> {
       address: false,
       telephone: false,
     },
+    robots: isProduction
+      ? {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+          },
+        }
+      : {
+          index: false,
+          follow: false,
+        },
     openGraph: {
       type: "website",
-      locale: "en_US",
-      url: siteUrl,
-      title: `${siteData.name} | ${siteData.tagline}`,
+      locale: "en_IN",
+      url: SITE_URL,
+      title: `${siteData.name} — ${siteData.tagline} | ${siteData.businessType}`,
       description: "From Maharashtra to the world: AJ Worldwide brings textiles, fresh fruit and vegetables, coconut, jaggery, spices and steel to buyers you can trust.",
       siteName: siteData.name,
       images: [
         {
-          url: "/og-image.png",
+          url: absoluteUrl("/og-image.png"),
           width: 1200,
           height: 630,
-          alt: `${siteData.name} - ${siteData.tagline}`,
+          alt: `${siteData.name} — ${siteData.tagline}`,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${siteData.name} | ${siteData.tagline}`,
+      title: `${siteData.name} — ${siteData.tagline} | ${siteData.businessType}`,
       description: "From Maharashtra to the world: AJ Worldwide brings textiles, fresh fruit and vegetables, coconut, jaggery, spices and steel to buyers you can trust.",
-      images: ["/og-image.png"],
+      images: [absoluteUrl("/og-image.png")],
     },
     icons: {
       icon: [
+        { url: "/favicon.ico", sizes: "48x48" },
         { url: "/icon.png", sizes: "512x512", type: "image/png" },
         { url: "/brand/logo-mark.png", sizes: "512x512", type: "image/png" },
       ],
       apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
     },
+    verification: gscVerification
+      ? {
+          google: gscVerification,
+        }
+      : undefined,
   };
 }
 
@@ -102,23 +135,33 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ajworldwide.com";
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: siteData.name,
-    url: siteUrl,
-    logo: `${siteUrl}/brand/logo-full.png`,
-    description: siteData.tagline,
+    url: SITE_URL,
+    logo: absoluteUrl("/brand/logo-full.png"),
+    slogan: siteData.tagline,
+    foundingDate: "2025",
     telephone: siteData.phones[0].tel.replace("tel:", ""),
-    email: siteData.email.display,
+    email: siteData.emails.map((e) => e.display),
     address: {
       "@type": "PostalAddress",
       streetAddress: siteData.address,
+      addressLocality: "Kumbhari",
+      addressRegion: "Maharashtra",
       addressCountry: "IN",
     },
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        telephone: siteData.phones[0].tel.replace("tel:", ""),
+        contactType: "customer support",
+        availableLanguage: ["English", "Hindi", "Marathi"],
+      },
+    ],
   };
 
   return (
@@ -163,12 +206,7 @@ export default function RootLayout({
             `,
           }}
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationSchema),
-          }}
-        />
+        <JsonLd schema={organizationSchema} />
         {gaId && (
           <>
             <Script

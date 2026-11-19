@@ -1,4 +1,8 @@
 export interface AboutData {
+  seo: {
+    title: string;
+    description: string;
+  };
   title: string;
   whoWeAre: {
     heading: string;
@@ -20,6 +24,11 @@ export interface AboutData {
 }
 
 export const aboutData: AboutData = {
+  seo: {
+    title: "About Us | AJ Worldwide — Export Trading from India",
+    description:
+      "Established in 2025 in Kumbhari, Maharashtra, AJ Worldwide connects global buyers with Indian textiles, produce, coconut, jaggery, spices and steel.",
+  },
   title: "About Us",
   whoWeAre: {
     heading: "Who We Are",

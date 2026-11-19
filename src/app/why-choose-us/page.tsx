@@ -1,22 +1,71 @@
 import React from "react";
 import type { Metadata } from "next";
 import { whyChooseUsData } from "@/data/whyChooseUs";
+import { siteData } from "@/data/site";
+import { SITE_URL, absoluteUrl } from "@/lib/siteUrl";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { InnerPageHeader } from "@/components/ui/InnerPageHeader";
 import { WhyChooseUsBento } from "@/components/why-choose-us/WhyChooseUsBento";
 import { PhotoBand } from "@/components/why-choose-us/PhotoBand";
 import { StatCounter } from "@/components/ui/StatCounter";
 
 export const metadata: Metadata = {
-  title: "Why Choose Us | AJ Worldwide — Export Strengths",
-  description:
-    "Five reasons international buyers partner with AJ Worldwide: Trust first, six product lines, registered credentials, always open, and direct contact.",
+  title: {
+    absolute: whyChooseUsData.seo.title,
+  },
+  description: whyChooseUsData.seo.description,
+  alternates: {
+    canonical: "/why-choose-us",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: absoluteUrl("/why-choose-us"),
+    siteName: siteData.name,
+    title: whyChooseUsData.seo.title,
+    description: whyChooseUsData.seo.description,
+    images: [
+      {
+        url: absoluteUrl("/og-image.png"),
+        width: 1200,
+        height: 630,
+        alt: `${siteData.name} — ${siteData.tagline}`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: whyChooseUsData.seo.title,
+    description: whyChooseUsData.seo.description,
+    images: [absoluteUrl("/og-image.png")],
+  },
 };
 
 export default function WhyChooseUsPage() {
   const { title, reasons, facts, photoBand } = whyChooseUsData;
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: SITE_URL,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Why Choose Us",
+        item: absoluteUrl("/why-choose-us"),
+      },
+    ],
+  };
+
   return (
     <div className="bg-white text-[#1E2A24] min-h-screen">
+      <JsonLd schema={breadcrumbSchema} />
       {/* 1. Deep-Green Inner-Page Banner */}
       <InnerPageHeader
         title={title}

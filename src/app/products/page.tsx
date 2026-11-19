@@ -3,20 +3,69 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ShieldCheck, ArrowRight } from "lucide-react";
 import { productsData } from "@/data/products";
+import { siteData } from "@/data/site";
+import { SITE_URL, absoluteUrl } from "@/lib/siteUrl";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { ProductsCategoryGrid } from "@/components/products/ProductsCategoryGrid";
 import { InnerPageHeader } from "@/components/ui/InnerPageHeader";
 
 export const metadata: Metadata = {
-  title: "Products | AJ Worldwide — Export Portfolio",
-  description:
-    "Explore AJ Worldwide's export product lines: Textile, Fruit & Vegetables, Coconut, Jaggery, Spices, and Steel.",
+  title: {
+    absolute: productsData.seo.title,
+  },
+  description: productsData.seo.description,
+  alternates: {
+    canonical: "/products",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: absoluteUrl("/products"),
+    siteName: siteData.name,
+    title: productsData.seo.title,
+    description: productsData.seo.description,
+    images: [
+      {
+        url: absoluteUrl("/og-image.png"),
+        width: 1200,
+        height: 630,
+        alt: `${siteData.name} — ${siteData.tagline}`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: productsData.seo.title,
+    description: productsData.seo.description,
+    images: [absoluteUrl("/og-image.png")],
+  },
 };
 
 export default function ProductsPage() {
   const { categories } = productsData;
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: SITE_URL,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Products",
+        item: absoluteUrl("/products"),
+      },
+    ],
+  };
+
   return (
     <div className="bg-white text-[#1E2A24] min-h-screen">
+      <JsonLd schema={breadcrumbSchema} />
       {/* 1. Deep-Green Inner Page Banner */}
       <InnerPageHeader
         title={productsData.title}

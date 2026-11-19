@@ -5,6 +5,10 @@ export interface HeroImage {
 }
 
 export interface HomeData {
+  seo: {
+    title: string;
+    description: string;
+  };
   hero: {
     heading: string;
     tagline: string;
@@ -37,6 +41,11 @@ export interface HomeData {
 }
 
 export const homeData: HomeData = {
+  seo: {
+    title: "AJ Worldwide — Trusted Worldwide | Import & Export",
+    description:
+      "From Maharashtra to the world: AJ Worldwide exports textiles, fresh produce, coconut, jaggery, spices and steel to trusted global trade partners.",
+  },
   hero: {
     heading: "AJ Worldwide",
     tagline: "Trusted Worldwide",

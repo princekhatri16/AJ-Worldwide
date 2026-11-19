@@ -10,6 +10,8 @@ import {
 } from "@/data/productSpecs";
 import { productsData } from "@/data/products";
 import { siteData } from "@/data/site";
+import { SITE_URL, absoluteUrl } from "@/lib/siteUrl";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { InnerPageHeader } from "@/components/ui/InnerPageHeader";
 import { ProductGallery } from "@/components/products/ProductGallery";
 
@@ -37,12 +39,43 @@ export async function generateMetadata({
   if (!specItem) {
     return {
       title: "Product Not Found | AJ Worldwide",
+      robots: { index: false, follow: false },
     };
   }
 
+  const steelCategory = productsData.categories.find((c) => c.slug === "steel");
+  const categoryItem = steelCategory?.items?.find((i) => i.slug === itemSlug);
+  const ogImageUrl = categoryItem?.image ? absoluteUrl(categoryItem.image) : absoluteUrl("/og-image.png");
+  const canonicalUrl = `/products/steel/${itemSlug}`;
+
   return {
-    title: `${specItem.name} | AJ Worldwide — Export Specifications`,
-    description: specItem.description,
+    title: {
+      absolute: specItem.seo.title,
+    },
+    description: specItem.seo.description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      type: "website",
+      locale: "en_IN",
+      url: absoluteUrl(canonicalUrl),
+      siteName: siteData.name,
+      title: specItem.seo.title,
+      description: specItem.seo.description,
+      images: [
+        {
+          url: ogImageUrl,
+          alt: `${specItem.name} — ${siteData.name}`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: specItem.seo.title,
+      description: specItem.seo.description,
+      images: [ogImageUrl],
+    },
   };
 }
 
@@ -82,27 +115,61 @@ export default async function SteelItemDetailPage({
     waItemMessage
   )}`;
 
-  // Product JSON-LD schema
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ajworldwide.com";
+  // BreadcrumbList JSON-LD schema
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: SITE_URL,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Products",
+        item: absoluteUrl("/products"),
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Steel",
+        item: absoluteUrl("/products/steel"),
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: categoryItem.name,
+        item: absoluteUrl(`/products/steel/${itemSlug}`),
+      },
+    ],
+  };
+
+  const productImages =
+    gallery.length > 0
+      ? gallery.map((g) => absoluteUrl(g.src))
+      : categoryItem.image
+      ? [absoluteUrl(categoryItem.image)]
+      : [absoluteUrl("/og-image.png")];
+
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: categoryItem.name,
-    description: categoryItem.description,
-    image: `${baseUrl}${categoryItem.image}`,
+    description: specItem.seo.description,
+    image: productImages,
     brand: {
       "@type": "Brand",
-      name: "AJ Worldwide",
+      name: siteData.name,
     },
   };
 
   return (
     <div className="bg-white text-[#1E2A24] min-h-screen">
-      {/* Product JSON-LD */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
-      />
+      <JsonLd schema={breadcrumbSchema} />
+      <JsonLd schema={productSchema} />
 
       {/* 1. Deep-Green Inner Page Banner */}
       <InnerPageHeader
